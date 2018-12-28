@@ -1,0 +1,57 @@
+<?
+$credit_card_total=0;
+   $subtotal=$invoice_total[$temp_invoice_no]+$man_power_price[$temp_invoice_no];
+   $subtotal=round($subtotal, 2);
+  // echo "subtotal=".$subtotal;
+   $subsubtotal=($subtotal*((100-$discount_percent[$temp_invoice_no])/100))-$discount_deduct[$temp_invoice_no];
+   //credit card
+   if ($invoice_credit_card_rate[$temp_invoice_no]!=0 and $invoice_credit_card_rate[$temp_invoice_no]!=null)
+   {
+   		$credit_card_total=round($subsubtotal*$invoice_credit_card_rate[$temp_invoice_no]/100);	
+   		$subsubtotal=$credit_card_total+$subsubtotal;
+   }
+   
+       if($branchID["$temp_invoice_no"]=="Y")
+   {
+   	$y_counter=$y_counter+$subsubtotal;
+   	if($temp_invoice_settle=="S")
+   	{
+	$S_y_counter=$S_y_counter+$subsubtotal;
+	$S_deposit_y_counter=$S_deposit_y_counter+$temp_invoice_deposit;
+	}
+   	else
+   	{
+	$A_y_counter=$A_y_counter+$subsubtotal;
+	$A_deposit_y_counter=$A_deposit_y_counter+$temp_invoice_deposit;
+	}
+   }
+   else if($branchID["$temp_invoice_no"]=="A")
+   {
+   	$a_counter=$a_counter+$subsubtotal;
+   	   	if($temp_invoice_settle=="S")
+   	{
+	$S_a_counter=$S_a_counter+$subsubtotal;
+	$S_deposit_a_counter=$S_deposit_a_counter+$temp_invoice_deposit;
+	}
+   	else
+   	{
+	$A_a_counter=$A_a_counter+$subsubtotal;
+	$A_deposit_a_counter=$A_deposit_a_counter+$temp_invoice_deposit;
+	}
+  }   else if($branchID["$temp_invoice_no"]=="H")
+   {
+   	$h_counter=$h_counter+$subsubtotal;
+   	   	if($temp_invoice_settle=="S")
+   	{
+	$S_h_counter=$S_h_counter+$subsubtotal;
+	$S_deposit_h_counter=$S_deposit_h_counter+$temp_invoice_deposit;
+	}
+   	else
+   	{
+	$A_h_counter=$A_h_counter+$subsubtotal;
+	$A_deposit_h_counter=$A_deposit_h_counter+$temp_invoice_deposit;
+	}
+  }
+   $day_counter=$day_counter+$subsubtotal;
+   
+   ?>

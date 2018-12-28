@@ -1,0 +1,488 @@
+﻿<?
+require_once("../include/config.php");
+
+?><html><head>
+<title>YRT STATISTIC <? echo "AREA=".$AREA;echo ",PC=".$PC;echo ",No.=".array_search($AREA,$shop_array);?></title>
+<LINK REL=stylesheet HREF="english.css" TYPE="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"><style type="text/css">
+<!--
+body {
+	background-color: #CCCCCC;
+}
+.style2 {color: #FFFFFF}
+-->
+</style></head>
+<body text="#000000">
+<?
+  
+if (!security_check($AREA,$PC)){
+	
+ $day = date(d);
+ }
+if(!$month)
+	{$month = date(m);}
+if(!$year)
+	{$year = date(Y);}
+
+	
+$connection = DB::connect($dsn);
+   if (DB::isError($connection))
+      die($connection->getMessage());
+   $result = $connection->query("SET NAMES 'UTF8'");
+   
+function security_check($AREA,$PC){
+	if (($AREA=="Y" && $PC=="1") || ($AREA=="Y" && $PC=="4")){
+			return TRUE;}
+	else{
+			return FALSE;
+		}
+}   
+   
+function printcalendar($month,$year)
+{
+$pass_salt="1";
+$pass_plain="1";
+$action = crypt($pass_plain, $pass_salt); 
+
+if(!$day)
+{$day = date(d);}
+if(!$month)
+	{$month = date(m);}
+if(!$year)
+	{$year = date(Y);}
+
+
+$fecha_ut = mktime(0,0,0,$month,$day,$year);
+
+$days_month = date(t,$fecha_ut);
+
+
+$days_semana = date(w,mktime(0,0,0,$month,1,$year));
+
+
+$month_top = $month;
+if($month_top == 1)
+	{$month_top = '一月';}
+	elseif($month_top == 2)
+		{$month_top = '二月';}
+	elseif($month_top == 3)
+		{$month_top = '三月';}
+	elseif($month_top == 4)
+		{$month_top = '四月';}
+	elseif($month_top == 5)
+		{$month_top = '五月';}
+	elseif($month_top == 6)
+		{$month_top = '六月';}
+	elseif($month_top == 7)
+		{$month_top = '七月';}
+	elseif($month_top == 8)
+		{$month_top = '八月';}
+	elseif($month_top == 9)
+		{$month_top = '九月';}
+	elseif($month_top == 10)
+		{$month_top = '十月';}
+	elseif($month_top == 11)
+		{$month_top = '十一月';}
+	elseif($month_top == 12)
+		{$month_top = '十二月';}
+
+
+$month_ant = $month - 1;
+$year_ant = $year;
+if($month_ant == 0)
+{
+	$month_ant = 12;
+	$year_ant = $year - 1;
+}
+
+$month_sig = $month + 1;
+$year_sig = $year;
+if($month_sig == 13)
+{
+	$month_sig = 1;
+	$year_sig = $year + 1;
+}
+echo ("<center>") ;
+
+$offset = $days_semana;
+echo("
+<table border=1 cellspacing=0 cellpadding=1 bordercolor=#8b0000 bordercolordark=#8b0000 bgcolor=#F5F5DC>
+<tr>
+	<td align=center><a href=\"$PHP_SELF?month=$month_ant&year=$year_ant\"><font size=1 color=red>&lt;</font></a></td>
+	<td colspan=5 align=center><b><a href=$PHP_SELF?day=0&month=$month&year=$year&action=$action><font size=1 color=red>$month_top $year</font></a></b></td>
+	<td align=center><a href=\"$PHP_SELF?month=$month_sig&year=$year_sig\"><font size=1>&gt;</font></a></td>
+</tr>
+<tr>
+	<td align=center><b><font color=red size=2>星期日</font></b></td>
+	<td align=center><b><font size=2>星期一</font></b></td>
+	<td align=center><b><font size=2>星期二</font></b></td>
+	<td align=center><b><font size=2>星期三</font></b></td>
+	<td align=center><b><font size=2>星期四</font></b></td>
+	<td align=center><b><font size=2>星期五</font></b></td>
+	<td align=center><b><font size=2>星期六</font></b></td>
+</tr>");
+$tot_cel = $days_month + $offset;
+$i = 0;
+$a = 1;
+while($i <= $tot_cel)
+{
+$ii = 1;
+echo("<tr>");
+
+	while($ii <= 7)
+	{
+		if($offset)
+		{
+			while($i <= $offset - 1)
+			{
+			echo("<td><font size=1 color=red>&nbsp;</font></td>");
+			$i++;
+			$ii++;
+			}
+		}
+		
+		if($a < $days_month+1)
+		{
+			if($a == date(d) AND $month == date(m) AND $year == date(Y))
+			{
+			$hoy = '#deb887';
+			}
+			elseif ($ii==1) 
+			{	$hoy = "pink" ; }
+			else
+			{
+			$hoy = '';
+			}
+echo("<td align=center bgcolor=$hoy><a 
+href=$PHP_SELF?day=$a&month=$month&year=$year&action=$action><font 
+face=verdana 
+size=1 color=red>$a</font></a></td>");
+		$i++;
+		$ii++;
+		$a++;
+		}
+		elseif($i >= $days_month)
+		{
+		echo("<td><font size=1>&nbsp;</font></td>");
+		$i++;
+		$ii++;
+		}
+	}
+echo("</tr>");
+}
+}
+
+
+//if ($action=="")
+//{
+	if (security_check($AREA,$PC))
+	printcalendar($month,$year);
+
+//}
+//else
+//{
+?>
+
+<?
+
+$total=0.00;
+$Y_return_total=0;
+$A_return_total=0;
+$H_return_total=0;
+
+
+if ($day==0)
+{
+	$subtotal="select sum(total_price) as total from invoice where month(invoice.invoice_date)=$month && year(invoice.invoice_date)=$year";
+	   $rows = $connection->query($subtotal);
+   $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
+   $day_counter=$row['total'];
+   
+	
+	for ($i=0;$i<count($shop_array);$i++){
+		$shop_subtotal[$i]="select sum(total_price) as total from invoice where month(invoice.invoice_date)=$month && year(invoice.invoice_date)=$year and branchID='$shop_array[$i]'";
+		$settle_shop_subtotal[$i]="select sum(total_price) as total from invoice where month(invoice.invoice_date)=$month && year(invoice.invoice_date)=$year and branchID='$shop_array[$i]' and settle='A'";
+		$unsettle_shop_subtotal[$i]="select sum(total_price) as total from invoice where month(invoice.invoice_date)=$month && year(invoice.invoice_date)=$year and branchID='$shop_array[$i]' and settle='S'";
+		$unsettle_shop_deposit[$i]="select sum(deposit) as total from invoice where month(invoice.invoice_date)=$month && year(invoice.invoice_date)=$year and branchID='$shop_array[$i]' and settle='S'";
+		$shop_return_total[$i]="select sum(total_price) as total from returngood where month(returngood.return_date)=$month && year(returngood.return_date)=$year and branchID='$shop_array[$i]'";
+		
+		if ($AREA==$shop_array[$i] || security_check($AREA,$PC) ){
+			 
+			 $rows = $connection->query($shop_subtotal[$i]);
+		   $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
+		   $shop_counter[$i]=$row['total'];
+		   
+		   $rows = $connection->query($settle_shop_subtotal[$i]);
+		   $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
+		   $settle_shop_subtotal_counter[$i]=$row['total'];
+		   
+		   $rows = $connection->query($unsettle_shop_subtotal[$i]);
+		   $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
+		   $unsettle_shop_subtotal_counter[$i]=$row['total'];
+		   
+		   $rows = $connection->query($unsettle_shop_deposit[$i]);
+		   $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
+		   $unsettle_shop_deposit_counter[$i]=$row['total'];
+		   
+		   $rows = $connection->query($shop_return_total[$i]);
+		   $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
+		   $return_shop_total_counter[$i]=$row['total'];
+   }
+		
+	}
+	
+	
+
+}
+else
+{?>
+<table width="100%" border="0" cellpadding="1" cellspacing="1" class="login" >
+<tr>
+
+<td width=120 align=left><font color=000000>貨品編號</font></td>
+<td width=200 align=left><font color=000000>貨品名</font></td>
+<td width=34><font color=000000>數量</font></td>
+<td width=60><font color=000000>市價</font></td>
+<td width=20><font color=000000>扶力</font></td>
+<td width=60><font color=000000>總計</font></td>
+</tr><?
+
+	$sql="select * from invoice ,goods_invoice where invoice.invoice_no=goods_invoice.invoice_no && month(invoice.invoice_date)=$month && year(invoice.invoice_date)=$year && DAYOFMONTH(invoice.invoice_date)=$day ";
+	
+		for ($i=0;$i<count($shop_array);$i++){
+				if ($AREA==$shop_array[$i]|| security_check($AREA,$PC)){
+				
+				 $sql_return_total_shop[$i]="select sum(total_price) as total from returngood where branchID='$shop_array[$i]' && month(returngood.return_date)=$month && year(returngood.return_date)=$year && DAYOFMONTH(returngood.return_date)=$day";
+				 $rows = $connection->query($sql_return_total_shop[$i]);
+				 $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
+				  $return_shop_total_counter[$i]=$row['total'];
+				 
+				 $sql1=" && branchID='$shop_array[$i]' order by invoice.invoice_no ";
+				}
+		}
+		
+		 if (security_check($AREA,$PC)){
+	 		$sql1="  order by invoice.invoice_no ";
+	 	}
+	
+ 
+ $sql=$sql.$sql1;
+
+		 $rows = $connection->query($sql);
+
+
+for ($i=0;$i<count($shop_array);$i++){
+$shop_counter[$i]=0;
+$settle_shop_subtotal[$i]=0;
+$unsettle_shop_subtotal[$i]=0;
+//$return_shop_total_counter[$i]=0;
+}
+
+$temp_invoice_no=0;
+
+
+while ( $row = $rows->fetchRow(DB_FETCHMODE_ASSOC))
+{
+
+
+if ($row["customer_name"]=="")
+{
+ $rows_member=mysql_query("select mem_name from member where mem_id=".$row["member_id"]);
+ $rows_member2=mysql_fetch_array($rows_member);
+ 
+ if ($rows_member2["mem_name_eng"]!="")
+ $row["customer_name"]=$rows_member2["mem_name_eng"];
+ else 
+ $row["customer_name"]=$rows_member2["mem_name_chi"];
+}
+
+
+ if ($day!=0){
+    if ($temp_invoice_no!=$row["invoice_no"] ){
+       if ($temp_invoice_no!=0){
+   			?><tr><td colspan="13"><hr></td></tr><tr><td colspan="13">
+		   <table width="100%" border="0" cellpadding="1" cellspacing="1">
+		   <tr><td>
+		   <?
+		   
+		    include("statistic_func.php");
+		   
+		   ?>總計 $<?=$subsubtotal?>  信用卡 $<?=$credit_card_total;?></td></tr>
+		   </table></td></tr><tr>
+   		 <? }?>
+   <td colspan="13">
+   <table width="100%" border="0" cellpadding="1" cellspacing="1">
+   <tr bgcolor="<?if( $row["settle"]=="S"){echo "#FF3333";}else{echo "#666666";}?>">
+    <td width=82 align=left> 
+      <div align="center"><font color="#FFFFFF">  單號 <br>
+            <?echo $row["invoice_no"];?>      </font> </div></td>  
+    <td width=168 align=left > 
+      <div align="center"><font color="#FFFFFF"> 
+        出單日期<br>
+        <?echo $row["invoice_date"];?>      </font> </div></td>
+    <td width=112 align=left > 
+      <div align="center"><font color="#FFFFFF">
+        客名<br>
+        <?echo $row["customer_name"];?>      </font> </div></td>
+    <td width=89 align=left ><div align="center"><font color="#FFFFFF"><? if( $row["settle"]=="S") {echo "掛單";} else{echo "入賬";} ?>
+    </font></div></td>
+    <td width=55 align=right > <div align="center"><font color="#FFFFFF">
+      <? echo $row["branchID"];
+	  $branchID[$row["invoice_no"]]=$row["branchID"];
+	  ?>
+    </font> <font color="#FFFFFF">舖</font></div></td>     
+    <td width=58 align=right> <div align="center"><font color="#FFFFFF">
+      送貨<br>
+      <?echo $row["delivery"];?>
+    </font> </div></td> 
+    <td width=80 align=left > <div align="center"><font color="#FFFFFF">
+      <?echo $row["sales_name"];?>
+    </font> </div></td>
+
+	 <td width=70 align=left > <div align="center"><font color="#FFFFFF">
+	   扶力費<br>
+	   <? echo $row["man_power_price"];
+	  $man_power_price[$row["invoice_no"]]=$row["man_power_price"];
+	  ?>
+	   </font> </div></td>
+	  	 <td width=93 align=left > <div align="center"><font color="#FFFFFF">
+	  	   特別扶力<br>
+	  	   <?echo $row["special_man_power_percent"];
+	   $special_man_power_percent[$row["invoice_no"]]=$row["special_man_power_percent"];
+	   ?>
+  	         </font> </div></td>
+  	 <td width=86 align=left > <font color="#FFFFFF"><? echo $row["discount_percent"];
+	  $discount_percent[$row["invoice_no"]]=$row["discount_percent"];
+	  ?>
+      </font> <font color="#FFFFFF">折</font></td>  	 
+  	 <td width=69 align=left > <font color="#FFFFFF">減</font><font color="#FFFFFF"><?echo $row["discount_deduct"];
+	   $discount_deduct[$row["invoice_no"]]=$row["discount_deduct"];?>
+      </font> </td>
+     <td align=left ><div align="center"><span class="style2">訂金</span><font color="#FFFFFF"><br>
+       
+           <?echo $row["deposit"]; ?></font> </div>       <div align="center"></div></td>
+     </tr></table></td></tr><? }?>
+ 
+	<? $temp_invoice_no=$row["invoice_no"];
+	   $temp_invoice_settle=$row["settle"];
+	   $temp_invoice_deposit=$row["deposit"];
+	   $temp_invoice_credit_card_rate=$row["credit_card_rate"];
+	?>  
+	  <tr>
+    <td width=120 align=left <?if (($row["invoice_no"]%2)==1){echo "bordercolor=\"#FFFFFF\" bgcolor=\"#CCCCCC\"";}else{echo "bordercolor=\"#FFFFFF\" bgcolor=\"#BBBBBB\"";}?>> 
+	
+      <font color=000000>
+      <?echo "<a href=\"../check_partno.php3?update=2&goods_partno=".URLEncode($row["goods_partno"])."\" target=\"CHECKPARTNO\">".$row["goods_partno"]."</a>";?>      </font> </td>
+<?
+if ($row["goods_detail"]==""){
+$query_askdetail=mysql_query("select goods_detail from sumgoods where goods_partno=\"".$row["goods_partno"]."\"");
+$rows_askdetail=mysql_fetch_array($query_askdetail);
+}
+?>
+    <td width=200 align=left <?if (($row["invoice_no"]%2)==1){echo "bordercolor=\"#FFFFFF\" bgcolor=\"#CCCCCC\"";}else{echo "bordercolor=\"#FFFFFF\" bgcolor=\"#BBBBBB\"";}?>> 
+      <font color=000000>
+      <?
+      if ($row["goods_detail"]==""){
+      echo $rows_askdetail["goods_detail"];
+      }
+      else { echo $row["goods_detail"];}?>
+      </font> </td>
+    <td width=34 align=left <?if (($row["invoice_no"]%2)==1){echo "bordercolor=\"#FFFFFF\" bgcolor=\"#CCCCCC\"";}
+else{echo "bordercolor=\"#FFFFFF\" bgcolor=\"#BBBBBB\"";}?>> <font color=000000>
+      <?echo $row["qty"];?>
+      </font> </td>
+    <td width=60 align=right <?if (($row["invoice_no"]%2)==1){echo "bordercolor=\"#FFFFFF\" bgcolor=\"#CCCCCC\"";}
+else{echo "bordercolor=\"#FFFFFF\" bgcolor=\"#BBBBBB\"";}?>> <font color=000000>
+      <?echo $row["marketprice"];?>
+      </font> </td>
+    
+	  
+	   <td width=20 align=right <?if (($row["invoice_no"]%2)==1){echo "bordercolor=\"#FFFFFF\" bgcolor=\"#CCCCCC\"";}
+else{echo "bordercolor=\"#FFFFFF\" bgcolor=\"#BBBBBB\"";}?>> <font color=000000>
+      <? echo $row["manpower"];?>
+      </font> </td>
+    <td width=60 align=right <?if (($row["invoice_no"]%2)==1){echo "bordercolor=\"#FFFFFF\" bgcolor=\"#CCCCCC\"";}
+else{echo "bordercolor=\"#FFFFFF\" bgcolor=\"#BBBBBB\"";}?>> 
+      <? $amount=((100-$row["discountrate"])/100)*$row["qty"]*$row["marketprice"];?>
+      <font color=000000>
+      <? echo number_format($amount,2,'.',',');?>      </font> </td>
+</tr>
+<?
+$invoice_total[$row["invoice_no"]]=$invoice_total[$row["invoice_no"]]+$amount;
+$invoice_credit_card_rate[$row["invoice_no"]]=$row["credit_card_rate"];
+} //endifdat=0
+
+} //endwhile
+?>
+<?
+ if ($temp_invoice_no!=0){
+   ?><tr><td colspan="13">
+   <table width="100%" border="0" cellpadding="1" cellspacing="1">
+   <tr><td><?
+   include("statistic_func.php");
+   
+   
+   ?>總計 $<?=$subsubtotal?> 信用卡 $<?=$credit_card_total?></td></tr>
+   </table></td></tr><? }?>
+<?
+}
+
+// }
+?>
+</table>
+</center>
+
+
+<hr>
+<table width="80%" border="2" align="center" cellpadding="1" cellspacing="1">
+  <tr>
+    <td colspan="<?=count($shop_array)?>"><div align="center">日結</div>    </td>
+  </tr>
+  <tr>
+  <?
+  	for ($i=0;$i<count($shop_array);$i++){?>
+		<td width="360"><u><?=$shop_array[$i]?>舖 </u>       </td>
+		<?}
+    
+  ?>
+  </tr>
+  <tr>
+    <?
+  	for ($i=0;$i<count($shop_array);$i++){?>
+		<td>總數 <?=number_format($shop_counter[$i],2,'.',',')?></td>
+		<?}?>
+  </tr>
+  <tr>
+   <?
+  	for ($i=0;$i<count($shop_array);$i++){?>
+		<td>入賬<?=number_format($settle_shop_subtotal_counter[$i],2,'.',',')?></td>
+		<?}?>
+  </tr>
+  <tr>
+   <?
+  	for ($i=0;$i<count($shop_array);$i++){?>
+		<td>掛單 <?=number_format($unsettle_shop_subtotal_counter[$i],2,'.',',')?></td>
+		<?}?>
+  </tr>
+  <tr>
+     <?
+  	for ($i=0;$i<count($shop_array);$i++){?>
+		<td>掛單訂金 <?=number_format($unsettle_shop_deposit_counter[$i],2,'.',',')?></td>
+		<?}?>
+  </tr>
+  <tr>
+    <?
+  	for ($i=0;$i<count($shop_array);$i++){?>
+		<td>退貨 <?=number_format($return_shop_total_counter[$i],2,'.',',')?></td>
+		<?}?>
+  </tr>
+  <tr>
+    <td colspan="<?=count($shop_array)?>"><div align="center">全日總數
+        <?=number_format($day_counter,2,'.',',')?>
+    </div></td>
+  </tr>
+</table>
+<p>
+<p>
+</body>
+</html>
