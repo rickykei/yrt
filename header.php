@@ -5,7 +5,7 @@
 <!--<script src="./js/jquery-ui-1.11.4.custom/jquery-ui.js"></script>
 <!--<script src="./js/autoNumeric.min.js"></script> 
 <link rel="stylesheet" href="./js/jquery-ui-1.11.4.custom/jquery-ui.min.css">-->
-<script type="text/javascript" src="./js/js.storage.min.js"></script> 
+<!--<script type="text/javascript" src="./js/js.storage.min.js"></script> -->
 
-</head>
+ 
 

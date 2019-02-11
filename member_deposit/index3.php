@@ -26,11 +26,11 @@ include("./include/config.php");
       die ($result->getMessage());
  
   //insert member_deposit
-  $query="insert into member_deposit (creation_date,created_by,mem_dep_id,entry_date,deposit_date,deposit_amt,sales_name,mem_name,mem_id,branchID,sts) ";
-  $query.=" values (SYSDATE(),upper('$browseryrt'),'',now(),'$deposit_date',$deposit_amt,'$sales','$mem_name','$mem_id','$AREA','A')";
+  $query="insert into member_deposit (creation_date,created_by,mem_dep_id,entry_date,deposit_date,deposit_amt,deposit_bank_amt,sales_name,mem_name,mem_id,branchID,sts) ";
+  $query.=" values (SYSDATE(),upper('$browseryrt'),'',now(),'$deposit_date','$deposit_amt','$deposit_bank_amt','$sales','$mem_name','$mem_id','$AREA','A')";
 
  
- 
+ //echo $query;
   $result=$connection->query($query);
   if (DB::isError($result)) die ($result->getMessage());
   

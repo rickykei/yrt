@@ -22,8 +22,8 @@ $totalcounter=0;
  
 
   //insert invoice Door
-  $query="insert into misc (id,daily_revenue,daily_expend,daily_cheque,daily_creditcard,daily_unionpay,daily_eps,daily_cash,daily_income,daily_drawer,past_daily_drawer,drawer_diff,area,invoice_date,created_by,created_date,pc,modified_by,modified_date,sts) ";
-  $query.=" values ('','$daily_revenue','$daily_expend','$daily_cheque','$daily_creditcard','$daily_unionpay','$daily_eps','$daily_cash','$daily_income','$daily_drawer','$past_daily_drawer','$drawer_diff','$AREA','$invoice_date','$browseryrt',SYSDATE(),'$pc','$browseryrt',now(),'A')";
+  $query="insert into misc (id,daily_revenue,daily_expend,daily_cheque,daily_creditcard,daily_unionpay,daily_eps,daily_fps,daily_cash,daily_income,daily_drawer,past_daily_drawer,drawer_diff,area,invoice_date,created_by,created_date,pc,modified_by,modified_date,sts) ";
+  $query.=" values ('','$daily_revenue','$daily_expend','$daily_cheque','$daily_creditcard','$daily_unionpay','$daily_eps','$daily_fps','$daily_cash','$daily_income','$daily_drawer','$past_daily_drawer','$drawer_diff','$AREA','$invoice_date','$browseryrt',SYSDATE(),'$pc','$browseryrt',now(),'A')";
 
  
  

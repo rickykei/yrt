@@ -20,8 +20,8 @@ session_start();
  include_once('./include/function.php');
  include_once('./include/config2.php');
  include_once('./include/user.class.php');
-?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+?><html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!doctype html xmlns="http://www.w3.org/1999/xhtml" lang="en"> 
 <head>
 <title>
 <?php 
@@ -61,7 +61,7 @@ if ($pos!='')
 ?>
 [<?echo $UNAME;?>,<?echo $AREA;?>,<?echo $PC;?>]
 </title>
- 
+
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
  
 <?php
@@ -153,8 +153,7 @@ $(document).ready(function(){
 		 	
 		if (checkLoginDateTime()){
 	?>
-	<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onkeydown="detectKeyBoard(event)">
- 
+	 
 	<?php
 	//print_r($_SESSION);
 	   if($_REQUEST['page']!='' && $_REQUEST['subpage']!='')

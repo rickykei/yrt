@@ -136,6 +136,11 @@ a:active {
             <td ><?php echo $daily_eps;?></td>
           </tr>
 		  <tr bgcolor="#CCCCCC">
+            <td ></td>
+            <td >FPS:</td>
+            <td ><?php echo $daily_fps;?></td>
+          </tr>
+		  <tr bgcolor="#CCCCCC">
             <td ></span></td>
             <td >現金入數:</td>
             <td ><?php echo $daily_cash;?></td>
@@ -225,6 +230,8 @@ for ($i=0;$i<4;$i++)
 <input type="hidden" name="daily_creditcard" id="daily_creditcard" value="<?php echo $daily_creditcard;?>"/>
 <input type="hidden" name="daily_unionpay" id="daily_unionpay" value="<?php echo $daily_unionpay;?>"/>
 <input type="hidden" name="daily_eps" id="daily_eps" value="<?php echo $daily_eps;?>"/>
+
+<input type="hidden" name="daily_fps" id="daily_fps" value="<?php echo $daily_fps;?>"/>
 <input type="hidden" name="daily_cash" id="daily_cash" value="<?php echo $daily_cash;?>"/>
 <input type="hidden" name="daily_income" id="daily_income" value="<?php echo $daily_income;?>"/>
 <input type="hidden" name="past_daily_drawer" id="past_daily_drawer" value="<?php echo $past_daily_drawer;?>"/>

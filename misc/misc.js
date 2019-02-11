@@ -104,6 +104,8 @@ function checkform()
 		 dailyCCStr=$('#daily_creditcard').val();
 		 dailyUPStr=$('#daily_unionpay').val();
 		 dailyEPSStr=$('#daily_eps').val();
+		 dailyFPSStr=$('#daily_fps').val();
+		 
 		 
 		 
 		 
@@ -124,7 +126,10 @@ function checkform()
 		  }
 		  if (dailyEPSStr!=""){
 			subtotal=subtotal-parseFloat(dailyEPSStr);
-		  }		
+		  }
+		if (dailyFPSStr!=""){
+			subtotal=subtotal-parseFloat(dailyFPSStr);
+		  }				  
 				  		  
 	 
 	   

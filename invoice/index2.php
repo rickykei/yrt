@@ -222,7 +222,7 @@ body {
             <td height="24"><span class="style6">
               <?if ($status=="A"){echo "入賑";}else if ($status=="S"){echo "掛單";} else {echo "訂金";};?>
             </span></td>
-			 <td height="24" class="style6"> <?if ($deposit_method=="C"){echo "現金入賑";}else if ($deposit_method=="D"){echo "會員賑戶扣數";} ?></td>
+			 <td height="24" class="style6"> <?if ($deposit_method=="C"){echo "現金入賑";}else if ($deposit_method=="D"){echo "會員現金扣數";}else if ($deposit_method=="B"){echo "會員銀行扣數 ";} ?></td>
           </tr>
         </table></td>
       </tr>

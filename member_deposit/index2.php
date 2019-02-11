@@ -79,6 +79,7 @@ body {
          
           <tr bgcolor="#004d80">
             <td height="23" class="style6">存入金額：<?echo $deposit_amt;?></td>
+			<td height="23" class="style6">存入銀行金額：<?echo $deposit_bank_amt;?></td>
             <td height="23" class="style6">餘額 :<?php echo $mem_dep_bal;?></td>
             <td height="23" class="style6">客戶編號：<?echo $mem_id;?></td>
             <td height="23" class="style6"></td>
@@ -105,6 +106,7 @@ body {
 		<input type="hidden" name="AREA" value="<?echo $AREA;?>" />
 		<input type="hidden" name="PC" value="<?echo $PC;?>" />
 		<input type="hidden" name="deposit_amt" value="<?echo $deposit_amt;?>" />
+		<input type="hidden" name="deposit_bank_amt" value="<?echo $deposit_bank_amt;?>" />
 		<input type="hidden" name="mem_dep_bal" value="<?php echo $mem_dep_bal;?>"/>
         <input name="clear" type="reset" id="clear" value="上一步" onClick="history.back(1);;">
         <input name="submitb" type="submit" id="submitb" value="送出"></td>

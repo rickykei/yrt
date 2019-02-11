@@ -98,7 +98,9 @@ a:active {
 				 <input id="deposit_method1" name="deposit_method" type="radio" value="C" checked>
 				<span class="style6">現金入賑</span>
 			  <input id="deposit_method2" name="deposit_method" type="radio" value="D" >
-			  <span class="style6">會員賑戶扣數</span><span class="style6">
+			  <span class="style6">會員現金扣數</span><span class="style6">
+			  <input id="deposit_method3" name="deposit_method" type="radio" value="B" >
+			  <span class="style6">會員銀行扣數</span><span class="style6">
 			 
 			  <br>
 			    <input name="delivery" type="radio" id="delivery1" value="Y" checked="checked" />

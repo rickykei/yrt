@@ -46,6 +46,7 @@ function Body($invoice_no)
 	$entry_date=iconv("UTF-8", "BIG5-HKSCS",$row['entry_date']);
 	$sales_name=$row['sales_name'];
 	$deposit_amt=$row['deposit_amt'];
+	$deposit_bank_amt=$row['deposit_bank_amt'];
 	$sql=" Select * from staff where name = '".$sales_name."'";
 	$resultStaff= $connection->query($sql);
 	$rowStaff=$resultStaff->fetchRow(DB_FETCHMODE_ASSOC);
@@ -142,6 +143,18 @@ function Body($invoice_no)
 	$this->Cell(22,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
  
 	$this->Cell(25,6,iconv("UTF-8", "BIG5-HKSCS",number_format($deposit_amt, 2, '.', ',')),$border,0,'R',0);
+	
+	$this->Ln(10);
+	$this->Cell(5,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);			
+	$this->Cell(10,6,iconv("UTF-8", "BIG5-HKSCS","1"),$border,0,'L',0);
+	$this->Cell(30,6,iconv("UTF-8", "BIG5-HKSCS","會員銀行存款"),$border,0,'L',0);
+	$this->Cell(10,6,iconv("UTF-8","BIG5-HKSCS",""),$border,0,'L',0);
+	$this->Cell(65,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'L',0);
+    $this->Cell(18,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+	$this->Cell(9,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+	$this->Cell(22,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+ 
+	$this->Cell(25,6,iconv("UTF-8", "BIG5-HKSCS",number_format($deposit_bank_amt, 2, '.', ',')),$border,0,'R',0);
 	
 	$this->Ln(50);
 	$this->Cell(5,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);			

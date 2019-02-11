@@ -24,8 +24,9 @@ $ok=0;
       die ($result->getMessage());
  
   //insert invoice
-  $query="update member_deposit set last_update_date=SYSDATE(),call_count=call_count+1,last_update_by=upper('$browseryrt'),deposit_date ='$deposit_date' , entry_date = '$entry_date' , sales_name= '$sales' ,mem_name = '$mem_name'    ,mem_id ='$mem_id',branchID='$AREA', deposit_amt = '$deposit_amt'   where mem_dep_id='".$mem_dep_id."'";
+  $query="update member_deposit set last_update_date=SYSDATE(),call_count=call_count+1,last_update_by=upper('$browseryrt'),deposit_date ='$deposit_date' , entry_date = '$entry_date' , sales_name= '$sales' ,mem_name = '$mem_name'    ,mem_id ='$mem_id',branchID='$AREA', deposit_amt = '$deposit_amt' , deposit_bank_amt = '$deposit_bank_amt'   where mem_dep_id='".$mem_dep_id."'";
  
+ echo $query;
   
   $result=$connection->query($query);
   
@@ -53,7 +54,7 @@ $ok=0;
 
 <SCRIPT LANGUAGE="JavaScript">
 popUp("./pdf/<?php echo $invoice_no?>.pdf");
- window.location="list.php"; 
+window.location="list.php"; 
 </script><?
 }
       

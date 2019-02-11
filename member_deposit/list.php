@@ -132,7 +132,8 @@ body {
 <TD width="67" bgcolor="#006633">分店</TD>
  
 <TD width="100" bgcolor="#006633">售貨員</TD>
-<TD width="100" bgcolor="#006633">單總</TD>
+<TD width="100" bgcolor="#006633">轉入現金</TD>
+<TD width="100" bgcolor="#006633">轉入銀行現金</TD>
 <?php 
 //20100525
 if (($AREA=="Y" && $PC=="99") || ($AREA=="Y" && $PC=="1") ){ 
@@ -164,6 +165,7 @@ else if ($row['settle']=="A") { echo " onMouseOut=\"this.className='normal'\"";e
  
    <td><?=$row['sales_name']?></td>
     <td><?=$row['deposit_amt']?></td>
+	<td><?=$row['deposit_bank_amt']?></td>
 	<?php 
 	//20100525
 	if (($AREA=="Y" && $PC=="99") || ($AREA=="Y" && $PC=="1") ){ 
@@ -197,4 +199,5 @@ else if ($row['settle']=="A") { echo " onMouseOut=\"this.className='normal'\"";e
     }
   ); 
 </script>
+ 
  

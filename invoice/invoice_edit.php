@@ -200,7 +200,8 @@
 				<span class="style6">現金入賑</span>
 			  <input id="deposit_method2" name="deposit_method" type="radio" value="D" <?php if($invoicerow['deposit_method']=="D"){echo "checked";}?>>
 			  <span class="style6">會員賑戶扣數</span><span class="style6">
-			 
+			  <input id="deposit_method3" name="deposit_method" type="radio" value="B" <?php if($invoicerow['deposit_method']=="B"){echo "checked";}?>>
+			  <span class="style6">會員銀行扣數</span><span class="style6">
 			  <br>
                 <input name="delivery" type="radio" id="delivery" value="Y" <?php if ($invoicerow['delivery']=="Y"){echo "checked";}?>/>
                 </span><span class="style6">送貨

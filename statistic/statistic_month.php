@@ -50,7 +50,9 @@ $subtotal="select sum(total_price) as total from invoice where invoice.invoice_d
 		$shop_return_total[$i]="select sum(total_price) as total from returngood where returngood.return_date>='$date_start' && returngood.return_date<='$date_end' and branchID='$shop_array[$i]'";
 		$delivery_total[$i]="select sum(fee) as total from delivery_fee where delivery_date>='$date_start' && delivery_date<='$date_end' and shop='$shop_array[$i]'";
 		$member_total_deposit[$i]="select sum(deposit_amt) as total from member_deposit where deposit_date <='$date_end' and  	branchID='$shop_array[$i]' ";
+		$member_total_bank_deposit[$i]="select sum(deposit_bank_amt) as total from member_deposit where deposit_date <='$date_end' and  	branchID='$shop_array[$i]' ";
 		$member_total_spend_on_deposit[$i]="select sum(total_price) as total from invoice where invoice.settledate <= '$date_end' and branchID='$shop_array[$i]' and settle='A' and deposit_method='D'  and void='A' ";
+		$member_total_spend_on_bank_deposit[$i]="select sum(total_price) as total from invoice where invoice.settledate <= '$date_end' and branchID='$shop_array[$i]' and settle='A' and deposit_method='B'  and void='A' ";
 		 
 		if ($AREA==$shop_array[$i] || security_check($AREA,$PC) ){
 			 
@@ -82,9 +84,18 @@ $subtotal="select sum(total_price) as total from invoice where invoice.invoice_d
 		   $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
 		   $member_total_deposit_counter[$i]=$row['total'];
 		   
+		   $rows = $connection->query($member_total_bank_deposit[$i]);
+		   $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
+		   $member_total_bank_deposit_counter[$i]=$row['total'];
+		   
+		   
 		   $rows = $connection->query($member_total_spend_on_deposit[$i]);
 		   $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
 		   $member_total_spend_on_deposit_counter[$i]=$row['total'];
+		   
+		    $rows = $connection->query($member_total_spend_on_bank_deposit[$i]);
+		   $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
+		   $member_total_spend_on_bank_deposit_counter[$i]=$row['total'];
    }
 		
 	}
@@ -147,13 +158,25 @@ $subtotal="select sum(total_price) as total from invoice where invoice.invoice_d
     <tr>
     <?
   	for ($i=0;$i<count($shop_array);$i++){?>
-		<td class="yrtfont">會員存款 <?=number_format($member_total_deposit_counter[$i],2,'.',',')?></td>
+		<td class="yrtfont">會員現金存款 <?=number_format($member_total_deposit_counter[$i],2,'.',',')?></td>
+		<?}?>
+  </tr>
+  <tr>
+    <?
+  	for ($i=0;$i<count($shop_array);$i++){?>
+		<td class="yrtfont">會員銀行存款 <?=number_format($member_total_bank_deposit_counter[$i],2,'.',',')?></td>
 		<?}?>
   </tr>
    <tr>
     <?
   	for ($i=0;$i<count($shop_array);$i++){?>
-		<td class="yrtfont">會員存款扣數 <?=number_format($member_total_spend_on_deposit_counter[$i],2,'.',',')?></td>
+		<td class="yrtfont">會員現金存款扣數 <?=number_format($member_total_spend_on_deposit_counter[$i],2,'.',',')?></td>
+		<?}?>
+  </tr>
+   <tr>
+    <?
+  	for ($i=0;$i<count($shop_array);$i++){?>
+		<td class="yrtfont">會員銀行存款扣數 <?=number_format($member_total_spend_on_bank_deposit_counter[$i],2,'.',',')?></td>
 		<?}?>
   </tr>
     <tr>

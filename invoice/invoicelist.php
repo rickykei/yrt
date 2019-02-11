@@ -137,7 +137,7 @@ body {
 			if ($deposit_method!=""){
 				if ($checking>=1) 
 					$sql.=" and ";
-					$sql.= " a.deposit_method ='D' ";
+					$sql.= " a.deposit_method ='".$deposit_method."' ";
 					$checking++;
 			 
 					
@@ -152,7 +152,7 @@ body {
 				}
 				
 				// sum of invoice amt for member used deposit saving
-				$sum_inv_dep_amt_sql="SELECT sum( total_price ) as sum FROM invoice WHERE member_id ='".$mem_id."' and deposit_method='D' ";
+				$sum_inv_dep_amt_sql="SELECT sum( total_price ) as sum FROM invoice WHERE member_id ='".$mem_id."' and deposit_method='".$deposit_method."' ";
 				$sum_inv_dep_amt_result = $db->query($sum_inv_dep_amt_sql);
 				while ( $sum_inv_dep_amt_result_row = $sum_inv_dep_amt_result->fetchRow(DB_FETCHMODE_ASSOC) ){
 				$sum_inv_dep_amt=$sum_inv_dep_amt_result_row["sum"];
@@ -233,8 +233,11 @@ body {
 				}?>
                 </select>
 </div>
- <div><label>會員賑戶扣數 </label>
+ <div><label>會員現金扣數 </label>
   <input name="deposit_method" type="checkbox" id="deposit_method" value="D" />
+</div>
+<div><label>會員銀行扣數 </label>
+  <input name="deposit_method" type="checkbox" id="deposit_method" value="B" />
 </div>
 <input type="submit" name="button" value="查貨單"/>
 </form>
@@ -256,13 +259,13 @@ body {
 <TD width="107" bgcolor="#006633"> 發票日期</TD>
 <TD width="107" bgcolor="#006633">送貨日期 </TD>
 <td width="78" bgcolor="#006633">客戶名稱</td>
-<TD width="94" bgcolor="#006633">會員編號</TD>
+<TD width="50" bgcolor="#006633">會員編號</TD>
 <TD width="67" bgcolor="#006633">分店</TD>
 <TD width="88" bgcolor="#006633">送貨</td>
 <TD width="88" bgcolor="#006633">地址</td>
 <TD width="100" bgcolor="#006633">售貨員</TD>
 <TD width="100" bgcolor="#006633">單總</TD>
-<TD width="40" bgcolor="#006633">入賑方法</TD>
+<TD width="50" bgcolor="#006633">入賑方法</TD>
 <?php 
 //20100525
 if (($AREA=="Y" && $PC=="99") || ($AREA=="Y" && $PC=="1") ){ 
@@ -296,7 +299,7 @@ else if ($row['settle']=="A") { echo " onMouseOut=\"this.className='normal'\"";e
    <td><?=$row['customer_detail']?></td>
    <td><?=$row['sales_name']?></td>
     <td><?=$row['total_price']?></td>
-	  <td><? if ($row['deposit_method']=='D') echo "會員賑戶扣數";?></td>
+	  <td><?if ($row['deposit_method']=="C"){echo "現金入賑";}else if ($row['deposit_method']=="D"){echo "會員現金扣數";}else if ($row['deposit_method']=="B"){echo "會員銀行扣數 ";} ?></td>
 	<?php 
 	//20100525
 	if (($AREA=="Y" && $PC=="99") || ($AREA=="Y" && $PC=="1") ){ 

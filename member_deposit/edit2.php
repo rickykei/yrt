@@ -135,6 +135,7 @@ body {
 		<input type="hidden" name="AREA" value="<?echo $AREA;?>" />
 		<input type="hidden" name="PC" value="<?echo $PC;?>" />
 		<input type="hidden" name="deposit_amt" value="<?echo $deposit_amt;?>" />
+ <input type="hidden" name="deposit_bank_amt" value="<?echo $deposit_bank_amt;?>" />
  
         <input name="clear" type="reset" id="clear" value="上一步" onClick="history.back(1);">
         <input name="submitb" type="submit" id="submitb" value="送出"></td>

@@ -114,8 +114,14 @@ a:active {
             <td colspan="4"><input onKeyPress="next_text_box(event,'mem_id')" tabindex="37" name="deposit_amt" type="text" id="deposit_amt" size="60" maxlength="255" onChange="findAddressAlertAjax()" /></td>
 			<td><input type="text" id="warning" name="warning" readonly="readonly" /></td>
 			<td> <input name="submitb" type="submit" id="submitb" value="送出"></td>
-                </tr>
+           </tr>
+         <tr bgcolor="#004d80">
          
+            <td><span class="style6">存入銀行金額</span></td>
+            <td colspan="4"><input onKeyPress="next_text_box(event,'mem_id')" tabindex="37" name="deposit_bank_amt" type="text" id="deposit_bank_amt" size="60" maxlength="255" onChange="findAddressAlertAjax()" /></td>
+			<td> </td>
+			<td> </td>
+           </tr>
         </table></td>
       </tr>
        
