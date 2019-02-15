@@ -175,7 +175,19 @@ body,td,th ,tr{
 		$member_total_bank_deposit[$i]="select sum(deposit_bank_amt) as total from member_deposit where month(deposit_date)=$month && year(deposit_date)=$year && DAYOFMONTH(deposit_date)=$day and branchID='$shop_array[$i]' ";
 		$member_total_spend_on_deposit[$i]="select sum(total_price) as total from invoice where month(invoice.settledate)=$month && year(invoice.settledate)=$year && DAYOFMONTH(invoice.settledate)=$day and branchID='$shop_array[$i]'  and void='A' and settle='A' and deposit_method='D' ";
 		$member_total_spend_on_bank_deposit[$i]="select sum(total_price) as total from invoice where month(invoice.settledate)=$month && year(invoice.settledate)=$year && DAYOFMONTH(invoice.settledate)=$day and branchID='$shop_array[$i]'  and void='A' and settle='A' and deposit_method='B' ";
-		$member_total_all_deposit[$i]="select sum(deposit_amt)+sum(deposit_bank_amt) as total from member_deposit where deposit_date  <= '$year-$month-$dayday' and  	branchID='$shop_array[$i]' ";
+		
+		
+		//all member spending by bank acc on invoice 
+		$member_total_spend_on_all_bank_deposit[$i]="select sum(total_price) as total from invoice where branchID='$shop_array[$i]'  and void='A' and settle='A' and deposit_method='B' and invoice.settledate <= '$year-$month-$dayday'";
+		
+		//all member spending by cash acc on invoice 
+		$member_total_spend_on_all_deposit[$i]="select sum(total_price) as total from invoice where branchID='$shop_array[$i]'  and void='A' and settle='A' and deposit_method='D' and invoice.settledate <= '$year-$month-$dayday'";
+				
+		// all member deposit by cash acc
+		$member_total_all_deposit[$i]="select sum(deposit_amt) as total from member_deposit where deposit_date  <= '$year-$month-$dayday' and  	branchID='$shop_array[$i]' ";
+		
+		// all member deposit by bank
+		$member_total_all_bank_deposit[$i]="select sum(deposit_bank_amt) as total from member_deposit where deposit_date  <= '$year-$month-$dayday' and  	branchID='$shop_array[$i]' ";
 		
 		if ($AREA==$shop_array[$i] || security_check($AREA,$PC) ){
 			 
@@ -252,6 +264,18 @@ body,td,th ,tr{
 		   $rows = $connection->query($member_total_all_deposit[$i]);
 		   $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
 		   $member_total_all_deposit_counter[$i]=$row['total'];
+		     
+		   $rows = $connection->query($member_total_all_bank_deposit[$i]);
+		   $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
+		   $member_total_all_bank_deposit_counter[$i]=$row['total'];
+		   
+		   $rows = $connection->query($member_total_spend_on_all_bank_deposit[$i]);
+		   $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
+		   $member_total_spend_on_all_bank_deposit_counter[$i]=$row['total'];
+		   
+		   $rows = $connection->query($member_total_spend_on_all_deposit[$i]);
+		   $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
+		   $member_total_spend_on_all_deposit_counter[$i]=$row['total'];
 		   
    }
 		
@@ -471,7 +495,13 @@ var day = document.getElementById("day");
   <tr>
     <?
   	for ($i=0;$i<count($shop_array);$i++){?>
-		<td class="yrtfont">會員總存款 <?=number_format($member_total_all_deposit_counter[$i],2,'.',',')?></td>
+		<td class="yrtfont">會員現金總存款 <?=number_format($member_total_all_deposit_counter[$i]-$member_total_spend_on_all_deposit_counter[$i],2,'.',',')?>(<?=number_format($member_total_all_deposit_counter[$i],2,'.',',')?>-<?=number_format($member_total_spend_on_all_deposit_counter[$i],2,'.',',')?>)</td>
+		<?}?>
+  </tr>
+   <tr>
+    <?
+  	for ($i=0;$i<count($shop_array);$i++){?>
+		<td class="yrtfont">會員銀行總存款 <?=number_format($member_total_all_bank_deposit_counter[$i]-$member_total_spend_on_all_bank_deposit_counter[$i],2,'.',',')?>(<?=number_format($member_total_all_bank_deposit_counter[$i],2,'.',',')?>-<?=number_format($member_total_spend_on_all_bank_deposit_counter[$i],2,'.',',')?>)</td>
 		<?}?>
   </tr>
    <tr>

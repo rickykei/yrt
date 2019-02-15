@@ -165,6 +165,9 @@ function memStateChanged() {
 		node = xmlDoc.getElementsByTagName("mem_dep_bal")[0].childNodes[0]
 		if (node != null)	document.getElementById("mem_dep_bal").value = node.nodeValue;
 		
+		node = xmlDoc.getElementsByTagName("mem_dep_bank_bal")[0].childNodes[0]
+		if (node != null)	document.getElementById("mem_dep_bank_bal").value = node.nodeValue;
+		
 		node = xmlDoc.getElementsByTagName("mem_add")[0].childNodes[0]
 		
 		if (node != null)	

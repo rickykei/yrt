@@ -130,7 +130,8 @@ a:active {
 		  <?php // <input name="sum_dep_amt" id="sum_dep_amt" type="text" disabled="disabled" class="blocktextbox" size="10" maxlength="10"> 
 		 // <input name="sum_inv_dep_amt" id="sum_inv_dep_amt" type="text" disabled="disabled" class="blocktextbox" size="10" maxlength="10"> 
 		 ?>
-		  <label><span class="style6">結餘 : </label></span><input name="mem_dep_bal" id="mem_dep_bal" type="text" disabled="disabled" class="blocktextbox" size="10" maxlength="10">
+		  <label><span class="style6">現金結餘 : </label></span><input name="mem_dep_bal" id="mem_dep_bal" type="text" disabled="disabled" class="blocktextbox" size="10" maxlength="10">
+		   <label><span class="style6">銀行結餘 : </label></span><input name="mem_dep_bank_bal" id="mem_dep_bank_bal" type="text" disabled="disabled" class="blocktextbox" size="10" maxlength="10">
 		  </td>
           </tr>
 		  

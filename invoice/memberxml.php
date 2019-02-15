@@ -35,6 +35,23 @@
 				//echo $sum_inv_dep_amt;
 				}
 				
+		// sum of ddeposit_bank_amt
+				$sum_dep_bank_amt_sql="SELECT sum(deposit_bank_amt ) as sum FROM member_deposit WHERE mem_id ='".$mem_id."' ";
+				
+				$sum_dep_bank_amt_result = $db->query($sum_dep_bank_amt_sql);
+				while ( $sum_dep_bank_amt_result_row = $sum_dep_bank_amt_result->fetchRow(DB_FETCHMODE_ASSOC) ){
+				$sum_dep_bank_amt=$sum_dep_bank_amt_result_row["sum"];
+				//echo $sum_dep_amt;
+				}
+				
+				// sum of invoice  amt for member used bank deposit saving
+				$sum_inv_dep_bank_amt_sql="SELECT sum( total_price ) as sum FROM invoice WHERE member_id ='".$mem_id."' and deposit_method='B' ";
+				$sum_inv_dep_bank_amt_result = $db->query($sum_inv_dep_bank_amt_sql);
+				while ( $sum_inv_dep_bank_amt_result_row = $sum_inv_dep_bank_amt_result->fetchRow(DB_FETCHMODE_ASSOC) ){
+				$sum_inv_dep_bank_amt=$sum_inv_dep_bank_amt_result_row["sum"];
+				//echo $sum_inv_dep_amt;
+				}		
+				
 	/*echo '<?xml version="1.0" encoding="ISO-8859-1"?><product>';*/
     echo '<?xml version="1.0" encoding="utf8"?><member>';
 	
@@ -49,6 +66,7 @@
 		echo "<sum_dep_amt>" . $sum_dep_amt . "</sum_dep_amt>";
 		echo "<sum_inv_dep_amt>" . $sum_inv_dep_amt . "</sum_inv_dep_amt>";
 		echo "<mem_dep_bal>" . ($sum_dep_amt-$sum_inv_dep_amt). "</mem_dep_bal>";
+		echo "<mem_dep_bank_bal>" . ($sum_dep_bank_amt-$sum_inv_dep_bank_amt). "</mem_dep_bank_bal>";
 
 	}
 	}else{
@@ -60,6 +78,7 @@
 		echo "<sum_dep_amt>0</sum_dep_amt>";
 		echo "<sum_inv_dep_amt>0</sum_inv_dep_amt>";
 		echo "<mem_dep_bal>0</mem_dep_bal>";
+		echo "<mem_dep_bank_bal>0</mem_dep_bank_bal>";
 	}
 	 
 	

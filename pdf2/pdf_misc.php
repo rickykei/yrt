@@ -120,10 +120,10 @@ function Body($invoice_no)
 	
 	for ($i=0;$i<15;$i++){
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",$i+1),$border,0,'R',0);
-	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($misc_misc[$i],2,'.',',')),$border,0,'R',0);
+	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",$misc_misc[$i]),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($misc_miscAmt[$i],2,'.',',')),$border,0,'R',0);
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",$i+1),$border,0,'R',0);
-    $this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($cheque[$i],2,'.',',')),$border,0,'R',0);
+    $this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",$cheque[$i]),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($cheque_amt[$i],2,'.',',')),$border,1,'R',0);
 	}
 	  $this->SetFont('Big5','',12);
