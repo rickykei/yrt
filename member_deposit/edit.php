@@ -1,9 +1,9 @@
 <?php
     
 	 
-  require_once("../include/config.php");
-  require_once("../include/functions.php");
-  include_once("../include/timestamp.php");
+  require_once("./include/config.php");
+  require_once("./include/functions.php");
+  include_once("./include/timestamp.php");
   $ts = new TIMESTAMP;
 	//db connection
 	$db = DB::connect($dsn);
@@ -57,7 +57,7 @@
 
 </style></head>
 <body onkeydown="detectKeyBoard(event)">
-<form action="edit2.php" method="POST" enctype="application/x-www-form-urlencoded" name="form1">
+<form action="/?page=member_deposit&subpage=edit2.php" method="POST" enctype="application/x-www-form-urlencoded" name="form1">
 <table width="1000"  border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#99d6ff">
   <tr>
     <td width="4" height="">&nbsp;</td>

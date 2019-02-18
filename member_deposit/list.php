@@ -174,7 +174,7 @@ else if ($row['settle']=="A") { echo " onMouseOut=\"this.className='normal'\"";e
 	<?php 
 	} 
 	?>
-   <td><a  href="edit.php?id=<?=$row['mem_dep_id']?>">Edit</a></td>
+   <td><a  href="/?page=member_deposit&subpage=edit.php&id=<?=$row['mem_dep_id']?>">Edit</a></td>
    <td><a  href="./pdf/<?=$row['mem_dep_id']?>.pdf">Print</a></td></tr>
 		 <? }
    ?>

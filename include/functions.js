@@ -209,7 +209,7 @@ function memStateChanged() {
 
 		xmlhttp.onreadystatechange=memStateChanged;
 		if ($pos=='pos')
-		xmlhttp.open("GET","/pos/memberxml.php?mem_id=" + mem_id,true);
+		xmlhttp.open("GET","/posv2/memberxml.php?mem_id=" + mem_id,true);
 		else
 		xmlhttp.open("GET","/invoice/memberxml.php?mem_id=" + mem_id,true);
 		xmlhttp.send(null);

@@ -190,7 +190,7 @@
                     
                 </select><span class="style6"><?=$invoicerow['sales_name']?></span></td>
            
-            <td colspan="2" bgcolor="#006633"><input name="status" type="radio" value="A" <?php if($invoicerow['settle']=="A"){echo "checked";}?>>
+            <td colspan="3" bgcolor="#006633"><input name="status" type="radio" value="A" <?php if($invoicerow['settle']=="A"){echo "checked";}?>>
               <span class="style6">入帳</span>
               <input name="status" type="radio" value="S" <?php if($invoicerow['settle']=="S"){echo "checked";}?>>
               <span class="style6">掛單</span><span class="style5">&nbsp; 
@@ -232,10 +232,17 @@
             <td colspan="2" bgcolor="#006633"><input name="mem_id" type="text" tabindex="38" id="mem_id" value="<?php echo $invoicerow['member_id'];?>" size="15" onKeyPress="next_text_box(event,'delivery_date3')" onChange="findMemIdAjax()" >
               <input name="check_mem_id" id="check_mem_id" type="button" value="?"></td>
 			  
-            <td width="108" bgcolor="#006633"><span class="style6">客戶名稱：</span></td>
-            <td width="286" bgcolor="#006633"><input name="mem_name" type="text" id="mem_name" value="<?php echo $invoicerow['customer_name'];?>">
-              <span class="style6">會員級別</span>
+            <td width="108" bgcolor="#006633"><span class="style6">客戶名稱：</span> <input name="mem_name" type="text" id="mem_name" value="<?php echo $invoicerow['customer_name'];?>">
+              </td><td><span class="style6">會員級別</span>
               <input name="mem_credit_level" id="mem_credit_level" type="text" disabled="disabled" class="blocktextbox" size="2" maxlength="2"></td>
+			  <td>
+		 <input name="sum_dep_amt" id="sum_dep_amt" type="hidden" disabled="disabled" class="blocktextbox" size="10" maxlength="10"> 
+		 <input name="sum_inv_dep_amt" id="sum_inv_dep_amt" type="hidden" disabled="disabled" class="blocktextbox" size="10" maxlength="10"> 
+		 
+		  <label><span class="style6">現金結餘 : </label></span><input name="mem_dep_bal" id="mem_dep_bal" type="text" disabled="disabled" class="blocktextbox" size="10" maxlength="10">
+		  <br>
+		   <label><span class="style6">銀行結餘 : </label></span><input name="mem_dep_bank_bal" id="mem_dep_bank_bal" type="text" disabled="disabled" class="blocktextbox" size="10" maxlength="10">
+		  </td>
           </tr>
 		  
 		   <tr bgcolor="#006633">
@@ -252,7 +259,7 @@
 			   <span class="style6">收貨人：<input  name="receiver" tabindex="38" type="text" id="receiver"  size="15" value="<?php echo $invoicerow['receiver'];?>" />
             </span>
 			<td>
-			<td colspan="2">
+			<td colspan="3">
 			   <span class="style6">姓氏：<input  name="lastname" tabindex="38" type="text" id="lastname"  size="15" value="<?php echo $invoicerow['lastname'];?>" />
             </span>
 			</td>
@@ -262,7 +269,7 @@
             <td height="24" bgcolor="#006633"><span class="style6">入賬日期：</span></td>
             <td height="24" bgcolor="#006633"><input name="settledate" type="text" id="settledate" value="<?php $ts->getDate($invoicerow['settledate']);?>" size="12" maxlength="20"><input name="cal2" id="calendar2" value=".." type="button"></td>
             <td height="24" bgcolor="#006633"><span class="style6">送貨地址：</span></td>
-            <td height="24" colspan="3" bgcolor="#006633"><input name="mem_add" tabindex="37" onKeyPress="next_text_box(event,'mem_id')" type="text" id="mem_add" size="50" value="<?php echo $invoicerow['customer_detail'];?>" onChange="findAddressAlertAjax()"></td>
+            <td height="24" colspan="4" bgcolor="#006633"><input name="mem_add" tabindex="37" onKeyPress="next_text_box(event,'mem_id')" type="text" id="mem_add" size="50" value="<?php echo $invoicerow['customer_detail'];?>" onChange="findAddressAlertAjax()"></td>
             <td height="24" bgcolor="#006633"><input type="text" id="warning" name="warning" readonly="readonly" /><span class="style6">取消單 </span><input type="checkbox" name="void" value="I"></td>
             </tr>
         </table>

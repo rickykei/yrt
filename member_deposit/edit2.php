@@ -1,7 +1,7 @@
 <?
 //get name
-require_once("../include/config.php");
-require_once("../include/functions.php");
+require_once("./include/config.php");
+require_once("./include/functions.php");
  
 
    $query="SET NAMES 'UTF8'";
@@ -77,7 +77,7 @@ body {
 -->
 </style>
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onkeydown="detectKeyBoard(event)">
-<form name="form1" action="edit3.php" method="POST">
+<form name="form1" action="/?page=member_deposit&subpage=edit3.php" method="POST">
 <table width="900" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#99d6ff">
   
   <tr>

@@ -189,19 +189,26 @@ function checkform()
 	{
 		
 	count_total();
-		
-		if ($("#deposit_method2").attr('checked')){
-				
-				 //alert($('#mem_dep_bal').val());
-				 //alert($('#countid').val());
-			if (parseInt($('#mem_dep_bal').val())<parseInt($('#countid').val()))
-				alert('會員存款不足');
+	
+		var payment_sts = $('input[name=status]:checked').val();
+		var radio_selected = $('input[name=deposit_method]:checked').val();
+		console.log('paymentsts='+payment_sts);
+		//alert(payment_sts);
+		//alert(radio_selected);		   
+		 if(radio_selected=='D' && payment_sts=='A' ){
+			 if (parseInt($('#mem_dep_bal').val())<parseInt($('#countid').val()))
+				alert('會員現金扣數不足'+$('#mem_dep_bal').val());
+			else
+				document.form1.submit();
+		}else if(radio_selected=='B'  && payment_sts=='A') {
+			if (parseInt($('#mem_dep_bank_bal').val())<parseInt($('#countid').val()))
+				alert('會員銀行扣數不足'+$('#mem_dep_bank_bal').val());
 			else
 				document.form1.submit();
 		}else{
- 		document.form1.submit();
+			document.form1.submit();
 		}
-		
+		 
 	}
 }
 

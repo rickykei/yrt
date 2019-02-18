@@ -207,7 +207,7 @@
  </script>
  
 
-<form action="/?pos=<?php echo $pos;?>&id=<?php echo $id;?>&page=ipadpos&subpage=index5_edit.php" method="POST" enctype="application/x-www-form-urlencoded" name="form1">
+<form action="/?pos=<?php echo $pos;?>&id=<?php echo $id;?>&page=posv2&subpage=index5_edit.php" method="POST" enctype="application/x-www-form-urlencoded" name="form1">
 <table width="1000"  border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#99d6ff">
   <tr>
     <td width="4" height="360">&nbsp;</td>
@@ -260,8 +260,10 @@
 			  <span class="style6">訂金</span> <br>
 				 <input id="deposit_method1" name="deposit_method" type="radio" value="C" <?php if($invoicerow['deposit_method']=="C"){echo "checked";}?>>
 				<span class="style6">現金入賑</span>
-			  <input id="deposit_method2" name="deposit_method" type="radio" value="D" <?php if($invoicerow['deposit_method']=="D"){echo "checked";}?>>
+			   <input id="deposit_method2" name="deposit_method" type="radio" value="D" <?php if($invoicerow['deposit_method']=="D"){echo "checked";}?>>
 			  <span class="style6">會員賑戶扣數</span><span class="style6">
+			  <input id="deposit_method3" name="deposit_method" type="radio" value="B" <?php if($invoicerow['deposit_method']=="B"){echo "checked";}?>>
+			  <span class="style6">會員銀行扣數</span><span class="style6">
 			 
 			  <br>
                 <input name="delivery" type="radio" id="delivery" value="Y" <?php if ($invoicerow['delivery']=="Y"){echo "checked";}?>/>
@@ -301,7 +303,9 @@
 		 <input name="sum_dep_amt" id="sum_dep_amt" type="hidden" disabled="disabled" class="blocktextbox" size="10" maxlength="10"> 
 		 <input name="sum_inv_dep_amt" id="sum_inv_dep_amt" type="hidden" disabled="disabled" class="blocktextbox" size="10" maxlength="10"> 
 		 
-		  <label><span class="style6">結餘 : </label></span><input name="mem_dep_bal" id="mem_dep_bal" type="text" disabled="disabled" class="blocktextbox" size="10" maxlength="10">
+		  <label><span class="style6">現金結餘 : </label></span><input name="mem_dep_bal" id="mem_dep_bal" type="text" disabled="disabled" class="blocktextbox" size="10" maxlength="10">
+		  <br>
+		   <label><span class="style6">銀行結餘 : </label></span><input name="mem_dep_bank_bal" id="mem_dep_bank_bal" type="text" disabled="disabled" class="blocktextbox" size="10" maxlength="10">
 		  </td>
           </tr>
 		  

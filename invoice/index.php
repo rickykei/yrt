@@ -26,7 +26,7 @@
 <script type="text/javascript" src="./include/cal/lang/calendar-en.js"></script>
 <script type="text/javascript" src="./include/cal/calendar-setup.js"></script>
 <script type="text/javascript" src="./include/functions.js"></script>
-<script type="text/javascript" src="./include/invoice.js"></script>
+<script type="text/javascript" src="./include/invoice.js?20190218"></script>
 <link href="./include/invoice.css" rel="stylesheet" type="text/css" />
  <script type="text/javascript" src="./js/js.storage.min.js"></script> 
  

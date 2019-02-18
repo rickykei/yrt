@@ -25,6 +25,24 @@ include("./include/config.php");
    if (DB::isError($result))
       die ($result->getMessage());
  
+  //20190218
+  //check member name db first before insert.
+ 
+  $query="select count(*) as cnt from member where member_id='".$mem_id."' ";
+  $result=$connection->query($query);
+  if (DB::isError($result)) die ($result->getMessage());
+	$row=$result->fetchRow();
+ 
+  echo "member_count(".$row[0].")";
+ if($row[0]==0){
+	  //insert member20190218
+	 
+	$query="insert into member (member_id,member_name) ";
+	$query.=" values ('$mem_id','$mem_name')";  
+	    $result=$connection->query($query);
+		echo "insert member table done ";
+ }
+ 
   //insert member_deposit
   $query="insert into member_deposit (creation_date,created_by,mem_dep_id,entry_date,deposit_date,deposit_amt,deposit_bank_amt,sales_name,mem_name,mem_id,branchID,sts) ";
   $query.=" values (SYSDATE(),upper('$browseryrt'),'',now(),'$deposit_date','$deposit_amt','$deposit_bank_amt','$sales','$mem_name','$mem_id','$AREA','A')";
