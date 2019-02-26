@@ -6,7 +6,7 @@
   <?
   include_once("./include/config.php");
 
-  if (!($AREA=="Y" && $PC=="99") && !($AREA=="Y" && $PC=="1") ){
+  if (!($AREA=="A" && $PC=="99") && !($AREA=="Y" && $PC=="1") ){
    $db="";
   }else{
 	     

@@ -294,7 +294,7 @@
           </tr>
 		  <tr bgcolor="#CCCCCC">
          
-            <td >FPS:</td>
+            <td >QRCODE:</td>
             <td ><input type="text" name="daily_fps" id="daily_fps" value="<?php echo $miscrow['daily_fps']; ?>" onChange="calDailyIncome()"></td>   <td ></td>
           </tr>
 		  

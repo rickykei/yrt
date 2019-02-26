@@ -81,7 +81,7 @@ setlocale(LC_MONETARY, 'en_US');
 <TD width="67" bgcolor="#006633">信用卡</TD>
 <TD width="67" bgcolor="#006633">銀聯卡</TD>
 <TD width="67" bgcolor="#006633">EPS</TD>
-<TD width="67" bgcolor="#006633">FPS</TD>
+<TD width="67" bgcolor="#006633">QRCODE</TD>
 <TD width="67" bgcolor="#006633">現金入數</TD>
 <TD width="67" bgcolor="#006633">入數</TD>
 <TD width="67" bgcolor="#006633">是日存柜</TD>

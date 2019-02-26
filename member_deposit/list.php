@@ -175,7 +175,7 @@ else if ($row['settle']=="A") { echo " onMouseOut=\"this.className='normal'\"";e
 	} 
 	?>
    <td><a  href="/?page=member_deposit&subpage=edit.php&id=<?=$row['mem_dep_id']?>">Edit</a></td>
-   <td><a  href="./pdf/<?=$row['mem_dep_id']?>.pdf">Print</a></td></tr>
+   <td><a  href="./member_deposit/pdf/<?=$row['mem_dep_id']?>.pdf">Print</a></td></tr>
 		 <? }
    ?>
 </table><?php echo $turnover;?>

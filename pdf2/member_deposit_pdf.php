@@ -18,7 +18,7 @@ function Set_header_title($header_title)
 {
 	$this->header_title=$header_title;
 }
-function Body($invoice_no)
+function Body($invoice_no,$oldrecord)
 {
    include("./include/config.php");
 
@@ -55,11 +55,9 @@ function Body($invoice_no)
 	$customer_name=iconv("UTF-8", "BIG5-HKSCS",$rowCust['member_name']."    ".$rowCust["creditLevel"]);
 	$customer_tel =iconv("UTF-8", "BIG5-HKSCS",$row['mem_id']);
 	$customer_detail= iconv("UTF-8", "BIG5-HKSCS",$row['customer_detail']);
- 
-	$creditLevel= $rowCust['creditLevel'];
-	 
+ 	$creditLevel= $rowCust['creditLevel'];
 	$branchid=$row['branchID'];
- 
+	
    }
 
 			// sum of dep amt
@@ -70,14 +68,31 @@ function Body($invoice_no)
 				$sum_dep_amt=$sum_dep_amt_result_row["sum"];
 				//echo $sum_dep_amt;
 				}
+			
+			// sum of bank dep amt
+				$sum_dep_bank_amt_sql="SELECT sum( deposit_bank_amt ) as sum FROM member_deposit WHERE mem_id ='".$customer_tel."' ";
 				
-				// sum of invoice amt for member used deposit saving
-				$sum_inv_dep_amt_sql="SELECT sum( total_price ) as sum FROM invoice WHERE member_id ='".$customer_tel."' and deposit_method='D' ";
+				$sum_dep_bank_amt_result = $db->query($sum_dep_bank_amt_sql);
+				while ( $sum_dep_bank_amt_result_row = $sum_dep_bank_amt_result->fetchRow(DB_FETCHMODE_ASSOC) ){
+				$sum_dep_bank_amt=$sum_dep_bank_amt_result_row["sum"];
+				//echo $sum_dep_amt;
+				}			
+				
+			// sum of invoice amt for member used deposit saving
+				$sum_inv_dep_amt_sql="SELECT sum(total_price) as sum FROM invoice WHERE member_id ='".$customer_tel."' and deposit_method='D' ";
 				$sum_inv_dep_amt_result = $db->query($sum_inv_dep_amt_sql);
-				while ( $sum_inv_dep_amt_result_row = $sum_inv_dep_amt_result->fetchRow(DB_FETCHMODE_ASSOC) ){
+				$sum_inv_dep_amt_result_row = $sum_inv_dep_amt_result->fetchRow(DB_FETCHMODE_ASSOC) ;
 				$sum_inv_dep_amt=$sum_inv_dep_amt_result_row["sum"];
 				//echo $sum_inv_dep_amt;
-				}
+				
+				
+			// sum of invoice bank amt for member used deposit saving
+				$sum_inv_dep_bank_amt_sql="SELECT sum(total_price) as sum  FROM invoice WHERE member_id ='".$customer_tel."' and deposit_method='B' ";
+				$sum_inv_dep_bank_amt_result = $db->query($sum_inv_dep_bank_amt_sql);
+				$sum_inv_dep_bank_amt_result_row = $sum_inv_dep_bank_amt_result->fetchRow(DB_FETCHMODE_ASSOC);
+				$sum_inv_dep_bank_amt=$sum_inv_dep_bank_amt_result_row["sum"];
+				//echo $sum_inv_dep_amt;
+				
 				
 				
     $this->SetY(-3);
@@ -153,10 +168,25 @@ function Body($invoice_no)
     $this->Cell(18,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 	$this->Cell(9,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 	$this->Cell(22,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
- 
-	$this->Cell(25,6,iconv("UTF-8", "BIG5-HKSCS",number_format($deposit_bank_amt, 2, '.', ',')),$border,0,'R',0);
+ 	$this->Cell(25,6,iconv("UTF-8", "BIG5-HKSCS",number_format($deposit_bank_amt, 2, '.', ',')),$border,1,'R',0);
 	
-	$this->Ln(50);
+	$this->Ln(10);
+	 
+	for ($i=0;$i<count($oldrecord);$i++){
+		$this->Cell(5,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);			
+		$this->Cell(10,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'L',0);
+		$this->Cell(30,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'L',0);
+		$this->Cell(10,6,iconv("UTF-8","BIG5-HKSCS",""),$border,0,'L',0);
+		$this->Cell(65,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'L',0);
+		$this->Cell(18,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+		$this->Cell(22,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+		$this->Cell(9,6,iconv("UTF-8", "BIG5-HKSCS",substr($oldrecord[$i]['invoice_date'],0,10)),$border,0,'R',0);
+		$this->Cell(25,6,iconv("UTF-8", "BIG5-HKSCS",number_format($oldrecord[$i]['total_price'], 2, '.', ',')),$border,1,'R',0);
+		
+	}
+	$this->Ln(10);
+	 
+	
 	$this->Cell(5,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);			
 	$this->Cell(10,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'L',0);
 	$this->Cell(30,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'L',0);
@@ -164,14 +194,23 @@ function Body($invoice_no)
 	$this->Cell(65,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'L',0);
     $this->Cell(18,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 	$this->Cell(9,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(22,6,iconv("UTF-8", "BIG5-HKSCS","會員總存款"),$border,0,'R',0);
- 
-	$this->Cell(25,6,iconv("UTF-8", "BIG5-HKSCS",number_format(($sum_dep_amt-$sum_inv_dep_amt), 2, '.', ',')),$border,0,'R',0);
+	$this->Cell(22,6,iconv("UTF-8", "BIG5-HKSCS","會員總現金存款"),$border,0,'R',0);
+	$this->Cell(25,6,iconv("UTF-8", "BIG5-HKSCS",number_format(($sum_dep_amt-$sum_inv_dep_amt), 2, '.', ',')),$border,1,'R',0);
 	
+	$this->Cell(5,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);			
+	$this->Cell(10,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'L',0);
+	$this->Cell(30,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'L',0);
+	$this->Cell(10,6,iconv("UTF-8","BIG5-HKSCS",""),$border,0,'L',0);
+	$this->Cell(65,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'L',0);
+    $this->Cell(18,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+	$this->Cell(9,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+	$this->Cell(22,6,iconv("UTF-8", "BIG5-HKSCS","會員總銀行存款"),$border,0,'R',0);
+	$this->Cell(25,6,iconv("UTF-8", "BIG5-HKSCS",number_format(($sum_dep_bank_amt-$sum_inv_dep_bank_amt), 2, '.', ',')),$border,1,'R',0);
 	
  	$result->free ();
 	$resultStaff->free();
 }
+
 function Header()
 {
 	//Page header
@@ -224,16 +263,16 @@ function Footer()
 
 
 
-
+$pdf=new pdf('P','mm','A4');
 //$pdf=new pdf('P','mm',array(216,217));
-$pdf=new pdf('P','mm',array(216,217));
+//$pdf=new pdf('P','mm',array(216,217));
 $pdf->SetAutoPageBreak(true,2);
 $pdf->SetTopMargin(1);
 $pdf->SetLeftMargin(0);
 $pdf->AddBig5Font();
 $title='出貨單';
 $header_title=array();
-$pdf->Body($invoice_no);
+$pdf->Body($invoice_no,$oldrecord);
 $pdf->SetAuthor('YRT Company Limited');
 
 $filepath='./member_deposit/pdf/'.$invoice_no.'.pdf';

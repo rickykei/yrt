@@ -100,7 +100,9 @@
                     
                 </select>		</td>
             <td width="191"> </td>
-			<td colspan="2"> <span class="style6">餘額 :</span><input name="mem_dep_bal" id="mem_dep_bal" value="<?php echo $sum_dep_amt-$sum_inv_dep_amt;?>" readonly="readonly"> </td>
+			<td colspan="2">  <label><span class="style6">現金結餘 : </label></span><input name="mem_dep_bal" id="mem_dep_bal" type="text" disabled="disabled" class="blocktextbox" size="10" maxlength="10">
+		  <br>
+		   <label><span class="style6">銀行結餘 : </label></span><input name="mem_dep_bank_bal" id="mem_dep_bank_bal" type="text" disabled="disabled" class="blocktextbox" size="10" maxlength="10"></td>
 			</tr>
 			
           <tr bgcolor="#004d80">
@@ -126,7 +128,13 @@
 			<td><input type="text" id="warning" name="warning" readonly="readonly" /></td>
 			<td> <input name="submitb" type="submit" id="submitb" value="送出"></td>
                 </tr>
+          <tr bgcolor="#004d80">
          
+            <td><span class="style6">存入銀行金額</span></td>
+            <td colspan="4"><input onKeyPress="next_text_box(event,'mem_id')" tabindex="37" name="deposit_bank_amt" type="text" id="deposit_bank_amt" size="60" value="<? echo $invoicerow['deposit_bank_amt']; ?>" maxlength="255" onChange="findAddressAlertAjax()" /></td>
+			<td> </td>
+			<td> </td>
+           </tr>
         </table></td>
       </tr>
        

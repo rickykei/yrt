@@ -90,28 +90,28 @@ body {
         <td width="37%">&nbsp;</td>
       </tr>
       <tr bgcolor="#FFFFFF">
-        <td height="24" colspan="4"><table width="100%" border="0" cellpadding="2" cellspacing="0">
+        <td height="24" colspan="4">
+		<table width="100%" border="0" cellpadding="2" cellspacing="0">
           <tr bgcolor="#004d80">
-            <td width="14%" height="21">
-                <span class="style6"> 發票日期： </span>            </td>
-            <td width="35%"><span class="style6"><?echo $entry_date;?></span></td>
-               <td height="24"><span class="style6">入賬日期：</span></td>
-            <td height="24"><span class="style6"><?=$deposit_date?></span></td>
-           
+            <td > <span class="style6"> 發票日期： <?echo $entry_date;?></span> </td>
+            <td ><span class="style6"></span></td>
+               <td ><span class="style6">入賬日期：<?=$deposit_date?></span></td>
+            <td><span class="style6"></span></td>
           </tr>
-		  
           <tr bgcolor="#004d80">
-             <td height="23"><span class="style6">客戶名稱：</span></td>
-            <td height="23"><span class="style6"><?echo $mem_name;?></span></td><td><span class="style6">員工姓名：</span></td>
-            <td><span class="style6"><?echo $sales;?></span></td>
+             <td height="23"><span class="style6">客戶名稱：<?echo $mem_name;?></span></td>
+            <td height="23"><span class="style6"></span></td>
+			<td><span class="style6">員工姓名：<?echo $sales;?></span></td>
+            <td><span class="style6"></span></td>
            
           </tr>
          
           <tr bgcolor="#004d80">
-            <td height="24"><span class="style6">存入金額:</span></td>
-            <td height="24"><span class="style6"><?echo $deposit_amt;?></span></td>
-            <td height="24" class="style6">客戶編號：</td>
-            <td height="24"><span class="style6"><?echo $mem_id;?></span></td>
+            <td height="23" class="style6">存入金額：<?echo $deposit_amt;?></td>
+			<td height="23" class="style6">存入銀行金額：<?echo $deposit_bank_amt;?></td>
+            <td height="23" class="style6">餘額 :<?php echo $mem_dep_bal;?></td>
+            <td height="23" class="style6">客戶編號：<?echo $mem_id;?></td>
+            <td height="23" class="style6"></td>
           </tr>
         
         </table></td>
@@ -135,7 +135,7 @@ body {
 		<input type="hidden" name="AREA" value="<?echo $AREA;?>" />
 		<input type="hidden" name="PC" value="<?echo $PC;?>" />
 		<input type="hidden" name="deposit_amt" value="<?echo $deposit_amt;?>" />
- <input type="hidden" name="deposit_bank_amt" value="<?echo $deposit_bank_amt;?>" />
+		<input type="hidden" name="deposit_bank_amt" value="<?echo $deposit_bank_amt;?>" />
  
         <input name="clear" type="reset" id="clear" value="上一步" onClick="history.back(1);">
         <input name="submitb" type="submit" id="submitb" value="送出"></td>

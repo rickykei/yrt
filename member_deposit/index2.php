@@ -62,7 +62,8 @@ body {
         <td width="37%">&nbsp;</td>
       </tr>
       <tr bgcolor="#FFFFFF">
-        <td height="23" colspan="4"><table width="100%" border="0" cellpadding="2" cellspacing="0">
+        <td height="23" colspan="4">
+		<table width="100%" border="0" cellpadding="2" cellspacing="0">
           <tr bgcolor="#004d80">
             <td > <span class="style6"> 發票日期： <?echo $entry_date;?></span> </td>
             <td ><span class="style6"></span></td>

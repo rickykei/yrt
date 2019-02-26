@@ -269,7 +269,7 @@ a:active {
           </tr>
 		 <tr bgcolor="#CCCCCC">
             
-            <td >FPS:</td>
+            <td >QRCODE:</td>
             <td ><input type="text" name="daily_fps" id="daily_fps" onChange="calDailyIncome()"></td><td ></td>
           </tr>
 		  <tr bgcolor="#CCCCCC">
