@@ -91,30 +91,7 @@ if ($count_man_flag==1){
 }*/
 }
 ?>
-<script language="JavaScript" type="text/JavaScript">
-<!--
-function MM_reloadPage(init) {  //reloads the window if Nav4 resized
-  if (init==true) with (navigator) {if ((appName=="Netscape")&&(parseInt(appVersion)==4)) {
-    document.MM_pgW=innerWidth; document.MM_pgH=innerHeight; onresize=MM_reloadPage; }}
-  else if (innerWidth!=document.MM_pgW || innerHeight!=document.MM_pgH) location.reload();
-}
-MM_reloadPage(true);
-function MM_findObj(n, d) { //v4.0
-  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
-    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
-  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
-  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
-  if(!x && document.getElementById) x=document.getElementById(n); return x;
-}
-
-function MM_showHideLayers() { //v3.0
-  var i,p,v,obj,args=MM_showHideLayers.arguments;
-  for (i=0; i<(args.length-2); i+=3) if ((obj=MM_findObj(args[i]))!=null) { v=args[i+2];
-    if (obj.style) { obj=obj.style; v=(v=='show')?'visible':(v='hide')?'hidden':v; }
-    obj.visibility=v; }
-}
-//-->
-</script>
+ 
 <script language="javascript">
 function first_text_box_focus()
 {
@@ -153,7 +130,7 @@ function checkform(i)
        document.form1.submit();
 }
 </script>
-<script type="text/javascript" src="./include/invoice.js"></script>
+<script type="text/javascript" src="./include/invoice.js?20190317"></script>
 <link href="./include/invoice.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 <!--
@@ -165,7 +142,7 @@ body {
 }
 -->
 </style>
-<form name="form1" action="/?page=invoice&subpage=invoice_edit3.php" method="POST">
+<form id="form1" name="form1" action="/?page=invoice&subpage=invoice_edit3.php" method="POST">
 <table width="900" height="414" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#99CC99">
   
   <tr>
@@ -411,7 +388,10 @@ body {
 		<input type="hidden" name="man_power_price" value="<? echo $total_man_power_price;?>" />
 		<input type="hidden" name="branchID" value="<? echo $branchID;?>" />
         <input name="back" type="button" id="back" value="上一步" onClick="history.back(1);">
-        <input name="submitb" type="submit" id="submitb" value="送出"></td>
+        <input name="submitb" type="submit" id="submitb" value="送出">
+		<input name="print" type="hidden" id="print" value="">
+			<input  type="button" value="出3色單" onclick="print3color();">  
+			</td>
       </tr>
     </table></td>
     <td width="10">&nbsp;</td>

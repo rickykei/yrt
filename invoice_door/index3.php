@@ -25,8 +25,8 @@ for ($i=0;$i<17;$i++)
  
 
   //insert invoice Door
-  $query="insert into invoice_door (cal_unit,creation_date,created_by,invoice_no,invoice_date,delivery_date,delivery_timeslot,sales_name,customer_name,customer_tel,customer_detail,member_id,branchID,delivery,man_power_price,discount_percent,discount_deduct,special_man_power_percent,total_price,settle,deposit,credit_card_rate,settledate,receiver) ";
-  $query.=" values ('$cal_unit',SYSDATE(),'$browseryrt','',now(),'$delivery_date',$delivery_timeslot,'$sales','$mem_name','$mem_tel','$mem_add','$mem_id','$AREA','$delivery','$man_power_price','$subdiscount','$subdeduct','$special_man_power_percent','$subsubtotal','$status','$deposit','$creditcardrate','$settledate','$receiver')";
+  $query="insert into invoice_door (cal_unit,creation_date,created_by,invoice_no,invoice_date,delivery_date,delivery_timeslot,sales_name,customer_name,customer_tel,customer_detail,member_id,branchID,delivery,man_power_price,discount_percent,discount_deduct,special_man_power_percent,total_price,settle,deposit,deposit_method,credit_card_rate,settledate,receiver) ";
+  $query.=" values ('$cal_unit',SYSDATE(),'$browseryrt','',now(),'$delivery_date',$delivery_timeslot,'$sales','$mem_name','$mem_tel','$mem_add','$mem_id','$AREA','$delivery','$man_power_price','$subdiscount','$subdeduct','$special_man_power_percent','$subsubtotal','$status','$deposit','$deposit_method','$creditcardrate','$settledate','$receiver')";
  
   $result=$connection->query($query);
   if (DB::isError($result)) die ($result->getMessage());
@@ -66,7 +66,12 @@ for ($i=0;$i<17;$i++)
   if ($ok==1)
   //echo "invoice insert Success=".$invoice_no;
   {
-  	include_once("./pdf2/pdf_invoice_door.php");
+	   if($_REQUEST['print']=='3col'){
+		include_once("./pdf2/pdf_invoice_door_v2.php");
+	  }else{
+  	 include_once("./pdf2/pdf_invoice_door.php");
+	  }
+  	
  ?><SCRIPT LANGUAGE="JavaScript">
 popUp("/invoice_door/pdf/<?=$invoice_no?>.pdf");
 window.location="/?page=invoice_door&subpage=index.php"; 

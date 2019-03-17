@@ -1,5 +1,8 @@
 var totalinvoiceRecord=16;
-
+ function print3color(){
+	$( "#print" ).val("3col");
+	 checkform();
+}
  function find_input_item(){
 	var i=0;
 	for(i=0;i<17;i++){

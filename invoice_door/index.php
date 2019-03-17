@@ -91,11 +91,12 @@ a:active {
         <td width="37%">&nbsp;</td>
       </tr>
       <tr bgcolor="#FFFFFF">
-        <td height="24" colspan="4"><table width="100%" border="0" cellpadding="2" cellspacing="0">
+        <td height="24" colspan="4">
+		<table width="100%" border="1" cellpadding="2" cellspacing="0">
           <tr bgcolor="#004d80">
-            <td width="80">
+            <td width="90">
                 <span class="style6">發票日期：</span></td>
-            <td width="136"><input name="invoice_date" type="text" id="invoice_date" value="<? echo Date("Y-m-d H:i"); ?>" size="16" maxlength="20" readonly="readonly"></td>
+            <td width="150"><input name="invoice_date" type="text" id="invoice_date" value="<? echo Date("Y-m-d H:i"); ?>" size="16" maxlength="20" readonly="readonly"></td>
              <td width="79"><span class="style6">營業員 ： </span></td>
             <td width="60">
               <select name="sales" id="sales">
@@ -109,22 +110,30 @@ a:active {
                 echo ">".$row['name']."</option>";
 				}?>
                 </select>			</td>
-            <td width="191"><span class="style6">收貨人：
-              <input  name="receiver" tabindex="38" type="text" id="receiver"  size="15" />
-            </span></td>
-			<td colspan="2"><input id="status1" name="status" type="radio" value="A" checked>
-			  <span class="style6">入帳</span>
+            
+				<td colspan="3"><input id="status1" name="status" type="radio" value="A" checked>
+			  <span class="style6">入賑</span>
 			  <input id="status2" name="status" type="radio" value="S">
 			  <span class="style6">掛單</span><span class="style6">
 			  <input id="status1" name="status" type="radio" value="D" >
 			  <span class="style6">訂金</span>
-			    &nbsp;&nbsp;&nbsp;&nbsp;
+			    &nbsp;&nbsp;&nbsp;&nbsp; <br>
+				 <input id="deposit_method1" name="deposit_method" type="radio" value="C" checked>
+				<span class="style6">現金入賑</span>
+			  <input id="deposit_method2" name="deposit_method" type="radio" value="D" >
+			  <span class="style6">會員現金扣數</span><span class="style6">
+			  <input id="deposit_method3" name="deposit_method" type="radio" value="B" >
+			  <span class="style6">會員銀行扣數</span><span class="style6">
+			 
+			  <br>
 			    <input name="delivery" type="radio" id="delivery1" value="Y" checked="checked" />
-			    送貨</span> <span class="style6">
-  <input name="delivery" type="radio" id="delivery2" value="S" />
-			      自取
-  <input name="delivery" type="radio" id="delivery3" value="C" />
-			      街車即走</span></td>
+			   <span class="style6"> 送貨</span>
+				<input name="delivery" type="radio" id="delivery2" value="S" />
+			     <span class="style6"> 自取</span>
+					<input name="delivery" type="radio" id="delivery3" value="C" />
+			     <span class="style6"> 街車即走</span>
+				 <input name="delivery" type="radio" id="delivery1" value="W" />
+			     <span class="style6">等電</span> </td>
 			</tr>
 			
           <tr bgcolor="#004d80">
@@ -132,32 +141,38 @@ a:active {
             <td ><input name="delivery_date" type="text" id="delivery_date" tabindex="39" size="12" maxlength="20" value="<? echo Date("Y-m-d"); ?>"><input name="cal" id="calendar" value=".." type="button"></td>
            
             <td><span class="style6">客戶編號：</span></td>
-            <td colspan="2"><input onKeyPress="next_text_box(event,'delivery_date')"  onBlur="javascript:check888();"  name="mem_id" tabindex="38" type="text" id="mem_id"  size="15" onChange="findMemIdAjax()"/> </td>
+            <td ><input onKeyPress="next_text_box(event,'delivery_date')"  onBlur="javascript:check888();"  name="mem_id" tabindex="38" type="text" id="mem_id"  size="15" onChange="findMemIdAjax()"/> </td>
 			 
 			<td width="237"><span class="style6">客戶名稱：
 			  <input name="mem_name" type="text" id="mem_name">
 			  </span></td>
-            <td width="188" ><span class="style6">會員級別</span>
-              <input name="mem_credit_level" id="mem_credit_level" type="text" disabled="disabled" class="blocktextbox" size="3" maxlength="3"></td>
+            <td width="118" ><span class="style6">會員級別</span>
+              <input name="mem_credit_level" id="mem_credit_level" type="text" disabled="disabled" class="blocktextbox" size="3" maxlength="3">
+			  </td>
+			  
+			    <td>
+		  
+		  <label><span class="style6">現金結餘 : </label></span><input name="mem_dep_bal" id="mem_dep_bal" type="text" disabled="disabled" class="blocktextbox" size="10" maxlength="10">
+		   <label><span class="style6">銀行結餘 : </label></span><input name="mem_dep_bank_bal" id="mem_dep_bank_bal" type="text" disabled="disabled" class="blocktextbox" size="10" maxlength="10">
+		  </td>
           </tr>
 		  
 		   <tr bgcolor="#004d80">
             <td ><span class="style6">送貨時間：</span></td>
 			 
-            <td colspan="">
+            <td >
 			<select name="delivery_timeslot" id="delivery_timeslot">
               <option value="1" <?php if (choose_timeslot()==1) {echo "selected";}?>> 早 08:00-11:00</option> 
 			  <option value="2" <?php if (choose_timeslot()==2) {echo "selected";}?>> 午 11:01-14:00</option> 
 			  <option value="3" <?php if (choose_timeslot()==3) { echo "selected";}?>> 晚 14:01-18:00</option> 
 			  </select>
-		<td colspan="1">
-		  <?php // <input name="sum_dep_amt" id="sum_dep_amt" type="text" disabled="disabled" class="blocktextbox" size="10" maxlength="10"> 
-		 // <input name="sum_inv_dep_amt" id="sum_inv_dep_amt" type="text" disabled="disabled" class="blocktextbox" size="10" maxlength="10"> 
-		 ?>
-		  <label><span class="style6">結餘 : </label></span></td><td  colspan="2"><input name="mem_dep_bal" id="mem_dep_bal" type="text" disabled="disabled" class="blocktextbox" size="10" maxlength="10">
-		  </td>
+			  </td>
+		 
 			 </td>
-			 <td><span class="style6">尺寸計法： </span><select name="cal_unit" id="cal_unit" onChange="find_input_item()"><option value="mm">毫米mm</option><option value="in">寸inch</option></select></td>
+			 <td><span class="style6">收貨人：</td><td>
+              <input  name="receiver" tabindex="38" type="text" id="receiver"  size="15" />
+            </span></td>
+			 <td colspan="2"><span class="style6">尺寸計法： </span><select name="cal_unit" id="cal_unit" onChange="find_input_item()"><option value="mm">毫米mm</option><option value="in">寸inch</option></select></td>
 			 <td></td>
            </tr>
 		  
@@ -278,7 +293,7 @@ $</strong></span></td>
               <td width="17%" class="style6">訂金
                   <input name="deposit" type="text" class="disabled" id="deposit" size="10" />              </td>
               <td width="17%"><span class="style6">
-                <input type="button" name="Submit" value="暫計" onClick="count_total()">
+                <input type="button" name="Submit" value="暫計" onClick="calTotalAmt();">
                 <input name="totalamt" type="text" class="disabled" id="totalamt" size="10" />
               </span></td>
               <td width="8%" class="style6">信用卡

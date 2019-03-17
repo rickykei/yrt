@@ -199,7 +199,7 @@
 				 <input id="deposit_method1" name="deposit_method" type="radio" value="C" <?php if($invoicerow['deposit_method']=="C"){echo "checked";}?>>
 				<span class="style6">現金入賑</span>
 			  <input id="deposit_method2" name="deposit_method" type="radio" value="D" <?php if($invoicerow['deposit_method']=="D"){echo "checked";}?>>
-			  <span class="style6">會員賑戶扣數</span><span class="style6">
+			  <span class="style6">	會員現金扣數</span><span class="style6">
 			  <input id="deposit_method3" name="deposit_method" type="radio" value="B" <?php if($invoicerow['deposit_method']=="B"){echo "checked";}?>>
 			  <span class="style6">會員銀行扣數</span><span class="style6">
 			  <br>
@@ -229,11 +229,14 @@
             </div>
              </td>
             <td bgcolor="#006633"><span class="style6">客戶編號：</span></td>
-            <td colspan="2" bgcolor="#006633"><input name="mem_id" type="text" tabindex="38" id="mem_id" value="<?php echo $invoicerow['member_id'];?>" size="15" onKeyPress="next_text_box(event,'delivery_date3')" onChange="findMemIdAjax()" >
+            <td   bgcolor="#006633"><input name="mem_id" type="text" tabindex="38" id="mem_id" value="<?php echo $invoicerow['member_id'];?>" size="15" onKeyPress="next_text_box(event,'delivery_date3')" onChange="findMemIdAjax()" >
               <input name="check_mem_id" id="check_mem_id" type="button" value="?"></td>
 			  
-            <td width="108" bgcolor="#006633"><span class="style6">客戶名稱：</span> <input name="mem_name" type="text" id="mem_name" value="<?php echo $invoicerow['customer_name'];?>">
-              </td><td><span class="style6">會員級別</span>
+            <td width="108" bgcolor="#006633"><span class="style6">客戶名稱：</span></td>
+			<td>
+			<input name="mem_name" type="text" id="mem_name" value="<?php echo $invoicerow['customer_name'];?>">
+              </td>
+			  <td><span class="style6">會員級別</span>
               <input name="mem_credit_level" id="mem_credit_level" type="text" disabled="disabled" class="blocktextbox" size="2" maxlength="2"></td>
 			  <td>
 		 <input name="sum_dep_amt" id="sum_dep_amt" type="hidden" disabled="disabled" class="blocktextbox" size="10" maxlength="10"> 

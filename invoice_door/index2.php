@@ -32,10 +32,10 @@ $delivery_date=correct_delTimeSlot_to_delDate($delivery_date,$delivery_timeslot)
  
 ?>
 <script type="text/javascript" src="./include/functions.js"></script>  
-<script type="text/javascript" src="/invoice_door/invoice_door.js"></script>
+<script type="text/javascript" src="/invoice_door/invoice_door.js?20190317"></script>
 <link href="./include/invoice.css" rel="stylesheet" type="text/css" />
 
-<form name="form1" action="/?page=invoice_door&subpage=index3.php" method="POST">
+<form name="form1" id="form1" action="/?page=invoice_door&subpage=index3.php" method="POST">
 <table width="900" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#99d6ff">
   
   <tr>
@@ -87,10 +87,10 @@ $delivery_date=correct_delTimeSlot_to_delDate($delivery_date,$delivery_timeslot)
           <tr bgcolor="#004d80">
             <td height="24"><span class="style6">入賬日期：</span></td>
             <td height="24"><span class="style6"><?=$settledate?></span></td>
-            <td height="24" class="style6">&nbsp;</td>
-            <td height="24"><span class="style6">
+               <td height="24"><span class="style6">
               <?if ($status=="A"){echo "入賑";}else if ($status=="S"){echo "掛單";} else {echo "訂金";};?>
             </span></td>
+			 <td height="24" class="style6"> <?if ($deposit_method=="C"){echo "現金入賑";}else if ($deposit_method=="D"){echo "會員現金扣數";}else if ($deposit_method=="B"){echo "會員銀行扣數 ";} ?></td>
           </tr>
 		  <tr bgcolor="#004d80">
             <td height="24"><span class="style6"> </span></td>
@@ -282,6 +282,7 @@ $delivery_date=correct_delTimeSlot_to_delDate($delivery_date,$delivery_timeslot)
 		<? }else{?>
 		<input type="hidden" name="deposit" value="<?=$deposit?>"/>
 <? }?>
+		<input type="hidden" name="deposit_method" value="<?=$deposit_method?>"/>
 		<input type="hidden" name="creditcardtotal" value="<?=$creditcardtotal?>"/>
    		<input type="hidden" name="creditcardrate" value="<?=$creditcardrate?>"/>
 		<input type="hidden" name="subsubtotal" value="<?=$subsubtotal?>"/>
@@ -289,7 +290,10 @@ $delivery_date=correct_delTimeSlot_to_delDate($delivery_date,$delivery_timeslot)
 		<input type="hidden" name="subdeduct" value="<? echo $subdeduct;?>" />
  
         <input name="clear" type="reset" id="clear" value="上一步" onClick="window.history.back();">
-        <input name="submitb" type="submit" id="submitb" value="送出"></td>
+        <input name="submitb" type="submit" id="submitb" value="送出">
+		<input name="print" type="hidden" id="print" value="">
+		<input type="button" value="出3色單" onclick="print3color();">
+		</td>
       </tr>
     </table></td>
     <td width="10">&nbsp;</td>

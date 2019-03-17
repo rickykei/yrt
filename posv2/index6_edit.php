@@ -47,7 +47,7 @@ include_once("./include/functions.php");
 
   //backup old invoice  20130717
   
-   $query="select * from outstock where outstock_no='".$outstock_no."'";
+ $query="select * from invoice where invoice_no='".$id."'";
    $oldInvoiceResult = $connection->query($query);
    $oldInvoiceRow = $oldInvoiceResult->fetchRow(DB_FETCHMODE_ASSOC);
    
@@ -154,11 +154,15 @@ include_once("./include/functions.php");
   if ($status==1)
   //echo "invoice insert Success=".$invoice_no;
   {
+  	if($_REQUEST['print']=='3col'){
+		  include_once("./pdf2/pdf_v2.php");
+	  }else{
   	include_once("./pdf2/pdf.php");
+	  }
 ?>
 <SCRIPT LANGUAGE="JavaScript">
-popUp("/outstock/pdf/<?=$id?>.pdf");
-window.location="/?page=outstock&subpage=outstocklist.php";
+popUp("/invoice/pdf/<?=$id?>.pdf");
+//window.location="/?page=outstock&subpage=outstocklist.php";
 </script><?
 }
   /*

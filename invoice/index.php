@@ -69,8 +69,9 @@ a:active {
         <td width="37%">&nbsp;</td>
       </tr>
       <tr bgcolor="#FFFFFF">
-        <td height="24" colspan="4"><table width="100%" border="1" cellpadding="2" cellspacing="0">
-          <tr bgcolor="#004d80">
+        <td height="24" colspan="4">
+		<table width="100%" border="1" cellpadding="2" cellspacing="0">
+          <tr bgcolor="#004d80" border="1">
             <td width="80">
                 <span class="style6">發票日期：</span></td>
             <td width="150"><input name="invoice_date" type="text" id="invoice_date" value="<? echo Date("Y-m-d H:i"); ?>" size="15" maxlength="20" readonly="readonly"></td>
@@ -118,7 +119,7 @@ a:active {
             <td ><input name="delivery_date" type="text" id="delivery_date" tabindex="39" size="12" maxlength="20" value="<? echo Date("Y-m-d"); ?>"><input name="cal" id="calendar" value=".." type="button"></td>
            
             <td ><span class="style6">客戶編號：</span></td>
-            <td colspan="1" ><input onKeyPress="next_text_box(event,'delivery_date')"  onBlur="javascript: check888();"  name="mem_id" tabindex="38" type="text" id="mem_id"  size="15" onChange="findMemIdAjax()"/> </td>
+            <td  ><input onKeyPress="next_text_box(event,'delivery_date')"  onBlur="javascript: check888();"  name="mem_id" tabindex="38" type="text" id="mem_id"  size="15" onChange="findMemIdAjax()"/> </td>
 			 
 			<td width="237"><span class="style6">客戶名稱：
 			  <input name="mem_name" type="text" id="mem_name">

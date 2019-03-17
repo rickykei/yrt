@@ -1,7 +1,11 @@
 //20170907 1957 
 
 var totalinvoiceRecord=16;
- 
+
+ function print3color(){
+	$( "#print" ).val("3col");
+	 $( "#form1" ).submit();
+}
 function count_total()
 { 
 	

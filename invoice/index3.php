@@ -85,11 +85,15 @@ include("./include/config.php");
   if ($ok==1)
   //echo "invoice insert Success=".$invoice_no;
   {
+	  if($_REQUEST['print']=='3col'){
+		  include_once("./pdf2/pdf_v2.php");
+	  }else{
   	include_once("./pdf2/pdf.php");
+	  }
  //echo "<a href=../pdf2/pdf.php?invoice_no=".$invoice_no.">列印</a>";
 ?><SCRIPT LANGUAGE="JavaScript">
 popUp("/invoice/pdf/<?=$invoice_no?>.pdf");
-window.location="/?page=invoice&subpage=index.php"; 
+ window.location="/?page=invoice&subpage=index.php"; 
 </script><?
  //echo "<a href=./pdf/".$invoice_no.".pdf target=\"print\">列印</a>";
 }

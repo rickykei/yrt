@@ -139,7 +139,7 @@ function AddrWindow(toccbcc){
 }
  
 </script>
-<script type="text/javascript" src="./include/invoice.js"></script>
+<script type="text/javascript" src="./include/invoice.js?20190317"></script>
 <link href="./include/invoice.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 <!--
@@ -151,7 +151,7 @@ body {
 }
 -->
 </style>
-<form name="form1" action="/?page=ipadpos&subpage=index6.php" method="POST">
+<form name="form1" id="form1" action="/?page=ipadpos&subpage=index6.php" method="POST">
 <table width="900" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#99d6ff">
   
   <tr>
@@ -384,7 +384,10 @@ body {
 		<input type="hidden" name="subdeduct" value="<? echo $subdeduct;?>" />
 		<input type="hidden" name="man_power_price" value="<? echo $total_man_power_price;?>" />
         <input name="clear" type="reset" id="clear" value="上一步" onClick="history.back(1);;">
-        <input name="submitb" type="submit" id="submitb" value="送出"></td>
+        <input name="submitb" type="submit" id="submitb" value="送出">
+		<input name="print" type="hidden" id="print" value="">
+			<input  type="button" value="出3色單" onclick="print3color();">
+			</td>
       </tr>
     </table></td>
     <td width="10">&nbsp;</td>

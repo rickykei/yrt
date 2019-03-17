@@ -1,5 +1,13 @@
 <link rel="stylesheet" href="./include/invoice_style.css" type="text/css">
 <style type="text/css">
+<!--
+body {
+	background-color: #CCCCCC;
+}
+.style1 {color: #5E5E5E}
+-->
+</style>
+<style type="text/css">
 @import url(./include/cal/calendar-win2k-1.css);
 </style>
 <script type="text/javascript" src="./include/cal/calendar.js"></script>

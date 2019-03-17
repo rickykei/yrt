@@ -32,30 +32,7 @@ for ($i=0;$i<$invoiceRecord;$i++)
  
 	 
 ?> 
-<script language="JavaScript" type="text/JavaScript">
-<!--
-function MM_reloadPage(init) {  //reloads the window if Nav4 resized
-  if (init==true) with (navigator) {if ((appName=="Netscape")&&(parseInt(appVersion)==4)) {
-    document.MM_pgW=innerWidth; document.MM_pgH=innerHeight; onresize=MM_reloadPage; }}
-  else if (innerWidth!=document.MM_pgW || innerHeight!=document.MM_pgH) location.reload();
-}
-MM_reloadPage(true);
-function MM_findObj(n, d) { //v4.0
-  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
-    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
-  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
-  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
-  if(!x && document.getElementById) x=document.getElementById(n); return x;
-}
-
-function MM_showHideLayers() { //v3.0
-  var i,p,v,obj,args=MM_showHideLayers.arguments;
-  for (i=0; i<(args.length-2); i+=3) if ((obj=MM_findObj(args[i]))!=null) { v=args[i+2];
-    if (obj.style) { obj=obj.style; v=(v=='show')?'visible':(v='hide')?'hidden':v; }
-    obj.visibility=v; }
-}
-//-->
-</script>
+ 
 <script language="javascript">
 function first_text_box_focus()
 {
@@ -94,7 +71,7 @@ function checkform(i)
        document.form1.submit();
 }
 </script>
-<script type="text/javascript" src="./include/invoice.js"></script>
+<script type="text/javascript" src="/invoice_door/invoice_door.js?20190317"></script>
 
 <link href="./include/invoice.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
@@ -107,7 +84,7 @@ body {
 }
 -->
 </style>
-<form name="form1" action="/?page=invoice_door&subpage=invoice_door_edit3.php" method="POST">
+<form name="form1" id="form1" action="/?page=invoice_door&subpage=invoice_door_edit3.php" method="POST">
 <table width="900" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#99d6ff">
   
   <tr>
@@ -159,10 +136,10 @@ body {
           <tr bgcolor="#004d80">
             <td height="24"><span class="style6">入賬日期：</span></td>
             <td height="24"><span class="style6"><?=$settledate?></span></td>
-            <td height="24" class="style6">&nbsp;</td>
             <td height="24"><span class="style6">
               <?if ($status=="A"){echo "入賑";}else if ($status=="S"){echo "掛單";} else {echo "訂金";};?>
             </span></td>
+			 <td height="24" class="style6">  <?if ($deposit_method=="C"){echo "現金入賑";}else if ($deposit_method=="D"){echo "會員現金扣數 ";}else if ($deposit_method=="B"){echo "會員銀行扣數 ";} ?></td>
           </tr>
 		  <tr bgcolor="#004d80">
             <td height="24"><span class="style6"> </span></td>
@@ -356,6 +333,7 @@ body {
 		<? }else{?>
 		<input type="hidden" name="deposit" value="<?=$deposit?>"/>
 <? }?>
+	<input type="hidden" name="deposit_method" value="<?=$deposit_method?>"/>
 		<input type="hidden" name="creditcardtotal" value="<?=$creditcardtotal?>"/>
    		<input type="hidden" name="creditcardrate" value="<?=$creditcardrate?>"/>
 		<input type="hidden" name="subsubtotal" value="<?=$subsubtotal?>"/>
@@ -363,7 +341,12 @@ body {
 		<input type="hidden" name="subdeduct" value="<? echo $subdeduct;?>" />
  
         <input name="clear" type="reset" id="clear" value="上一步" onClick="history.back(1);">
-        <input name="submitb" type="submit" id="submitb" value="送出"></td>
+        <input name="submitb" type="submit" id="submitb" value="送出">
+		
+		<input name="print" type="hidden" id="print" value="">
+		<input type="button" value="出3色單" onclick="print3color();">
+		
+		</td>
       </tr>
     </table></td>
     <td width="10">&nbsp;</td>

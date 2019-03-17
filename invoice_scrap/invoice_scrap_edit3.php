@@ -88,7 +88,11 @@ include("./include/functions.php");
   if ($status==1)
   //echo "invoice insert Success=".$invoice_no;
   {
-  	include_once("./pdf2/pdf_invoice_scrap.php");
+  	  if($_REQUEST['print']=='3col'){
+		include_once("./pdf2/pdf_invoice_scrap_v2.php");
+	  }else{
+  	 include_once("./pdf2/pdf_invoice_scrap.php");
+	  }
 ?>
 <SCRIPT LANGUAGE="JavaScript">
 popUp("/invoice_scrap/pdf/<?=$invoice_no?>.pdf");

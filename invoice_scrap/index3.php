@@ -69,7 +69,12 @@ for ($i=0;$i<17;$i++)
   if ($ok==1)
   //echo "invoice insert Success=".$invoice_no;
   {
-  	include_once("./pdf2/pdf_invoice_scrap.php");
+	   if($_REQUEST['print']=='3col'){
+		include_once("./pdf2/pdf_invoice_scrap_v2.php");
+	  }else{
+  	 include_once("./pdf2/pdf_invoice_scrap.php");
+	  }
+  	
  //echo "<a href=../pdf2/pdf.php?invoice_no=".$invoice_no.">列印</a>";
 ?><SCRIPT LANGUAGE="JavaScript">
 popUp("/invoice_scrap/pdf/<?=$invoice_no?>.pdf");

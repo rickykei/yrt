@@ -40,8 +40,8 @@ include("./include/functions.php");
    $query="select * from invoice_door where invoice_no='".$invoice_no."'";
    $oldInvoiceResult = $connection->query($query);
    $oldInvoiceRow = $oldInvoiceResult->fetchRow(DB_FETCHMODE_ASSOC);
-   $query="insert into invoice_door_amend (amend_invoice_id,amend_sales_name,amend_by,amend_date,cal_unit,creation_date,created_by,invoice_no,invoice_date,delivery_date,delivery_timeslot,sales_name,customer_name,customer_tel,customer_detail,member_id,branchID,delivery,man_power_price,discount_percent,discount_deduct,special_man_power_percent,total_price,settle,deposit,credit_card_rate,settledate,receiver) ";
-   $query.=" values ('','$sales','$browseryrt',SYSDATE(),'".$oldInvoiceRow['cal_unit']."','".$oldInvoiceRow['creation_date']."','".$oldInvoiceRow['created_by']."','".$oldInvoiceRow['invoice_no']."','".$oldInvoiceRow['invoice_date']."','".$oldInvoiceRow['delivery_date']."','".$oldInvoiceRow['delivery_timeslot']."','".$oldInvoiceRow['sales_name']."','".$oldInvoiceRow['customer_name']."','".$oldInvoiceRow['customer_tel']."','".$oldInvoiceRow['customer_detail']."','".$oldInvoiceRow['member_id']."','".$oldInvoiceRow['branchID']."','".$oldInvoiceRow['delivery']."','".$oldInvoiceRow['man_power_price']."','".$oldInvoiceRow['discount_percent']."','".$oldInvoiceRow['discount_deduct']."','".$oldInvoiceRow['special_man_power_percent']."','".$oldInvoiceRow['total_price']."','".$oldInvoiceRow['settle']."','".$oldInvoiceRow['deposit']."','".$oldInvoiceRow['credit_card_rate']."','".$oldInvoiceRow['settledate']."','".$oldInvoiceRow['receiver']."')";
+   $query="insert into invoice_door_amend (amend_invoice_id,amend_sales_name,amend_by,amend_date,cal_unit,creation_date,created_by,invoice_no,invoice_date,delivery_date,delivery_timeslot,sales_name,customer_name,customer_tel,customer_detail,member_id,branchID,delivery,man_power_price,discount_percent,discount_deduct,special_man_power_percent,total_price,settle,deposit,deposit_method,credit_card_rate,settledate,receiver) ";
+   $query.=" values ('','$sales','$browseryrt',SYSDATE(),'".$oldInvoiceRow['cal_unit']."','".$oldInvoiceRow['creation_date']."','".$oldInvoiceRow['created_by']."','".$oldInvoiceRow['invoice_no']."','".$oldInvoiceRow['invoice_date']."','".$oldInvoiceRow['delivery_date']."','".$oldInvoiceRow['delivery_timeslot']."','".$oldInvoiceRow['sales_name']."','".$oldInvoiceRow['customer_name']."','".$oldInvoiceRow['customer_tel']."','".$oldInvoiceRow['customer_detail']."','".$oldInvoiceRow['member_id']."','".$oldInvoiceRow['branchID']."','".$oldInvoiceRow['delivery']."','".$oldInvoiceRow['man_power_price']."','".$oldInvoiceRow['discount_percent']."','".$oldInvoiceRow['discount_deduct']."','".$oldInvoiceRow['special_man_power_percent']."','".$oldInvoiceRow['total_price']."','".$oldInvoiceRow['settle']."','".$oldInvoiceRow['deposit']."','".$oldInvoiceRow['deposit_method']."','".$oldInvoiceRow['credit_card_rate']."','".$oldInvoiceRow['settledate']."','".$oldInvoiceRow['receiver']."')";
 	$result=$connection->query($query);
 	
  $query="SELECT LAST_INSERT_ID();";
@@ -67,7 +67,7 @@ include("./include/functions.php");
   //backup old invoice item  20130717
   
   //insert invoice
-  $query="update invoice_door set last_update_date=SYSDATE(),call_count=call_count+1,last_update_by='$browseryrt',invoice_date ='$invoice_date' , delivery_date = '$delivery_date' , sales_name= '$sales' ,customer_name = '$mem_name' ,customer_tel = '$mem_tel' ,customer_detail = '$mem_add' ,member_id ='$mem_id',settle='$status',branchID='$branchID', delivery = '$delivery' ,man_power_price= '$man_power_price' ,discount_percent = '$subdiscount', discount_deduct= '$subdeduct',  special_man_power_percent='$special_man_power_percent',total_price='$subsubtotal',deposit='$deposit',credit_card_rate='$creditcardrate' ,settledate = '$settledate' ,receiver = '$receiver' ,delivery_timeslot ='$delivery_timeslot' ,cal_unit='$cal_unit' where invoice_no='".$invoice_no."'";
+  $query="update invoice_door set last_update_date=SYSDATE(),call_count=call_count+1,last_update_by='$browseryrt',invoice_date ='$invoice_date' , delivery_date = '$delivery_date' , sales_name= '$sales' ,customer_name = '$mem_name' ,customer_tel = '$mem_tel' ,customer_detail = '$mem_add' ,member_id ='$mem_id',settle='$status',branchID='$branchID', delivery = '$delivery' ,man_power_price= '$man_power_price' ,discount_percent = '$subdiscount', discount_deduct= '$subdeduct',  special_man_power_percent='$special_man_power_percent',total_price='$subsubtotal',deposit='$deposit',deposit_method='$deposit_method',credit_card_rate='$creditcardrate' ,settledate = '$settledate' ,receiver = '$receiver' ,delivery_timeslot ='$delivery_timeslot' ,cal_unit='$cal_unit' where invoice_no='".$invoice_no."'";
   
  // $query.=" values ('',now(),'$delivery_date','$sales','$mem_name','$mem_tel','$mem_add','$mem_id','A','$AREA','$delivery','$man_power_price','$discount_percent','$discount_deduct')";
 //  echo $query;
@@ -119,7 +119,11 @@ include("./include/functions.php");
   if ($status==1)
   //echo "invoice insert Success=".$invoice_no;
   {
-  	include_once("./pdf2/pdf_invoice_door.php");
+  	 if($_REQUEST['print']=='3col'){
+		include_once("./pdf2/pdf_invoice_door_v2.php");
+	  }else{
+  	 include_once("./pdf2/pdf_invoice_door.php");
+	  }
 ?>
 <SCRIPT LANGUAGE="JavaScript">
 popUp("./invoice_door/pdf/<?=$invoice_no?>.pdf");

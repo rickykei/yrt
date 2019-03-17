@@ -34,11 +34,11 @@ $delivery_date=correct_delTimeSlot_to_delDate($delivery_date,$delivery_timeslot)
 <title>invoice door form </title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="text/javascript" src="./include/functions.js"></script>  
-<script type="text/javascript" src="invoice_door.js"></script>
+<script type="text/javascript" src="/invoice_scrap/invoice.js?20190317"></script>
 <link href="./include/invoice.css" rel="stylesheet" type="text/css" />
 
 <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onkeydown="detectKeyBoard(event)">
-<form name="form1" action="/?page=invoice_scrap&subpage=index3.php" method="POST">
+<form name="form1" id="form1" action="/?page=invoice_scrap&subpage=index3.php" method="POST">
 <table width="900" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#99d6ff">
   
   <tr>
@@ -258,7 +258,10 @@ $delivery_date=correct_delTimeSlot_to_delDate($delivery_date,$delivery_timeslot)
 		<input type="hidden" name="subdeduct" value="<? echo $subdeduct;?>" />
  
         <input name="clear" type="reset" id="clear" value="上一步" onClick="window.history.back();">
-        <input name="submitb" type="submit" id="submitb" value="送出"></td>
+        <input name="submitb" type="submit" id="submitb" value="送出">
+		<input name="print" type="hidden" id="print" value="">
+		<input type="button" value="出3色單" onclick="print3color();">
+		</td>
       </tr>
     </table></td>
     <td width="10">&nbsp;</td>

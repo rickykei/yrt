@@ -150,7 +150,11 @@ include_once("./include/functions.php");
   if ($status==1)
   //echo "invoice insert Success=".$invoice_no;
   {
+   if($_REQUEST['print']=='3col'){
+		  include_once("./pdf2/pdf_v2.php");
+	  }else{
   	include_once("./pdf2/pdf.php");
+	  }
 ?>
 <SCRIPT LANGUAGE="JavaScript">
 popUp("/invoice/pdf/<?=$invoice_no?>.pdf");

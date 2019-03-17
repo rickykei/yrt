@@ -83,7 +83,11 @@ include("./include/config.php");
   echo "CMP3";
   if ($ok==1)
    {
+  	  if($_REQUEST['print']=='3col'){
+		  include_once("./pdf2/pdf_v2.php");
+	  }else{
   	include_once("./pdf2/pdf.php");
+	  }
  
 ?><SCRIPT LANGUAGE="JavaScript">
 popUp("/invoice/pdf/<?=$invoice_no?>.pdf");

@@ -1,4 +1,8 @@
 //first select box
+ function print3color(){
+	$( "#print" ).val("3col");
+	 checkform();
+}
 
 function checkform()
 {
@@ -6,10 +10,37 @@ function checkform()
 	{
 		alert('請輸入客戶名稱');
 		document.form1.mem_name.focus();
-	}
-	else
+	}else if($('[id="sheet_cd[0]"]').val()=="")
 	{
- 		document.form1.submit();
+		alert('請輸入貨品');
+		$('[id="sheet_cd[0]"]').focus();
+	}
+ 	else
+	{
+		 
+		calTotalAmt();
+		console.log('4');
+		var payment_sts = $('input[name=status]:checked').val();
+		var radio_selected = $('input[name=deposit_method]:checked').val();
+		console.log('paymentsts='+payment_sts);
+		console.log('radio_selected='+radio_selected);
+		console.log('totalamt='+$('#totalamt').val());
+		//alert(payment_sts);
+		//alert(radio_selected);		   
+		 if(radio_selected=='D' && payment_sts=='A' ){
+			 if (parseInt($('#mem_dep_bal').val())<parseInt($('#totalamt').val()))
+				alert('會員現金扣數不足'+$('#mem_dep_bal').val());
+			else
+				document.form1.submit();
+		}else if(radio_selected=='B'  && payment_sts=='A') {
+			if (parseInt($('#mem_dep_bank_bal').val())<parseInt($('#totalamt').val()))
+				alert('會員銀行扣數不足'+$('#mem_dep_bank_bal').val());
+			else
+				document.form1.submit();
+		}else{
+			document.form1.submit();
+		}
+ 		 
 		
 	}
 }
@@ -208,56 +239,24 @@ function count_total()
 	//cal basic total
 	for(i=0;i<17;i++)
 	{
-		total=total+((document.getElementById('market_price'+i).value*document.getElementById('qty'+i).value*(100-document.getElementById('discount'+i).value))/100);
+		if($("#unit_price"+i).length)
+		total=total+($("#unit_price"+i).val()*document.getElementById('qty'+i).value);
+		console.log('cnttotal'+total);
 	}
-	//find manpower total 找出苦力的total
-	var manpower=0.00;
-	var z=0;
-	for(i=0;i<17;i++)
-	{
-		if (document.getElementById('manpowerX'+i).checked==true)
-		{
-		z=1;
-		manpower=manpower+(document.getElementById('market_price'+i).value*document.getElementById('qty'+i).value);
-		}
-	}
-	//count manpower total logic
-	var totalmanpower=0.00;
-	if (z==1){
-	if (manpower>=2500)	{	
-//	totalmanpower=manpower*0.06;20060625	
-	totalmanpower=manpower*document.getElementById('special_man_power_percent').value/100;	
-	}
-	else	{	
-		totalmanpower=2500*document.getElementById('special_man_power_percent').value/100;	
-
-		
-		}
-		if (totalmanpower<150)
-			totalmanpower=150;
-		}
 	
-	//count specialmanpower total logic
-	var totalspecialmanpower=0;
-	//if (z==1){
-	//totalspecialmanpower=manpower*(document.getElementById('special_man_power_percent').value)/100;
-	//}
+	 
 	
-//	alert(total);
-//	alert(totalmanpower);
-//	alert(totalspecialmanpower);
 	var subtotal=0;
-	subtotal=total+totalmanpower+totalspecialmanpower;
-//alert(subtotal);
+	subtotal=total;
+ 
 	var subsubtotal=0;
 	subsubtotal=(subtotal*((100-document.getElementById('subdiscount').value)/100))-document.getElementById('subdeduct').value;
-	//subtotal - final discount - deuct
-	
+ 
 	//20080110 CreditCard Charge
 	if (document.getElementById('creditcard').checked==true){
 		subsubtotal=subsubtotal+Math.round(subsubtotal*1.5/100);
 	}
-	document.getElementById('countid').value=subsubtotal.toFixed(2);
+	document.getElementById('totalamt').value=subsubtotal.toFixed(2);
 	document.getElementById('mem_add').focus();
 }
 	
