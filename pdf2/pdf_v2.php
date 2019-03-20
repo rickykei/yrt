@@ -243,7 +243,7 @@ $this->Cell(9,8,iconv("UTF-8", "BIG5-HKSCS",$row2['unit_name_chi']),$border,0,'R
 	$this->Cell(5,7,iconv("UTF-8", "BIG5-HKSCS",""),$border,1,'R',0);
 	
 	
-	$this->Ln(12);
+	
 		$this->SetFont('Big5','',17);
 	$this->Cell(5,7,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);	
 	
@@ -289,7 +289,7 @@ $shopAddress="九龍大角咀通州街2-16號長豐大廈A-M舖地下";
 $shopDetail="TEL : 2412-2335, 2412-2241 FAX : 2413-3373";
 
  
-	
+	$this->Ln(12);
 	$this->Cell(40,18,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 	$this->Cell(125,18,iconv("UTF-8", "BIG5-HKSCS","黃河木行有限公司"),$border,0,'C',0);
 	$this->Cell(40,18,iconv("UTF-8", "BIG5-HKSCS",$rightLabel1),"TRL",1,'C',0);
@@ -359,13 +359,19 @@ $pdf->SetTopMargin(1);
 $pdf->SetLeftMargin(0);
 $pdf->AddBig5Font();
 $pdf->SetTextColor(0,0,0);
+$pdf->SetFillColor(0,0,0);
+$pdf->SetDrawColor(0, 0, 0);
 $title='發票';
 $header_title=array();
 $pdf->Body($invoice_no);
 $pdf->SetTextColor(255,0,0);
+$pdf->SetFillColor(255,0,0);
+$pdf->SetDrawColor(255, 0, 0);
 $title='提貨單';
 $pdf->Body($invoice_no);
 $pdf->SetTextColor(0,0,255);
+$pdf->SetFillColor(0,0,255);
+$pdf->SetDrawColor(0, 0, 255);
 $title='收據';
 $pdf->Body($invoice_no);
 $pdf->SetAuthor('YRT Company Limited');

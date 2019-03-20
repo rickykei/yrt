@@ -151,14 +151,15 @@ include_once("./include/functions.php");
   //echo "invoice insert Success=".$invoice_no;
   {
    if($_REQUEST['print']=='3col'){
+	   echo "3col";
 		  include_once("./pdf2/pdf_v2.php");
 	  }else{
-  	include_once("./pdf2/pdf.php");
+			include_once("./pdf2/pdf.php");
 	  }
 ?>
 <SCRIPT LANGUAGE="JavaScript">
 popUp("/invoice/pdf/<?=$invoice_no?>.pdf");
-window.location="/?page=invoice&subpage=invoicelist.php";
+ window.location="/?page=invoice&subpage=invoicelist.php";
 </script><?
 }
   /*

@@ -183,7 +183,8 @@ $this->Cell(5,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 	$this->Cell(15,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 	$this->Cell(80,8,"",$border,0,'L',0);
 	
-		$this->Ln(12);
+		$this->Ln(3);
+
  
 
 //print goods_invoice
@@ -300,35 +301,69 @@ $this->Cell(5,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 
  	
 }
+ 
 function Header()
 {
 	//Page header
 	global $title;
 	global $header_title;
+	global $invoice_no;
 	
 	
 	$w=$this->GetStringWidth($title)+6;
 	$this->SetX(2);
 	$this->SetDrawColor(255,255,255);
 	$this->SetFillColor(233,233,233);
-	$this->SetTextColor(0,0,0);
+	//$this->SetTextColor(0,0,0);
 	//20060621$this->Ln(35);
-	$this->Ln(19);
+	//$this->Ln(19);
 	$this->SetLineWidth(0);
+	$this->Ln(12);
+  $this->SetFont('Big5','',40);
+
+$shopAddress="九龍大角咀通州街2-16號長豐大廈A-M舖地下";
+$shopDetail="TEL : 2412-2335, 2412-2241 FAX : 2413-3373";
+
+ 
 	
-//      $abc=iconv("UTF-8", "iso-8859-2", "黃河木行有限公司");
-	/*$this->SetFont('Big5','B',30);
-	$companyName=iconv("UTF-8", "BIG5-HKSCS", "黃河木行有限公司");
-	$companyAddress=iconv("UTF-8", "BIG5-HKSCS", "旺角新填地街609-613號地下");
-	$companyTel=iconv("UTF-8", "BIG5-HKSCS", "電話:241-22-241  241-22-335  傳真:241-33-373");
-	$INVOICE=iconv("UTF-8", "BIG5-HKSCS", "發票");
-	$this->Cell(190,14,$companyName,2,1,'C',0);
-	$this->SetFont('Big5','',15);
-	$this->Cell(190,5,$companyAddress,1,1,'C',0);
-	$this->Cell(190,5,$companyTel,1,1,'C',0);
-	$this->SetFont('Big5','B',25);
-	$this->Cell(190,12,$INVOICE,1,1,'C',0);
-	$this->Ln(8);*/
+	$this->Cell(40,18,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+	$this->Cell(125,18,iconv("UTF-8", "BIG5-HKSCS","黃河木行有限公司"),$border,0,'C',0);
+	$this->Cell(40,18,iconv("UTF-8", "BIG5-HKSCS",$rightLabel1),"TRL",1,'C',0);
+	 
+	$this->SetFont('Big5','',23);
+  
+	
+	if ($delivery=="C")
+	{
+	
+	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+	$this->Cell(125,8,iconv("UTF-8", "BIG5-HKSCS",$shopAddress),$border,0,'C',0);
+	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",$rightLabel1),"TRL",1,'C',0);
+	 
+	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'C',0);
+	 
+  $this->Cell(125,8,iconv("UTF-8", "BIG5-HKSCS",$shopDetail),$border,0,'C',0);
+  $this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",$rightLabel2),"BRL",1,'C',0);
+  
+	}else{	
+ 
+	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+	$this->Cell(125,8,iconv("UTF-8", "BIG5-HKSCS",$shopAddress),$border,0,'C',0);
+	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,1,'C',0);
+	$this->SetFont('Big5','',12);
+	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+	$this->SetFont('Big5','',16);
+    $this->Cell(125,8,iconv("UTF-8", "BIG5-HKSCS",$shopDetail),$border,0,'C',0);
+    $this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,1,'C',0);
+
+  }
+  
+  $this->SetFont('Big5','',18);
+  	$this->Cell(40,18,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+	$this->Cell(125,18,iconv("UTF-8", "BIG5-HKSCS",$title),$border,0,'C',0);
+	$this->Cell(40,18,iconv("UTF-8", "BIG5-HKSCS",$rightLabel1),"TRL",1,'C',0);
+	 $this->SetFont('Big5','',12);
+  
 	//Save ordinate
     $this->y0=$this->GetY();
 }
@@ -354,22 +389,28 @@ function Footer()
 
 
 //$pdf=new pdf('P','mm',array(216,217));
-$pdf=new pdf('P','mm',array(216,217));
+$pdf=new pdf('P','mm','A4');
 $pdf->SetAutoPageBreak(true,2);
 $pdf->SetTextColor(0,0,0);
 $pdf->SetTopMargin(1);
 $pdf->SetLeftMargin(0);
 $pdf->AddBig5Font();
- 
+  $pdf->SetTextColor(0,0,0);
+$pdf->SetFillColor(0,0,0);
+$pdf->SetDrawColor(0, 0, 0);
 $header=array('出貨單','出貨單','出貨單','出貨單','出貨單');
 $header_title=array();
 $title='發票';
 $header_title=array();
 $pdf->Body($invoice_no);
 $pdf->SetTextColor(255,0,0);
+$pdf->SetFillColor(255,0,0);
+$pdf->SetDrawColor(255, 0, 0);
 $title='提貨單';
 $pdf->Body($invoice_no);
 $pdf->SetTextColor(0,0,255);
+$pdf->SetFillColor(0,0,255);
+$pdf->SetDrawColor(0, 0, 255);
 $title='收據';
 $pdf->Body($invoice_no);
 $pdf->SetAuthor('YRT Company Limited');

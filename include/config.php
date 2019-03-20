@@ -27,6 +27,6 @@ $result = $connection->query("SET NAMES 'UTF8'");
 	$LTD=$_SESSION['ltd'];
  }
  
-
  
+  
 ?>

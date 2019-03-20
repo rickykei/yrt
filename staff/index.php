@@ -5,18 +5,22 @@
 <p>
   <?
   include_once("./include/config.php");
-
-  if (!($AREA=="A" && $PC=="99") && !($AREA=="Y" && $PC=="1") ){
-   $db="";
+ 
+  
+  //window connction
+   $result = $db->query("SET NAMES 'UTF8'");
+ 
+  if (   $USER=='carrie' || $USER=='fung' || $USER=='alvin'  || $USER=='ricky'){
+   
   }else{
-	     
+	$db="";     
   }
   
   
 	$checking=0;
   if ($mem_id=="" && $mem_chi_name=="" && $mem_telno =="")	{
 	  		$sql="SELECT * FROM staff ";
-	  	    $sqlCount= " Select count(*) as total FROM member  ";
+	  	    $sqlCount= " Select count(*) as total FROM staff ";
 	// $sql="SELECT * FROM invoice order by invoice_no desc";
 		}else if ($mem_id!="" && $mem_chi_name=="" && $mem_telno ==""){
 			$sql="SELECT * FROM staff order by area";
@@ -28,6 +32,7 @@
 
 	//cal total count first;
 	if ($sqlCount!=""){
+		 
 	 $result = $db->query($sqlCount);
 		 while ( $row = $result->fetchRow(DB_FETCHMODE_ASSOC) ){
 				$countTotal=$row["total"];
