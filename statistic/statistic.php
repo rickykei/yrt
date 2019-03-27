@@ -189,13 +189,13 @@ body,td,th ,tr{
 		
 		//all member spending by bank acc on invoice 
 		$member_total_spend_on_all_bank_deposit[$i]="select sum(total_price) as total from invoice where branchID='$shop_array[$i]'  and void='A' and settle='A' and deposit_method='B' and invoice.settledate <= '$year-$month-$dayday'";
-		echo $member_total_spend_on_all_bank_deposit[$i];
+		//echo $member_total_spend_on_all_bank_deposit[$i];
 		//all member spending by cash acc on invoice 
 		$member_total_spend_on_all_deposit[$i]="select sum(total_price) as total from invoice where branchID='$shop_array[$i]'  and void='A' and settle='A' and deposit_method='D' and invoice.settledate <= '$year-$month-$dayday'";
 		
 		//all member spending by bank acc on invoice door 
 		$member_total_spend_on_all_bank_deposit_door[$i]="select sum(total_price) as total from invoice_door where branchID='$shop_array[$i]'   and settle='A' and deposit_method='B' and settledate <= '$year-$month-$dayday'";
-		echo $member_total_spend_on_all_bank_deposit_door[$i];
+		//echo $member_total_spend_on_all_bank_deposit_door[$i];
 		//all member spending by cash acc on invoice door 
 		$member_total_spend_on_all_deposit_door[$i]="select sum(total_price) as total from invoice_door where branchID='$shop_array[$i]'    and settle='A' and deposit_method='D' and settledate <= '$year-$month-$dayday'";
 				

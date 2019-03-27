@@ -8,6 +8,11 @@ if (DB::isError($connection))
  die($connection->getMessage());
 $result = $connection->query("SET NAMES 'UTF8'");
    
+   
+   
+$shop_array = array ( "A","Y");
+
+   
  if ($_SESSION['username']==''){
  
 	 $uname=$_REQUEST['username'];

@@ -18,10 +18,18 @@ function Set_header_title($header_title)
 {
 	$this->header_title=$header_title;
 }
+
 function Body($invoice_no)
 {
-   include("./include/config.php");
+  // $this->SetDrawColor(255,255,255);
+   //$this->SetTextColor(0,0,0);
+      
+   $this->SetFont('Big5','',26);
+   $border=0;
+  
 
+   include("./include/config.php");
+  
     $connection = DB::connect($dsn);
 
    if (DB::isError($connection))
@@ -49,8 +57,8 @@ function Body($invoice_no)
 	$staffTel=$rowStaff['telno'];
  
 	$customer_name=iconv("UTF-8", "BIG5-HKSCS",$row['customer_name']."    ".$rowCust["creditLevel"]);
-	$customer_tel =iconv("UTF-8", "BIG5-HKSCS",$row['member_id']);
-	$customer_detail= iconv("UTF-8", "BIG5-HKSCS",$row['customer_detail']);
+	$customer_tel=iconv("UTF-8", "BIG5-HKSCS",$row['member_id']);
+	$customer_detail=iconv("UTF-8", "BIG5-HKSCS",$row['customer_detail']);
 	$lastname=iconv("UTF-8", "BIG5-HKSCS",$row['lastname']);
 	$receiver= $row['receiver'];
 	$delivery=$row['delivery'];
@@ -67,16 +75,18 @@ function Body($invoice_no)
 	
 	$branchid=$row['branchID'];
   
-	if ($row['delivery']=="Y")
+
+	if ($row["delivery"]=="Y")
 	$delLabel='送貨';
-	else if ($row['delivery']=="C")
+	else if ($row["delivery"]=="C")
 	{
 		$delLabel='街車即走';
-		$rightLabel1='收尾數';
+	//	$rightLabel1='收尾數';
 		$rightLabel2='車費客付';
 	}
-	else if ($row['delivery']=="S")
+	else if ($row["delivery"]=="S")
 	$delLabel='自取';
+
 	
 	//if ($customer_tel=="888")
 	//$delLabel='自取';
@@ -85,10 +95,7 @@ function Body($invoice_no)
  $this->SetY(-3);
    //$this->Ln(95);
   // $this->Ln(85);
-  // $this->SetTextColor(0,0,0);
-   $this->SetFont('Big5','',26);
-  // $this->SetDrawColor(255,255,255);
-  $border=0;
+
   
   //20170709 disable shopname
   //$printShopName=$shopAddress[array_search($branchid,$shop_array)];
@@ -97,54 +104,54 @@ function Body($invoice_no)
    
 	$this->SetFont('Big5','',16);
 	$this->Cell(5,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(5,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(100,8,iconv("UTF-8", "BIG5-HKSCS","收貨人:".$receiver).$lastname,$border,0,'L',0);
+	
+	$this->Cell(106,8,iconv("UTF-8", "BIG5-HKSCS","收貨人:".$receiver.$lastname),$border,0,'L',0);
  	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",$delLabel),$border,1,'C',0);
+	$this->Cell(65,8,iconv("UTF-8", "BIG5-HKSCS",$delLabel),$border,1,'R',0);
 	
 	$this->Cell(5,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(5,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","姓名:").$customer_name,$border,0,'L',0);
-	$this->Cell(55,8,iconv("UTF-8", "BIG5-HKSCS","售貨員:".$sales_name),$border,0,'C',0);
-	$this->Cell(50,8,iconv("UTF-8", "BIG5-HKSCS","發票編號:").$branchid.$invoice_no,$border,1,'R',0);
+	
+	$this->Cell(65,8,iconv("UTF-8", "BIG5-HKSCS","姓名:").$customer_name,$border,0,'L',0);
+	$this->Cell(65,8,iconv("UTF-8", "BIG5-HKSCS","售貨員:".$sales_name),$border,0,'C',0);
+	$this->Cell(70,8,iconv("UTF-8", "BIG5-HKSCS","發票編號:").$branchid.$invoice_no,$border,1,'R',0);
 
 	$this->Cell(5,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(5,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+	
 	
 	if ($creditLevel=='E'){
 	$border=1;
-	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","電話:".$customer_tel),$border,0,'L',0);
+	$this->Cell(65,8,iconv("UTF-8", "BIG5-HKSCS","電話:".$customer_tel),$border,0,'L',0);
 	$border=0;
 	}else{
-	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","電話:".$customer_tel),$border,0,'L',0);
+	$this->Cell(65,8,iconv("UTF-8", "BIG5-HKSCS","電話:".$customer_tel),$border,0,'L',0);
 	}
 	$this->Cell(65,8,iconv("UTF-8", "BIG5-HKSCS",$staffTel),$border,0,'C',0);
-	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","日期:落單").$invoice_date,$border,1,'R',0);
+	$this->Cell(70,8,iconv("UTF-8", "BIG5-HKSCS","日期:落單").$invoice_date,$border,1,'R',0);
 	
 	
 	$this->Cell(5,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(5,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(90,8,iconv("UTF-8", "BIG5-HKSCS","地址:".$customer_detail),$border,0,'L',0);
+	
+	$this->Cell(95,8,iconv("UTF-8", "BIG5-HKSCS","地址:").$customer_detail,$border,0,'L',0);
 	$this->Cell(35,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 if ($customer_tel=="888")
-	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","自取").$delivery_date,$border,1,'R',0);
+	$this->Cell(70,8,iconv("UTF-8", "BIG5-HKSCS","自取").$delivery_date,$border,1,'R',0);
 	else
-	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","送貨").$delivery_date,$border,1,'R',0);
+	$this->Cell(70,8,iconv("UTF-8", "BIG5-HKSCS","送貨").$delivery_date,$border,1,'R',0);
 //	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS","地址："),0,0,'R',0);
 //	$this->Cell(170,8,$customer_detail,0,1,'L',0);
 
 	
 		$this->Ln(9);
 	
-	
+	$this->Cell(5,8,iconv("UTF-8", "BIG5-HKSCS",""),0,0,'C',0);
 	$this->Cell(45,8,iconv("UTF-8", "BIG5-HKSCS","貨品編號"),1,0,'C',0);
 	$this->Cell(80,8,iconv("UTF-8", "BIG5-HKSCS","項目"),1,0,'C',0);
 	$this->Cell(27,8,iconv("UTF-8", "BIG5-HKSCS","數量"),1,0,'C',0);
-	$this->Cell(22,8,iconv("UTF-8", "BIG5-HKSCS","單價"),1,0,'C',0);
-	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS","共銀"),1,1,'C',0);
+	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS","單價"),1,0,'C',0);
+	$this->Cell(29,8,iconv("UTF-8", "BIG5-HKSCS","共銀"),1,1,'C',0);
 
 
-
+//$this->SetFont('Big5','',14);
 //print goods_invoice
    $result = $connection->query("SET NAMES 'UTF8'");
    $result = $connection->query("SELECT goods_invoice.deductstock as deductstock, goods_invoice.cutting as cutting ,goods_invoice.goods_partno as goods_partno,goods_invoice.goods_detail as goods_detail,goods_invoice.qty as qty,goods_invoice.marketprice as marketprice,goods_invoice.manpower as manpower ,goods_invoice.subtotal as subtotal,sumgoods.goods_detail as goods_detail2 ,  discountrate,unit_name_chi FROM goods_invoice,sumgoods,unit where sumgoods.goods_partno=goods_invoice.goods_partno and invoice_no=".$invoice_no." and sumgoods.unitid=unit.id order by goods_invoice.id asc");
@@ -160,7 +167,7 @@ if ($customer_tel=="888")
 				$deductstock='行';
 	$this->Cell(5,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);			
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",$i),$border,0,'L',0);
-	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",$row2['goods_partno']),$border,0,'L',0);
+	$this->Cell(35,8,iconv("UTF-8", "BIG5-HKSCS",$row2['goods_partno']),$border,0,'L',0);
 	
     $this->Cell(10,8,iconv("UTF-8","BIG5-HKSCS",$cutting.$deductstock),$border,0,'L',0);
 	
@@ -168,13 +175,13 @@ if ($customer_tel=="888")
 		$this->Cell(65,8,iconv("UTF-8", "BIG5-HKSCS",$row2['goods_detail']),$border,0,'L',0);
 	else
 		$this->Cell(65,8,iconv("UTF-8", "BIG5-HKSCS",$row2['goods_detail2']),$border,0,'L',0);
-$this->SetFont('Big5','',18);
-$this->Cell(18,8,iconv("UTF-8", "BIG5-HKSCS",number_format($row2['qty'])),$border,0,'R',0);
-$this->SetFont('Big5','',14);
+ 
+$this->Cell(14,8,iconv("UTF-8", "BIG5-HKSCS",number_format($row2['qty'])),$border,0,'R',0);
+
 
 $this->Cell(9,8,iconv("UTF-8", "BIG5-HKSCS",$row2['unit_name_chi']),$border,0,'R',0);
 	
-	$this->Cell(22,8,iconv("UTF-8", "BIG5-HKSCS",$row2['marketprice']),$border,0,'R',0);
+	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS",$row2['marketprice']),$border,0,'R',0);
 	
 //	$this->Cell(22,6,iconv("UTF-8", "BIG5-HKSCS",$row2['manpower']),0,0,'C',0);
 	//20060410
@@ -185,13 +192,13 @@ $this->Cell(9,8,iconv("UTF-8", "BIG5-HKSCS",$row2['unit_name_chi']),$border,0,'R
 
 
 	//20071006 add discount display
-	$this->SetFont('Big5','',12);
+	//$this->SetFont('Big5','',12);
 	$discountrate="-".$row2['discountrate']."%";
 	if ($row2['discountrate']==0)
-	$this->Cell(12,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,1,'R',0);
+	$this->Cell(14,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,1,'R',0);
 	else
-	$this->Cell(12,8,iconv("UTF-8", "BIG5-HKSCS","(".$discountrate.")"),$border,1,'C',0);
-	$this->SetFont('Big5','',14);
+	$this->Cell(14,8,iconv("UTF-8", "BIG5-HKSCS","(".$discountrate.")"),$border,1,'C',0);
+	//$this->SetFont('Big5','',14);
 
 	$i++;
     $total=$total+$amount;
@@ -272,12 +279,15 @@ function Header()
 	global $title;
 	global $header_title;
 	global $invoice_no;
-	
+	global $AREA;
+	global $delivery;
 	
 	$w=$this->GetStringWidth($title)+6;
 	$this->SetX(2);
-	$this->SetDrawColor(255,255,255);
-	$this->SetFillColor(233,233,233);
+	$this->Ln(12);
+
+	//$this->SetDrawColor(255,255,255);
+	//$this->SetFillColor(233,233,233);
 	//$this->SetTextColor(0,0,0);
 	//20060621$this->Ln(35);
 	//$this->Ln(19);
@@ -285,35 +295,57 @@ function Header()
 	
   $this->SetFont('Big5','',40);
 
-$shopAddress="九龍大角咀通州街2-16號長豐大廈A-M舖地下";
-$shopDetail="TEL : 2412-2335, 2412-2241 FAX : 2413-3373";
+  if ($AREA=='Y'){
+	$shopAddress="九龍旺角通州街2-16號長豐大廈A-M舖地下";
+	$shopDetail="TEL : 2412-2335, 2412-2241 FAX : 2413-3373";
+  }
+  else {
+	$shopAddress="九龍旺角鴉蘭街5B號中華漆廠大廈地下D舖";
+	$shopDetail="TEL : 2393-9335, 2787-7678 FAX : 2393-8707";
+  }
+	
 
  
-	$this->Ln(12);
-	$this->Cell(40,18,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(125,18,iconv("UTF-8", "BIG5-HKSCS","黃河木行有限公司"),$border,0,'C',0);
-	$this->Cell(40,18,iconv("UTF-8", "BIG5-HKSCS",$rightLabel1),"TRL",1,'C',0);
-	 
-	$this->SetFont('Big5','',23);
-  
 	
+	 
+	if ($delivery=="Y")
+	$delLabel='送貨';
+	else if ($delivery=="C")
+	{
+		$delLabel='街車即走';
+	//	$rightLabel1='收尾數';
+		$rightLabel2='車費客付';
+	}
+	else if ($delivery=="S")
+	$delLabel='自取';
+
 	if ($delivery=="C")
 	{
+	$this->Cell(40,18,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+	$this->Cell(125,18,iconv("UTF-8", "BIG5-HKSCS","黃河木行有限公司"),$border,0,'C',0);
+	$this->Cell(40,18,iconv("UTF-8", "BIG5-HKSCS",$rightLabel1),$border,1,'C',0);
 	
-	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(125,8,iconv("UTF-8", "BIG5-HKSCS",$shopAddress),$border,0,'C',0);
-	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",$rightLabel1),"TRL",1,'C',0);
-	 
-	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'C',0);
-	 
-  $this->Cell(125,8,iconv("UTF-8", "BIG5-HKSCS",$shopDetail),$border,0,'C',0);
-  $this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",$rightLabel2),"BRL",1,'C',0);
-  
-	}else{	
- 
+	 $this->SetFont('Big5','',23);
 	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 	$this->Cell(125,8,iconv("UTF-8", "BIG5-HKSCS",$shopAddress),$border,0,'C',0);
 	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,1,'C',0);
+	
+	$this->SetFont('Big5','',12);
+	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'C',0);
+	$this->SetFont('Big5','',16);
+	$this->Cell(125,8,iconv("UTF-8", "BIG5-HKSCS",$shopDetail),$border,0,'C',0);
+	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,1,'C',0);
+  
+	}else{	
+ 	$this->Cell(40,18,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+	$this->Cell(125,18,iconv("UTF-8", "BIG5-HKSCS","黃河木行有限公司"),$border,0,'C',0);
+	$this->Cell(40,18,iconv("UTF-8", "BIG5-HKSCS",$rightLabel1),$border,1,'C',0);
+	
+	$this->SetFont('Big5','',23);
+	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+	$this->Cell(125,8,iconv("UTF-8", "BIG5-HKSCS",$shopAddress),$border,0,'C',0);
+	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,1,'C',0);
+	
 	$this->SetFont('Big5','',12);
 	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 	$this->SetFont('Big5','',16);
@@ -322,11 +354,34 @@ $shopDetail="TEL : 2412-2335, 2412-2241 FAX : 2413-3373";
 
   }
   
-  $this->SetFont('Big5','',18);
+  
+    if ($title=='提貨單'){
+		$this->SetTextColor(255,0,0);
+		$this->SetFillColor(255,0,0);
+		//$this->SetDrawColor(255, 0, 0);
+	}else if ($title=='收據'){
+		$this->SetTextColor(0,0,255);
+		$this->SetFillColor(0,0,255);
+		//$this->SetDrawColor(0, 0, 255);
+	}
+	
+     $this->SetFont('Big5','',23);
+
   	$this->Cell(40,18,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(125,18,iconv("UTF-8", "BIG5-HKSCS",$title),$border,0,'C',0);
-	$this->Cell(40,18,iconv("UTF-8", "BIG5-HKSCS",$rightLabel1),"TRL",1,'C',0);
-	 $this->SetFont('Big5','',12);
+	 if ($title=='提貨單'){
+	$this->Cell(125,18,iconv("UTF-8", "BIG5-HKSCS","※※".$title."※※"),$border,0,'C',0);
+	 }else{
+		 $this->Cell(125,18,iconv("UTF-8", "BIG5-HKSCS",$title),$border,0,'C',0);
+	 }
+	 
+	 if ($delivery=="C")
+	{
+		$this->Cell(40,18,iconv("UTF-8", "BIG5-HKSCS",$rightLabel2),"BTRL",1,'C',0);
+	}else{
+		$this->Cell(40,18,iconv("UTF-8", "BIG5-HKSCS",$rightLabel2),$border,1,'C',0);
+	}
+	
+	$this->SetFont('Big5','',12);
   
 	//Save ordinate
     $this->y0=$this->GetY();
@@ -361,17 +416,14 @@ $pdf->AddBig5Font();
 $pdf->SetTextColor(0,0,0);
 $pdf->SetFillColor(0,0,0);
 $pdf->SetDrawColor(0, 0, 0);
+//$pdf->SetDrawColor(255, 0, 0);
 $title='發票';
 $header_title=array();
 $pdf->Body($invoice_no);
-$pdf->SetTextColor(255,0,0);
-$pdf->SetFillColor(255,0,0);
-$pdf->SetDrawColor(255, 0, 0);
+
 $title='提貨單';
 $pdf->Body($invoice_no);
-$pdf->SetTextColor(0,0,255);
-$pdf->SetFillColor(0,0,255);
-$pdf->SetDrawColor(0, 0, 255);
+
 $title='收據';
 $pdf->Body($invoice_no);
 $pdf->SetAuthor('YRT Company Limited');
