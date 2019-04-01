@@ -1,10 +1,8 @@
 <?php
 require_once('./pdf3/tcpdf.php');
-
-
-
 //require('../fpdf.php');
- //class PDF extends FPDF
+
+//class PDF extends FPDF
 class PDF extends TCPDF
 {
 //Current column
@@ -23,7 +21,7 @@ function Body($invoice_no)
   // $this->SetDrawColor(255,255,255);
    //$this->SetTextColor(0,0,0);
       
-   $this->SetFont($fontname,'',26,false);
+   $this->SetFont('msungstdlight','',26);
    $border=0;
   
 
@@ -101,7 +99,7 @@ function Body($invoice_no)
   //$printShopDetail=$shopDetail[array_search($branchid,$shop_array)];
   
    
-	$this->SetFont($fontname,'',16);
+	$this->SetFont('msungstdlight','',16);
 	$this->Cell(5,8, "" ,$border,0,'R',0);
 	
 	$this->Cell(106,8, "收貨人:".$receiver.$lastname ,$border,0,'L',0);
@@ -129,15 +127,14 @@ function Body($invoice_no)
 	
 	
 	$this->Cell(5,8, "" ,$border,0,'R',0);
-	$this->SetFont($fontname,'',13);
+	
 	$this->Cell(95,8, "地址:" .$customer_detail,$border,0,'L',0);
-	$this->SetFont($fontname,'',16);
 	$this->Cell(35,8, "" ,$border,0,'R',0);
 if ($customer_tel=="888")
 	$this->Cell(70,8, "自取" .$delivery_date,$border,1,'R',0);
 	else
 	$this->Cell(70,8, "送貨" .$delivery_date,$border,1,'R',0);
-//	$this->Cell(20,8,iconv("UTF-8", "DroidSansFallback-HKSCS","地址："),0,0,'R',0);
+//	$this->Cell(20,8,iconv("UTF-8", "msungstdlight-HKSCS","地址："),0,0,'R',0);
 //	$this->Cell(170,8,$customer_detail,0,1,'L',0);
 
 	
@@ -151,7 +148,7 @@ if ($customer_tel=="888")
 	$this->Cell(29,8,"共銀",1,1,'C',0);
 
 
-//$this->SetFont($fontname,'',14);
+//$this->SetFont('msungstdlight','',14);
 //print goods_invoice
    $result = $connection->query("SET NAMES 'UTF8'");
    $result = $connection->query("SELECT goods_invoice.deductstock as deductstock, goods_invoice.cutting as cutting ,goods_invoice.goods_partno as goods_partno,goods_invoice.goods_detail as goods_detail,goods_invoice.qty as qty,goods_invoice.marketprice as marketprice,goods_invoice.manpower as manpower ,goods_invoice.subtotal as subtotal,sumgoods.goods_detail as goods_detail2 ,  discountrate,unit_name_chi FROM goods_invoice,sumgoods,unit where sumgoods.goods_partno=goods_invoice.goods_partno and invoice_no=".$invoice_no." and sumgoods.unitid=unit.id order by goods_invoice.id asc");
@@ -182,20 +179,20 @@ if ($customer_tel=="888")
 	
 	$this->Cell(22,8, $row2['marketprice'] ,$border,0,'R',0);
 	
-//	$this->Cell(22,6,iconv("UTF-8", "DroidSansFallback-HKSCS",$row2['manpower']),0,0,'C',0);
+//	$this->Cell(22,6,iconv("UTF-8", "msungstdlight-HKSCS",$row2['manpower']),0,0,'C',0);
 	//20060410
 	//$amount=((100-$row2["discountrate"])/100)*$row2["qty"]*$row2["marketprice"];
 	$amount=$row2['subtotal'];
 	$this->Cell(25,8,number_format($row2['subtotal'], 2, '.', ','),$border,0,'R',0);
 
  
-	$this->SetFont($fontname,'',8);
+	$this->SetFont('msungstdlight','',8);
 	$discountrate="-".$row2['discountrate']."%";
 	if ($row2['discountrate']==0)
 	$this->Cell(14,8,"",$border,1,'R',0);
 	else
 	$this->Cell(10,8,"(".$discountrate.")",$border,1,'L',0);
-	$this->SetFont($fontname,'',16);
+	$this->SetFont('msungstdlight','',16);
 
 	$i++;
     $total=$total+$amount;
@@ -204,15 +201,15 @@ if ($customer_tel=="888")
    
  $result->free ();
  for ($i=$i;$i<=17;$i++){
- $this->Cell(22,8,iconv("UTF-8", "DroidSansFallback-HKSCS",""),$border,1,'C',0);
+ $this->Cell(22,8,iconv("UTF-8", "msungstdlight-HKSCS",""),$border,1,'C',0);
  }
 
 		$subtotal=$man_power_price+$total;
 		$subtotal=$subtotal-($subtotal*$discount_percent/100);
 		$subtotal=$subtotal-$discount_deduct;
-		 $this->SetFont($fontname,'',13);
+		 $this->SetFont('msungstdlight','',13);
  
- 	 $this->SetFont($fontname,'',14);
+ 	 $this->SetFont('msungstdlight','',14);
 	if ($creditcardrate!=0){
 		$creditcardtotal=round($subtotal*$creditcardrate/100);
 	$this->Cell(5,6,"",$border,0,'R',0);		
@@ -230,7 +227,7 @@ if ($customer_tel=="888")
 	
 	
 	
-	$this->SetFont($fontname,'',10);
+	$this->SetFont('msungstdlight','',10);
 	$this->Cell(5,7,"",$border,0,'R',0);	
 	$this->Cell(140,7,"*如對本公司服務有何意見，請電:6117 6673。*",$border,0,'L',0);
 	$this->Cell(50,7, "*如要入地盤需繳附加費$500*" ,$border,0,'R',0);
@@ -248,23 +245,23 @@ if ($customer_tel=="888")
 	
 	
 	
-	$this->SetFont($fontname,'',17);
+	$this->SetFont('msungstdlight','',17);
 	$this->Cell(5,7, "" ,$border,0,'R',0);	
 	
-	//$this->Cell(140,7,iconv("UTF-8", "DroidSansFallback-HKSCS","訂造貨品，必須貨到後一個月內取，否則視作客戶自動"),$border,0,'L',0);
+	//$this->Cell(140,7,iconv("UTF-8", "msungstdlight-HKSCS","訂造貨品，必須貨到後一個月內取，否則視作客戶自動"),$border,0,'L',0);
 	$this->Cell(140,7,"收貨人:",'B',0,'L',0);
 
 	$this->Cell(50,7,"共銀:".number_format($subtotal+$creditcardtotal, 2, '.', ','),$border,0,'R',0);
 	$this->Cell(5,7,"",$border,1,'R',0);
 
-	//$this->Cell(5,7,iconv("UTF-8", "DroidSansFallback-HKSCS",""),$border,0,'R',0);	
-	//$this->SetFont($fontname,'',14);
-	//$this->Cell(140,7,iconv("UTF-8", "DroidSansFallback-HKSCS","放棄該貨品及所付訂金，日後不得追究。"),$border,0,'L',0);
-	//$this->Cell(130,7,iconv("UTF-8", "DroidSansFallback-HKSCS",""),$border,0,'R',0);
-	//$this->Cell(10,7,iconv("UTF-8", "DroidSansFallback-HKSCS",""),$border,0,'R',0);	
-	//$this->SetFont($fontname,'',17);
+	//$this->Cell(5,7,iconv("UTF-8", "msungstdlight-HKSCS",""),$border,0,'R',0);	
+	//$this->SetFont('msungstdlight','',14);
+	//$this->Cell(140,7,iconv("UTF-8", "msungstdlight-HKSCS","放棄該貨品及所付訂金，日後不得追究。"),$border,0,'L',0);
+	//$this->Cell(130,7,iconv("UTF-8", "msungstdlight-HKSCS",""),$border,0,'R',0);
+	//$this->Cell(10,7,iconv("UTF-8", "msungstdlight-HKSCS",""),$border,0,'R',0);	
+	//$this->SetFont('msungstdlight','',17);
 	//$this->Cell(30,7,'',$border,0,'R',0);
- 	//$this->Cell(5,7,iconv("UTF-8", "DroidSansFallback-HKSCS",""),$border,1,'R',0);
+ 	//$this->Cell(5,7,iconv("UTF-8", "msungstdlight-HKSCS",""),$border,1,'R',0);
  
 		$this->Ln(3);
 
@@ -282,7 +279,7 @@ function Header()
 	$w=$this->GetStringWidth($title)+6;
 	$this->SetX(2);
 	$this->Ln(12);
-    $this->SetMargins(1, 70, 1);
+ $this->SetMargins(1, 70, 1);
 	//$this->SetDrawColor(255,255,255);
 	//$this->SetFillColor(233,233,233);
 	//$this->SetTextColor(0,0,0);
@@ -290,7 +287,7 @@ function Header()
 	//$this->Ln(19);
 	$this->SetLineWidth(0);
 	
-  $this->SetFont($fontname,'',40);
+  $this->SetFont('msungstdlight','',40);
 
   if ($AREA=='Y'){
 	$shopAddress="九龍旺角通州街2-16號長豐大廈A-M舖地下";
@@ -322,14 +319,14 @@ function Header()
 	$this->Cell(125,18,"黃河木行有限公司",$border,0,'C',0);
 	$this->Cell(40,18, $rightLabel1,$border,1,'C',0);
 	
-	 $this->SetFont($fontname,'',23);
+	 $this->SetFont('msungstdlight','',23);
 	$this->Cell(40,8, "",$border,0,'R',0);
 	$this->Cell(125,8, $shopAddress,$border,0,'C',0);
 	$this->Cell(40,8, "" ,$border,1,'C',0);
 	
-	$this->SetFont($fontname,'',12);
+	$this->SetFont('msungstdlight','',12);
 	$this->Cell(40,8, "",$border,0,'C',0);
-	$this->SetFont($fontname,'',16);
+	$this->SetFont('msungstdlight','',16);
 	$this->Cell(125,8,$shopDetail,$border,0,'C',0);
 	$this->Cell(40,8,"",$border,1,'C',0);
   
@@ -338,14 +335,14 @@ function Header()
 	$this->Cell(125,18,"黃河木行有限公司",$border,0,'C',0);
 	$this->Cell(40,18,$rightLabel1,$border,1,'C',0);
 	
-	$this->SetFont($fontname,'',23);
+	$this->SetFont('msungstdlight','',23);
 	$this->Cell(40,8,"",$border,0,'R',0);
 	$this->Cell(125,8,$shopAddress,$border,0,'C',0);
 	$this->Cell(40,8,"",$border,1,'C',0);
 	
-	$this->SetFont($fontname,'',12);
+	$this->SetFont('msungstdlight','',12);
 	$this->Cell(40,8,"",$border,0,'R',0);
-	$this->SetFont($fontname,'',16);
+	$this->SetFont('msungstdlight','',16);
     $this->Cell(125,8,$shopDetail,$border,0,'C',0);
     $this->Cell(40,8,"",$border,1,'C',0);
 
@@ -362,7 +359,7 @@ function Header()
 		//$this->SetDrawColor(0, 0, 255);
 	}
 	
-     $this->SetFont($fontname,'',23);
+     $this->SetFont('msungstdlight','',23);
 
   	$this->Cell(40,18, "",$border,0,'R',0);
 	 if ($title=='提貨單'){
@@ -378,7 +375,7 @@ function Header()
 		$this->Cell(40,18, $rightLabel2 ,$border,1,'C',0);
 	}
 	
-	$this->SetFont($fontname,'',12);
+	$this->SetFont('msungstdlight','',12);
   
 	//Save ordinate
      $this->y0=$this->GetY();
@@ -386,7 +383,11 @@ function Header()
 
 function Footer()
 {
- 
+	//Page footer
+	//$this->SetY(-5);
+	//$this->SetFont('msungstdlight','',9);
+	//$this->SetTextColor(128);
+	//$this->Cell(0,10,'Page '.$this->PageNo(),0,0,'C');
 }
 
 
@@ -401,16 +402,12 @@ function Footer()
 
 
 //$pdf=new pdf('P','mm',array(216,217));
-$pdf=new pdf('P','mm','A4', true, 'UTF-8', false);
+$pdf=new pdf('P','mm','A4');
 $pdf->SetAutoPageBreak(true,2);
 $pdf->SetTopMargin(1);
 $pdf->SetLeftMargin(0);
-//$fontname = TCPDF_FONTS::addTTFfont('d:/github/yrt/pdf3/fonts/DroidSansFallback.ttf', 'TrueTypeUnicode', '', 96);
- $fontname="msungstdlight";
- 
- $pdf->SetFont($fontname, '', 10);
- 
- 
+//$pdf->AddmsungstdlightFont();
+ $pdf->SetFont('msungstdlight', '', 10);
 $pdf->SetTextColor(0,0,0);
 $pdf->SetFillColor(0,0,0);
 $pdf->SetDrawColor(0, 0, 0);
@@ -427,8 +424,8 @@ $title='收據';
 $pdf->Body($invoice_no);
 $pdf->SetAuthor('YRT Company Limited');
 
-$filepath='./invoice/pdf/'.$invoice_no.'.pdf';
-
+$filepath='/home/vhost/rickykei.info/yrtdemo2018/invoice/pdf/'.$invoice_no.'.pdf';
+$filepath='D:/github/yrt/invoice/pdf/'.$invoice_no.'.pdf';
 if (file_exists($filepath)) {
 	//move to backup
 	$file_timestamp=date("Ymd_His") ;

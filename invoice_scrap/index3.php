@@ -70,7 +70,7 @@ for ($i=0;$i<17;$i++)
   //echo "invoice insert Success=".$invoice_no;
   {
 	   if($_REQUEST['print']=='3col'){
-		include_once("./pdf2/pdf_invoice_scrap_v2.php");
+		include_once("./pdf3/pdf_invoice_scrap_v2.php");
 	  }else{
   	 include_once("./pdf2/pdf_invoice_scrap.php");
 	  }

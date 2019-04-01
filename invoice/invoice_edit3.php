@@ -154,7 +154,7 @@ include_once("./include/functions.php");
 	   echo "3col";
 		  include_once("./pdf3/pdf_v2.php");
 	  }else{
-			include_once("./pdf3/pdf.php");
+			include_once("./pdf2/pdf.php");
 	  }
 ?>
 <SCRIPT LANGUAGE="JavaScript">
