@@ -2,6 +2,7 @@
     
 	
   $invoiceRecord=15;
+    $chqRecord=17;
   require_once("./include/config.php");
   require_once("./include/functions.php");
    include_once("./include/timestamp.php");
@@ -251,7 +252,7 @@
 		
 		 <?
 			$tab=0;        
-			for ($i=0;$i<$invoiceRecord;$i++)          
+			for ($i=0;$i<$chqRecord=17;$i++)          
 			{
 				?>
 		  <tr bgcolor="#CCCCCC">

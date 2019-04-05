@@ -73,7 +73,7 @@ $invoice_no=$_POST['invoice_no'];
    die ($result->getMessage());
 
 //insert misc_chq
-    for ($i=0;$i<15;$i++)
+    for ($i=0;$i<17;$i++)
   {
 
 	if($cheque[$i]!=""){

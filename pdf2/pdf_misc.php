@@ -122,7 +122,7 @@ function Body($invoice_no)
     $this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS",'支票'),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",'金額'),$border,1,'R',0);
 	
-	for ($i=0;$i<15;$i++){
+	for ($i=0;$i<17;$i++){
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",$i+1),$border,0,'R',0);
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS",$misc_misc[$i]),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($misc_miscAmt[$i],2,'.',',')),$border,0,'R',0);

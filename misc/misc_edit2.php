@@ -1,6 +1,7 @@
 <?php
 
   $invoiceRecord=15;
+  $chqRecord=17;
 	require_once("./include/config.php");
 	require_once("./include/functions.php");
 	
@@ -96,7 +97,7 @@ a:active {
 		
 			 <?
 			$tab=0;        
-			for ($i=0;$i<$invoiceRecord;$i++)          
+			for ($i=0;$i<$chqRecord;$i++)          
 			{
 				?>
 		  <tr bgcolor="#CCCCCC">
@@ -211,7 +212,7 @@ for ($i=0;$i<$invoiceRecord;$i++)
 <input type="hidden" name="misc_amt[<?php echo $i;?>]" id="misc_amt[<?php echo $i;?>]" value="<?php echo $misc_amt[$i];?>"/>
  <?}?>
  <? 
-for ($i=0;$i<15;$i++)
+for ($i=0;$i<$chqRecord;$i++)
  {?>
 <input type="hidden" name="cheque[<?php echo $i;?>]" id="cheque[<?php echo $i;?>]" value="<?php echo $cheque[$i];?>"/>
 <input type="hidden" name="cheque_amt[<?php echo $i;?>]" id="cheque_amt[<?php echo $i;?>]" value="<?php echo $cheque_amt[$i];?>"/>

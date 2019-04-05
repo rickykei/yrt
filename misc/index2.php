@@ -96,7 +96,7 @@ a:active {
 		<table width="100%" border="0" cellpadding="2" cellspacing="1" bgcolor="#ffffff" >
 		
 		     <?php
-		 for ($i=0;$i<$invoiceRecord;$i++)          
+		 for ($i=0;$i<$chqRecord;$i++)          
 			{
 				?>
 		  <tr bgcolor="#CCCCCC">
