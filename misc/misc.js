@@ -41,7 +41,7 @@ function checkform()
 	 var subtotal=0.00;
 	 var subtotalStr="";
 	 console.log("calTotalChqAmt");
-	 for (row_no=0;row_no<15;row_no++){
+	 for (row_no=0;row_no<17;row_no++){
 		 subtotalStr=$('#cheque_amt\\['+row_no+'\\]').val();
 		  if (subtotalStr!=""){
 			subtotal=subtotal+parseFloat(subtotalStr);

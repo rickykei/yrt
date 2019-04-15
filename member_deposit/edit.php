@@ -100,9 +100,9 @@
                     
                 </select>		</td>
             <td width="191"> </td>
-			<td colspan="2">  <label><span class="style6">現金結餘 : </label></span><input name="mem_dep_bal" id="mem_dep_bal" type="text" disabled="disabled" class="blocktextbox" size="10" maxlength="10">
+			<td colspan="2">  <label><span class="style6">現金結餘 : </label></span><input name="mem_dep_bal" id="mem_dep_bal"  type="text" disabled="disabled" class="blocktextbox" size="10" maxlength="10">
 		  <br>
-		   <label><span class="style6">銀行結餘 : </label></span><input name="mem_dep_bank_bal" id="mem_dep_bank_bal" type="text" disabled="disabled" class="blocktextbox" size="10" maxlength="10"></td>
+		   <label><span class="style6">銀行結餘 : </label></span><input name="mem_dep_bank_bal" id="mem_dep_bank_bal"  type="text" disabled="disabled" class="blocktextbox" size="10" maxlength="10"></td>
 			</tr>
 			
           <tr bgcolor="#004d80">
@@ -158,7 +158,7 @@
       
     }
   );
-  
+  findMemIdAjax();
 </script>
 
 
