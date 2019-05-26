@@ -13,7 +13,7 @@
 	
 	 
 	//$query = "select * from member where member_id='".$_GET['mem_id']."'";
-	$query = " SELECT member_id,member_add,member_name,creditLevel,(select alert from address addr where mem.member_add like concat('%',addr.address,'%') limit 0,1) alert  FROM member mem WHERE mem.member_id='".$_GET['mem_id']."'  ";
+	$query = " SELECT member_id,member_add,member_name,creditLevel,(select alert from address addr where mem.member_add like concat('%',addr.address,'%') limit 0,1) alert ,remark FROM member mem WHERE mem.member_id='".$_GET['mem_id']."'  ";
 	$result =$db->query($query ) or die (mysql_error()."Couldn't execute query: $query");
 	
 	
@@ -63,6 +63,7 @@
 		echo "<mem_credit_level>" . $row['creditLevel'] . "</mem_credit_level>";
 		echo "<mem_add>" . $row['member_add'] . "</mem_add>";
 		echo "<mem_alert>" . $row['alert'] . "</mem_alert>";
+		echo "<mem_remark>" . $row['remark'] . "</mem_remark>";
 		echo "<sum_dep_amt>" . $sum_dep_amt . "</sum_dep_amt>";
 		echo "<sum_inv_dep_amt>" . $sum_inv_dep_amt . "</sum_inv_dep_amt>";
 		echo "<mem_dep_bal>" . ($sum_dep_amt-$sum_inv_dep_amt). "</mem_dep_bal>";
@@ -75,6 +76,7 @@
 		echo "<mem_credit_level></mem_credit_level>";
 		echo "<mem_add></mem_add>";
 		echo "<mem_alert></mem_alert>";
+			echo "<mem_remark></mem_remark>";
 		echo "<sum_dep_amt>0</sum_dep_amt>";
 		echo "<sum_inv_dep_amt>0</sum_inv_dep_amt>";
 		echo "<mem_dep_bal>0</mem_dep_bal>";

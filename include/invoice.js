@@ -6,6 +6,11 @@ var totalinvoiceRecord=16;
 	$( "#print" ).val("3col");
 	 $( "#form1" ).submit();
 }
+
+ function printboss(){
+	$( "#print" ).val("boss");
+	 $( "#form1" ).submit();
+}
 function count_total()
 { 
 	

@@ -148,11 +148,15 @@ function Body($invoice_no)
 	$this->Cell(35,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 	$this->Cell(50,8,iconv("UTF-8", "BIG5-HKSCS",$delLabel),$border,1,'C',0);
 	
+	
+	
 	$this->Cell(5,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 	$this->Cell(15,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 	$this->Cell(70,8,$customer_name,$border,0,'L',0);
-	$this->Cell(55,8,iconv("UTF-8", "BIG5-HKSCS",$sales_name),$border,0,'C',0);
+	$this->Cell(55,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'C',0);
 	$this->Cell(50,8,$branchid.$invoice_no,$border,1,'C',0);
+
+
 
 	$this->Cell(5,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 	$this->Cell(15,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
@@ -164,8 +168,10 @@ function Body($invoice_no)
 	}else{
 	$this->Cell(60,8,$customer_tel,$border,0,'L',0);
 	}
-	$this->Cell(65,8,iconv("UTF-8", "BIG5-HKSCS",$staffTel),$border,0,'C',0);
+	$this->Cell(65,8,iconv("UTF-8", "BIG5-HKSCS",$sales_name." ".$staffTel),$border,0,'C',0);
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","落單").$invoice_date,$border,1,'R',0);
+	
+	
 	
 	$this->Cell(5,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 	$this->Cell(15,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
@@ -356,6 +362,12 @@ $pdf->SetAutoPageBreak(true,2);
 $pdf->SetTopMargin(1);
 $pdf->SetLeftMargin(0);
 $pdf->AddBig5Font();
+$title='出貨單';
+$header_title=array();
+$pdf->Body($invoice_no);
+$title='出貨單';
+$header_title=array();
+$pdf->Body($invoice_no);
 $title='出貨單';
 $header_title=array();
 $pdf->Body($invoice_no);

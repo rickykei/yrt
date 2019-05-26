@@ -111,7 +111,7 @@ function Body($invoice_no)
 	$this->Cell(5,8, ""  ,$border,0,'R',0);
 	
 	$this->Cell(65,8, "姓名:" .$customer_name,$border,0,'L',0);
-	$this->Cell(65,8, "售貨員:".$sales_name ,$border,0,'C',0);
+	$this->Cell(65,8, "" ,$border,0,'C',0);
 	$this->Cell(70,8, "發票編號:" .$branchid.$invoice_no,$border,1,'R',0);
 
 	$this->Cell(5,8, "" ,$border,0,'R',0);
@@ -124,7 +124,7 @@ function Body($invoice_no)
 	}else{
 	$this->Cell(65,8, "電話:".$customer_tel ,$border,0,'L',0);
 	}
-	$this->Cell(65,8, $staffTel ,$border,0,'C',0);
+	$this->Cell(65,8, '' ,$border,0,'C',0);
 	$this->Cell(70,8, "日期:落單"  .$invoice_date,$border,1,'R',0);
 	
 	
@@ -232,7 +232,7 @@ if ($customer_tel=="888")
 	
 	$this->SetFont($fontname,'',10);
 	$this->Cell(5,7,"",$border,0,'R',0);	
-	$this->Cell(140,7,"*如對本公司服務有何意見，請電:6117 6673。*",$border,0,'L',0);
+	$this->Cell(140,7,"*如對本公司服務有何意見，請電: 97227738。*",$border,0,'L',0);
 	$this->Cell(50,7, "*如要入地盤需繳附加費$500*" ,$border,0,'R',0);
 	$this->Cell(5,7, "" ,$border,1,'R',0);
 	
@@ -293,12 +293,12 @@ function Header()
   $this->SetFont($fontname,'',40);
 
   if ($AREA=='Y'){
-	$shopAddress="九龍旺角通州街2-16號長豐大廈A-M舖地下";
-	$shopDetail="TEL : 2412-2335, 2412-2241 FAX : 2413-3373";
+	$shopAddress="落單電話周生 : 97227738";
+	$shopDetail="";
   }
   else {
-	$shopAddress="九龍旺角鴉蘭街5B號中華漆廠大廈地下D舖";
-	$shopDetail="TEL : 2393-9335, 2787-7678 FAX : 2393-8707";
+	$shopAddress="落單電話周生 : 97227738";
+	$shopDetail="";
   }
 	
 
@@ -319,7 +319,7 @@ function Header()
 	if ($delivery=="C")
 	{
 	$this->Cell(40,18,'',$border,0,'R',0);
-	$this->Cell(125,18,"黃河木行有限公司",$border,0,'C',0);
+	$this->Cell(125,18,"清洲木行",$border,0,'C',0);
 	$this->Cell(40,18, $rightLabel1,$border,1,'C',0);
 	
 	 $this->SetFont($fontname,'',23);
@@ -335,7 +335,7 @@ function Header()
   
 	}else{	
  	$this->Cell(40,18,"",$border,0,'R',0);
-	$this->Cell(125,18,"黃河木行有限公司",$border,0,'C',0);
+	$this->Cell(125,18,"清洲木行",$border,0,'C',0);
 	$this->Cell(40,18,$rightLabel1,$border,1,'C',0);
 	
 	$this->SetFont($fontname,'',23);

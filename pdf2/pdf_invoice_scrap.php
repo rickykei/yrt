@@ -346,6 +346,12 @@ $pdf->AddBig5Font();
 $title='出貨單';
 $header_title=array();
 $pdf->Body($invoice_no);
+$title='出貨單';
+$header_title=array();
+$pdf->Body($invoice_no);
+$title='出貨單';
+$header_title=array();
+$pdf->Body($invoice_no);
 $pdf->SetAuthor('YRT Company Limited');
 
 $filepath='./invoice_scrap/pdf/'.$invoice_no.'.pdf';

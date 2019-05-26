@@ -153,6 +153,8 @@ include_once("./include/functions.php");
    if($_REQUEST['print']=='3col'){
 	   echo "3col";
 		  include_once("./pdf3/pdf_v2.php");
+		}else if($_REQUEST['print']=='boss'){
+		  include_once("./pdf3/pdf_vboss.php");
 	  }else{
 			include_once("./pdf2/pdf.php");
 	  }

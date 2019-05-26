@@ -397,13 +397,16 @@ $pdf->Body($invoice_no);
 ///$pdf->SetTextColor(255,0,0);
 ///$pdf->SetFillColor(255,0,0);
 ///$pdf->SetDrawColor(255, 0, 0);
-$title='提貨單';
-$pdf->Body($invoice_no);
+
 ///$pdf->SetTextColor(0,0,255);
 ///$pdf->SetFillColor(0,0,255);
 ///$pdf->SetDrawColor(0, 0, 255);
 $title='收據';
 $pdf->Body($invoice_no);
+
+$title='提貨單';
+$pdf->Body($invoice_no);
+
 $pdf->SetAuthor('YRT Company Limited');
 
 $filepath='./invoice_scrap/pdf/'.$invoice_no.'.pdf';

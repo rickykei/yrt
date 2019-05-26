@@ -423,12 +423,14 @@ $header_title=array();
 $title='發票';
 $header_title=array();
 $pdf->Body($invoice_no);
- 
-$title='提貨單';
+ $title='提貨單';
 $pdf->Body($invoice_no);
  
-$title='收據';
+ $title='收據';
 $pdf->Body($invoice_no);
+
+
+
 $pdf->SetAuthor('YRT Company Limited');
 
 $filepath='./invoice_door/pdf/'.$invoice_no.'.pdf';

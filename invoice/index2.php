@@ -126,7 +126,7 @@ function AddrWindow(toccbcc){
 }
  
 </script>
-<script type="text/javascript" src="../include/invoice.js?20190317"></script>
+<script type="text/javascript" src="../include/invoice.js?20190522"></script>
 <link href="../include/invoice.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
 <!--
@@ -374,6 +374,7 @@ body {
         <input name="submitb" type="submit" id="submitb" value="出單">
 		<input name="print" type="hidden" id="print" value="">
 		<input type="button" value="出3色單" onclick="print3color();">
+		<input type="button" value="出清洲單" onclick="printboss();">
 		</td>
 		
       </tr>
