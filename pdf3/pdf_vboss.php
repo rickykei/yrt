@@ -415,9 +415,14 @@ $pdf->SetTextColor(0,0,0);
 $pdf->SetFillColor(0,0,0);
 $pdf->SetDrawColor(0, 0, 0);
 //$pdf->SetDrawColor(255, 0, 0);
-$title='發票';
+
 $header_title=array();
- 
+
+
+$title='收據';
+$pdf->Body($invoice_no);
+
+$title='發票';
 $pdf->Body($invoice_no);
 
 $title='提貨單';

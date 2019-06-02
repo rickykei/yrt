@@ -91,7 +91,7 @@ include("./include/functions.php");
   	  if($_REQUEST['print']=='3col'){
 		include_once("./pdf3/pdf_invoice_scrap_v2.php");
 	  }else{
-  	 include_once("./pdf2/pdf_invoice_scrap.php");
+  	 include_once("./pdf3/pdf_invoice_scrap.php");
 	  }
 ?>
 <SCRIPT LANGUAGE="JavaScript">

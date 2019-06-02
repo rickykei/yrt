@@ -90,7 +90,7 @@ include("./include/config.php");
 	  }else if($_REQUEST['print']=='boss'){
 		  include_once("./pdf3/pdf_vboss.php");
 	  }else{
-		  include_once("./pdf2/pdf.php");
+		  include_once("./pdf3/pdf.php");
 	  }
  //echo "<a href=../pdf2/pdf.php?invoice_no=".$invoice_no.">列印</a>";
 ?><SCRIPT LANGUAGE="JavaScript">

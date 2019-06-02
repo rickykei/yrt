@@ -1,12 +1,11 @@
-<?php echo "<?xml version=\"1.0\" encoding=\"utf-8\"?".">"; ?><?php
-define('FPDF_FONTPATH','./font/');
+<?php  
  
-require_once('./pdf2/chinese.php');
+require_once('./pdf3/tcpdf.php');
 
 //require('../fpdf.php');
 
 //class PDF extends FPDF
-class PDF extends PDF_Chinese
+class PDF extends TCPDF
 {
 //Current column
 var $col=0;
@@ -20,6 +19,10 @@ function Set_header_title($header_title)
 }
 function Body($invoice_no)
 {
+	
+   $this->SetFont($fontname,'',26,false);
+   $border=1;
+   
    include("./include/config.php");
 
     $connection = DB::connect($dsn);
@@ -82,84 +85,60 @@ function Body($invoice_no)
 	//$delLabel='自取';
    }
 
- $this->SetY(-3);
+ $this->SetY(-1);
    //$this->Ln(95);
   // $this->Ln(85);
-   $this->SetTextColor(0,0,0);
-   $this->SetFont('Big5','',16);
+   
+   $this->SetFont($fontname,'',16);
   // $this->SetDrawColor(255,255,255);
-  $border=0;
-  
-  //20170709 disable shopname
-  //$printShopName=$shopAddress[array_search($branchid,$shop_array)];
-  //$printShopDetail=$shopDetail[array_search($branchid,$shop_array)];
-  
-  /*
-  if ($branchid=="A")  {
-  	$printShopName=SHOP_A;
-  	$printShopDetail=SHOP_A_DETAIL;
-  }
-  else if ($branchid=="Y") {
-  	$printShopName=SHOP_Y;
-  	$printShopDetail=SHOP_Y_DETAIL;
-	}
-	else 
-	{
-	  $printShopName=SHOP_H;
-  	$printShopDetail=SHOP_H_DETAIL;
-	}*/
-	
-	
-	
+   
 	
 	if ($delivery=="C")
 	{
 	
-	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(125,8,iconv("UTF-8", "BIG5-HKSCS",$printShopName),$border,0,'C',0);
-	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",$rightLabel1),"TRL",1,'C',0);
+	$this->Cell(40,8,"",$border,0,'R',0);
+	$this->Cell(125,8,$printShopName,$border,0,'C',0);
+	$this->Cell(40,8,$rightLabel1,"TRL",1,'C',0);
 	 
-	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'C',0);
+	$this->Cell(40,8,"",$border,0,'C',0);
 	 
-  $this->Cell(125,8,iconv("UTF-8", "BIG5-HKSCS",$printShopDetail),$border,0,'C',0);
-  $this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",$rightLabel2),"BRL",1,'C',0);
+    $this->Cell(125,8,$printShopDetail,$border,0,'C',0);
+    $this->Cell(40,8,$rightLabel2,"BRL",1,'C',0);
   
 	}else{	
 //   $this->Cell(216,8,iconv("UTF-8", "BIG5-HKSCS",$printShopName),$border,1,'C',0);
 //   $this->Cell(216,8,iconv("UTF-8", "BIG5-HKSCS",$printShopDetail),$border,1,'C',0);
 
-	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",$receiver),$border,0,'R',0);
-	$this->Cell(125,8,iconv("UTF-8", "BIG5-HKSCS",$printShopName),$border,0,'C',0);
-	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,1,'C',0);
-	$this->SetFont('Big5','',12);
-		$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-		$this->SetFont('Big5','',16);
-  $this->Cell(125,8,iconv("UTF-8", "BIG5-HKSCS",$printShopDetail),$border,0,'C',0);
-  $this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,1,'C',0);
+	$this->Cell(40,8,$receiver,$border,0,'R',0);
+	$this->Cell(125,8,$printShopName,$border,0,'C',0);
+	$this->Cell(40,8,"",$border,1,'C',0);
+	$this->SetFont($fontname,'',12);
+	$this->Cell(40,8,"",$border,0,'R',0);
+	$this->SetFont($fontname,'',16);
+    $this->Cell(125,8,$printShopDetail,$border,0,'C',0);
+    $this->Cell(40,8,"",$border,1,'C',0);
 
   }
     $result->free ();
    
-	$this->SetFont('Big5','',16);
-	$this->Cell(5,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(105,8,iconv("UTF-8", "BIG5-HKSCS","").$lastname,$border,0,'L',0);
-	$this->SetFont('Big5','',14);
+	$this->SetFont($fontname,'',16);
+	$this->Cell(5,8,"",$border,0,'R',0);
+	$this->Cell(105,8,"".$lastname,$border,0,'L',0);
+	$this->SetFont($fontname,'',14);
 	
-	$this->Cell(35,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(50,8,iconv("UTF-8", "BIG5-HKSCS",$delLabel),$border,1,'C',0);
-	
-	
-	
-	$this->Cell(5,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(15,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+	$this->Cell(35,8,"",$border,0,'R',0);
+	$this->Cell(50,8,$delLabel,$border,1,'C',0);
+	 
+	$this->Cell(5,8,"",$border,0,'R',0);
+	$this->Cell(15,8,"",$border,0,'R',0);
 	$this->Cell(70,8,$customer_name,$border,0,'L',0);
-	$this->Cell(55,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'C',0);
+	$this->Cell(55,8,"",$border,0,'C',0);
 	$this->Cell(50,8,$branchid.$invoice_no,$border,1,'C',0);
 
 
 
-	$this->Cell(5,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(15,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+	$this->Cell(5,8,"",$border,0,'R',0);
+	$this->Cell(15,8,"",$border,0,'R',0);
 	//20100805
 	if ($creditLevel=='E'){
 	$border=1;
@@ -168,24 +147,24 @@ function Body($invoice_no)
 	}else{
 	$this->Cell(60,8,$customer_tel,$border,0,'L',0);
 	}
-	$this->Cell(65,8,iconv("UTF-8", "BIG5-HKSCS",$sales_name." ".$staffTel),$border,0,'C',0);
-	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","落單").$invoice_date,$border,1,'R',0);
+	$this->Cell(65,8,$sales_name." ".$staffTel,$border,0,'C',0);
+	$this->Cell(60,8,"落單".$invoice_date,$border,1,'R',0);
 	
 	
 	
-	$this->Cell(5,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(15,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+	$this->Cell(5,8,"",$border,0,'R',0);
+	$this->Cell(15,8,"",$border,0,'R',0);
 	$this->Cell(90,8,$customer_detail,$border,0,'L',0);
-	$this->Cell(35,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+	$this->Cell(35,8,"",$border,0,'R',0);
 if ($customer_tel=="888")
-	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","自取").$delivery_date,$border,1,'R',0);
+	$this->Cell(60,8,"自取".$delivery_date,$border,1,'R',0);
 	else
-	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","送貨").$delivery_date,$border,1,'R',0);
+	$this->Cell(60,8,"送貨".$delivery_date,$border,1,'R',0);
 //	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS","地址："),0,0,'R',0);
 //	$this->Cell(170,8,$customer_detail,0,1,'L',0);
 
-$this->Cell(5,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(15,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+	$this->Cell(5,8,"",$border,0,'R',0);
+	$this->Cell(15,8,"",$border,0,'R',0);
 	$this->Cell(80,8,"",$border,0,'L',0);
 	
 		$this->Ln(12);
@@ -213,82 +192,83 @@ $this->Cell(5,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 				$cutting='界';
 			if ($row2['deductstock']=='N')
 				$deductstock='行';
-	$this->Cell(5,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);			
-	$this->Cell(10,6,iconv("UTF-8", "BIG5-HKSCS",$i),$border,0,'L',0);
-	$this->Cell(30,6,iconv("UTF-8", "BIG5-HKSCS",$row2['goods_partno']),$border,0,'L',0);
+	$this->Cell(5,6,"",$border,0,'R',0);			
+	$this->Cell(10,6,$i,$border,0,'L',0);
+	$this->Cell(30,6,$row2['goods_partno'],$border,0,'L',0);
 	
-    $this->Cell(10,6,iconv("UTF-8","BIG5-HKSCS",$cutting.$deductstock),$border,0,'L',0);
+    $this->Cell(10,6,$cutting.$deductstock,$border,0,'L',0);
 	
 	if($row2['goods_detail']!="")
-		$this->Cell(65,6,iconv("UTF-8", "BIG5-HKSCS",$row2['goods_detail']),$border,0,'L',0);
+		$this->Cell(65,6,$row2['goods_detail'],$border,0,'L',0);
 	else
-		$this->Cell(65,6,iconv("UTF-8", "BIG5-HKSCS",$row2['goods_detail2']),$border,0,'L',0);
-$this->SetFont('Big5','',18);
-$this->Cell(18,6,iconv("UTF-8", "BIG5-HKSCS",number_format($row2['qty'])),$border,0,'R',0);
-$this->SetFont('Big5','',14);
-
-$this->Cell(9,6,iconv("UTF-8", "BIG5-HKSCS",$row2['unit_name_chi']),$border,0,'R',0);
+		$this->Cell(65,6,$row2['goods_detail2'],$border,0,'L',0);
 	
-	$this->Cell(22,6,iconv("UTF-8", "BIG5-HKSCS",$row2['marketprice']),$border,0,'R',0);
+		$this->SetFont($fontname,'',18);
+		$this->Cell(18,6,number_format($row2['qty']),$border,0,'R',0);
+		$this->SetFont($fontname,'',14);
+
+$this->Cell(9,6,$row2['unit_name_chi'],$border,0,'R',0);
+	
+	$this->Cell(22,6,$row2['marketprice'],$border,0,'R',0);
 	
 //	$this->Cell(22,6,iconv("UTF-8", "BIG5-HKSCS",$row2['manpower']),0,0,'C',0);
 	//20060410
 	//$amount=((100-$row2["discountrate"])/100)*$row2["qty"]*$row2["marketprice"];
 	$amount=$row2['subtotal'];
-	$this->Cell(25,6,iconv("UTF-8", "BIG5-HKSCS",number_format($row2['subtotal'], 2, '.', ',')),$border,0,'R',0);
+	$this->Cell(25,6,number_format($row2['subtotal'], 2, '.', ','),$border,0,'R',0);
 
 
 
 	//20071006 add discount display
-	$this->SetFont('Big5','',12);
+	$this->SetFont($fontname,'',12);
 	$discountrate="-".$row2['discountrate']."%";
 	if ($row2['discountrate']==0)
-	$this->Cell(12,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,1,'R',0);
+	$this->Cell(12,6,"",$border,1,'R',0);
 	else
-	$this->Cell(12,6,iconv("UTF-8", "BIG5-HKSCS","(".$discountrate.")"),$border,1,'C',0);
-	$this->SetFont('Big5','',14);
+	$this->Cell(12,6,"(".$discountrate.")",$border,1,'C',0);
+	$this->SetFont($fontname,'',14);
 
 	$i++;
     $total=$total+$amount;
    }
  $result->free ();
  for ($i=$i;$i<=17;$i++){
- $this->Cell(22,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,1,'C',0);
+ $this->Cell(22,6,"",$border,1,'C',0);
  }
 
-		$subtotal=$man_power_price+$total;
-		$subtotal=$subtotal-($subtotal*$discount_percent/100);
-		$subtotal=$subtotal-$discount_deduct;
-		 $this->SetFont('Big5','',13);
-	$this->Cell(5,7,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);	
-	$this->Cell(100,7,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'L',0);
-	$this->Cell(101,7,iconv("UTF-8", "BIG5-HKSCS",""),$border,1,'R',0);
- 	 $this->SetFont('Big5','',14);
+	$subtotal=$man_power_price+$total;
+	$subtotal=$subtotal-($subtotal*$discount_percent/100);
+	$subtotal=$subtotal-$discount_deduct;
+	$this->SetFont($fontname,'',13);
+	$this->Cell(5,7,"",$border,0,'R',0);	
+	$this->Cell(100,7,"",$border,0,'L',0);
+	$this->Cell(101,7,"",$border,1,'R',0);
+ 	$this->SetFont($fontname,'',14);
 	if ($creditcardrate!=0){
 		$creditcardtotal=round($subtotal*$creditcardrate/100);
-	$this->Cell(5,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);		
- 	$this->Cell(145,6,iconv("UTF-8", "BIG5-HKSCS","@"),$border,0,'R',0);
- 	$this->Cell(25,6,iconv("UTF-8", "BIG5-HKSCS",number_format($creditcardtotal, 2, '.', ',')),$border,0,'L',0);
- 	$this->Cell(5,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,1,'R',0);
+	$this->Cell(5,6,"",$border,0,'R',0);		
+ 	$this->Cell(145,6,"@",$border,0,'R',0);
+ 	$this->Cell(25,6,number_format($creditcardtotal, 2, '.', ','),$border,0,'L',0);
+ 	$this->Cell(5,6,"",$border,1,'R',0);
 	}
 	else
 	{ 
 	
-	$this->Cell(22,6,iconv("UTF-8", "BIG5-HKSCS",""),$border,1,'C',0);
+	$this->Cell(22,6,"",$border,1,'C',0);
 	}
 
-	$this->Cell(5,7,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);	
-	$this->Cell(140,7,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'L',0);
-	$this->Cell(30,7,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(5,7,iconv("UTF-8", "BIG5-HKSCS",""),$border,1,'R',0);
+	$this->Cell(5,7,"",$border,0,'R',0);	
+	$this->Cell(140,7,"",$border,0,'L',0);
+	$this->Cell(30,7,"",$border,0,'R',0);
+	$this->Cell(5,7,"",$border,1,'R',0);
 	
-	$this->Cell(5,7,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);	
-	$this->SetFont('Big5','',10);
+	$this->Cell(5,7,"",$border,0,'R',0);	
+	$this->SetFont($fontname,'',10);
 	//$this->Cell(140,7,iconv("UTF-8", "BIG5-HKSCS","訂造貨品，必須貨到後一個月內取，否則視作客戶自動"),$border,0,'L',0);
-	$this->Cell(140,7,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'L',0);
-	$this->SetFont('Big5','',17);
-	$this->Cell(30,7,iconv("UTF-8", "BIG5-HKSCS",number_format($subtotal+$creditcardtotal, 2, '.', ',')),$border,0,'R',0);
-	$this->Cell(5,7,iconv("UTF-8", "BIG5-HKSCS",""),$border,1,'R',0);
+	$this->Cell(140,7,"",$border,0,'L',0);
+	$this->SetFont($fontname,'',17);
+	$this->Cell(30,7,number_format($subtotal+$creditcardtotal, 2, '.', ','),$border,0,'R',0);
+	$this->Cell(5,7,"",$border,1,'R',0);
 
 	//$this->Cell(5,7,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);	
 	//$this->SetFont('Big5','',14);
@@ -308,7 +288,9 @@ function Header()
 	//Page header
 	global $title;
 	global $header_title;
-	
+	global $invoice_no;
+	global $AREA;
+	global $delivery;
 	
 	$w=$this->GetStringWidth($title)+6;
 	$this->SetX(2);
@@ -316,7 +298,8 @@ function Header()
 	$this->SetFillColor(233,233,233);
 	$this->SetTextColor(0,0,0);
 	//20060621$this->Ln(35);
-	$this->Ln(19);
+	$this->Ln(12);
+	$this->SetMargins(1, 10, 1);
 	$this->SetLineWidth(0);
 	
 //      $abc=iconv("UTF-8", "iso-8859-2", "黃河木行有限公司");
@@ -357,11 +340,17 @@ function Footer()
 
 
 //$pdf=new pdf('P','mm',array(216,217));
-$pdf=new pdf('P','mm',array(216,217));
+$pdf=new pdf('P','mm',array(216,217), true, 'UTF-8', false);
+//$pdf=new pdf('P','mm',array(216,217));
 $pdf->SetAutoPageBreak(true,2);
 $pdf->SetTopMargin(1);
 $pdf->SetLeftMargin(0);
-$pdf->AddBig5Font();
+//$pdf->AddBig5Font();
+ $fontname="msungstdlight";
+ 
+  $pdf->SetFont($fontname, '', 10);
+  
+  
 $title='出貨單';
 $header_title=array();
 $pdf->Body($invoice_no);
