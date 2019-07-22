@@ -21,7 +21,7 @@ function Body($invoice_no)
 {
 	
    $this->SetFont($fontname,'',26,false);
-   $border=1;
+   $border=0;
    
    include("./include/config.php");
 
@@ -51,11 +51,11 @@ function Body($invoice_no)
 	
 	$staffTel=$rowStaff['telno'];
  
-	$customer_name=iconv("UTF-8", "BIG5-HKSCS",$row['customer_name']."    ".$rowCust["creditLevel"]);
-	$customer_tel =iconv("UTF-8", "BIG5-HKSCS",$row['member_id']);
-	$customer_detail= iconv("UTF-8", "BIG5-HKSCS",$row['customer_detail']);
-	$lastname=iconv("UTF-8", "BIG5-HKSCS",$row['lastname']);
-	$receiver= $row['receiver'];
+	$customer_name=$row['customer_name']."    ".$rowCust["creditLevel"];
+	$customer_tel =$row['member_id'];
+	$customer_detail= $row['customer_detail'];
+	$lastname=$row['lastname'];
+	$receiver=$row['receiver'];
 	$delivery=$row['delivery'];
 	//20100805
 	$creditLevel= $rowCust['creditLevel'];
@@ -87,7 +87,7 @@ function Body($invoice_no)
 
  $this->SetY(-1);
    //$this->Ln(95);
-  // $this->Ln(85);
+   //$this->Ln(8);
    
    $this->SetFont($fontname,'',16);
   // $this->SetDrawColor(255,255,255);
@@ -95,13 +95,16 @@ function Body($invoice_no)
 	
 	if ($delivery=="C")
 	{
-	
+	 
+	$this->Cell(40,8,"",$border,1,'C',0);
+	 
 	$this->Cell(40,8,"",$border,0,'R',0);
 	$this->Cell(125,8,$printShopName,$border,0,'C',0);
 	$this->Cell(40,8,$rightLabel1,"TRL",1,'C',0);
 	 
-	$this->Cell(40,8,"",$border,0,'C',0);
-	 
+   $this->Cell(5,8,"",$border,0,'C',0);
+	 $this->Cell(35,8,$receiver." ".$lastname,$border,0,'L',0);
+  	$this->SetFont($fontname,'',16);	 
     $this->Cell(125,8,$printShopDetail,$border,0,'C',0);
     $this->Cell(40,8,$rightLabel2,"BRL",1,'C',0);
   
@@ -109,52 +112,62 @@ function Body($invoice_no)
 //   $this->Cell(216,8,iconv("UTF-8", "BIG5-HKSCS",$printShopName),$border,1,'C',0);
 //   $this->Cell(216,8,iconv("UTF-8", "BIG5-HKSCS",$printShopDetail),$border,1,'C',0);
 
-	$this->Cell(40,8,$receiver,$border,0,'R',0);
+	
+	$this->Cell(40,8,"",$border,1,'C',0);
+
+	$this->Cell(40,8,'',$border,0,'R',0);
 	$this->Cell(125,8,$printShopName,$border,0,'C',0);
 	$this->Cell(40,8,"",$border,1,'C',0);
-	$this->SetFont($fontname,'',12);
-	$this->Cell(40,8,"",$border,0,'R',0);
+
+
+	//$this->SetFont($fontname,'',16);
+   $this->Cell(5,8,"",$border,0,'C',0);
+  $this->Cell(35,8,$receiver." ".$lastname,$border,0,'L',0);
 	$this->SetFont($fontname,'',16);
     $this->Cell(125,8,$printShopDetail,$border,0,'C',0);
     $this->Cell(40,8,"",$border,1,'C',0);
 
   }
     $result->free ();
-   
+	
+
+
 	$this->SetFont($fontname,'',16);
 	$this->Cell(5,8,"",$border,0,'R',0);
-	$this->Cell(105,8,"".$lastname,$border,0,'L',0);
+	$this->Cell(105,8,"",$border,0,'L',0);
 	$this->SetFont($fontname,'',14);
 	
 	$this->Cell(35,8,"",$border,0,'R',0);
 	$this->Cell(50,8,$delLabel,$border,1,'C',0);
 	 
+	 
+	 
 	$this->Cell(5,8,"",$border,0,'R',0);
-	$this->Cell(15,8,"",$border,0,'R',0);
-	$this->Cell(70,8,$customer_name,$border,0,'L',0);
-	$this->Cell(55,8,"",$border,0,'C',0);
+	$this->Cell(20,8,"",$border,0,'R',0);
+	$this->Cell(65,8,$customer_name,$border,0,'L',0);
+	$this->Cell(55,8,$sales_name,$border,0,'L',0);
 	$this->Cell(50,8,$branchid.$invoice_no,$border,1,'C',0);
 
 
 
 	$this->Cell(5,8,"",$border,0,'R',0);
-	$this->Cell(15,8,"",$border,0,'R',0);
+	$this->Cell(20,8,"",$border,0,'R',0);
 	//20100805
 	if ($creditLevel=='E'){
 	$border=1;
-	$this->Cell(60,8,$customer_tel,$border,0,'L',0);
+	$this->Cell(55,8,$customer_tel,$border,0,'L',0);
 	$border=0;
 	}else{
-	$this->Cell(60,8,$customer_tel,$border,0,'L',0);
+	$this->Cell(55,8,$customer_tel,$border,0,'L',0);
 	}
-	$this->Cell(65,8,$sales_name." ".$staffTel,$border,0,'C',0);
+	$this->Cell(65,8,$staffTel,$border,0,'C',0);
 	$this->Cell(60,8,"落單".$invoice_date,$border,1,'R',0);
 	
 	
 	
 	$this->Cell(5,8,"",$border,0,'R',0);
-	$this->Cell(15,8,"",$border,0,'R',0);
-	$this->Cell(90,8,$customer_detail,$border,0,'L',0);
+	$this->Cell(20,8,"",$border,0,'R',0);
+	$this->Cell(85,8,$customer_detail,$border,0,'L',0);
 	$this->Cell(35,8,"",$border,0,'R',0);
 if ($customer_tel=="888")
 	$this->Cell(60,8,"自取".$delivery_date,$border,1,'R',0);
@@ -203,7 +216,7 @@ if ($customer_tel=="888")
 	else
 		$this->Cell(65,6,$row2['goods_detail2'],$border,0,'L',0);
 	
-		$this->SetFont($fontname,'',18);
+		$this->SetFont($fontname,'',15);
 		$this->Cell(18,6,number_format($row2['qty']),$border,0,'R',0);
 		$this->SetFont($fontname,'',14);
 
@@ -247,7 +260,7 @@ $this->Cell(9,6,$row2['unit_name_chi'],$border,0,'R',0);
 	if ($creditcardrate!=0){
 		$creditcardtotal=round($subtotal*$creditcardrate/100);
 	$this->Cell(5,6,"",$border,0,'R',0);		
- 	$this->Cell(145,6,"@",$border,0,'R',0);
+ 	$this->Cell(155,6,"@",$border,0,'R',0);
  	$this->Cell(25,6,number_format($creditcardtotal, 2, '.', ','),$border,0,'L',0);
  	$this->Cell(5,6,"",$border,1,'R',0);
 	}

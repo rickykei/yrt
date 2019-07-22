@@ -72,7 +72,7 @@ for ($i=0;$i<17;$i++)
 	   if($_REQUEST['print']=='3col'){
 		include_once("./pdf3/pdf_invoice_scrap_v2.php");
 	  }else{
-  	 include_once("./pdf3/pdf_invoice_scrap.php");
+  	 include_once("./pdf2/pdf_invoice_scrap.php");
 	  }
   	
  //echo "<a href=../pdf2/pdf.php?invoice_no=".$invoice_no.">列印</a>";
