@@ -1,4 +1,4 @@
-/include/*
+include/config*
 *.pdf
 *.7z
 pdf2/pdf_invoice_scrap.php20190628
