@@ -1,0 +1,77 @@
+[
+    {
+        "cat_name":"門。門框",
+        "child_cats":[{
+            "cat_name":"紅櫸門",
+            "goods_list":[
+                {
+                    "goodsId": 1,
+                    "goodsImg": "http://oz36epqiu.bkt.clouddn.com/p1.jpg",
+                    "goodsName": "紅櫸門 28寸X81寸",
+                    "price": 178
+                },
+                {
+                    "goodsId": 2,
+                    "goodsImg": "http://oz36epqiu.bkt.clouddn.com/p2.jpg",
+                    "goodsName": "紅櫸門 30寸X81寸",
+                    "price": 178
+                } 
+            ]
+        },
+        {
+            "cat_name":"山樟框",
+            "goods_list":[
+                {
+                    "goodsId": 97,
+                    "goodsImg": "http://oz36epqiu.bkt.clouddn.com/p1.jpg",
+                    "goodsName": "松木圍身板",
+                    "price": 754.00
+                },
+                {
+                    "goodsId": 586,
+                    "goodsImg": "http://oz36epqiu.bkt.clouddn.com/p12.jpg",
+                    "goodsName": "2寸 x 4寸 山樟門框 24寸",
+                    "price": 494.00
+                } 
+            ]
+        }
+    ]
+    },
+    {
+        "cat_name":"木枋",
+        "child_cats":[{
+            "cat_name":"2寸 X 3寸",
+            "goods_list":[
+                {
+                    "goodsId": 1,
+                    "goodsImg": "http://oz36epqiu.bkt.clouddn.com/p1.jpg",
+                    "goodsName": "光方 2 x 3 (12呎)",
+                    "price": 178
+                },
+                {
+                    "goodsId": 2,
+                    "goodsImg": "http://oz36epqiu.bkt.clouddn.com/p2.jpg",
+                    "goodsName": "光方 2 x 3 (8呎)",
+                    "price": 178
+                } 
+            ]
+        },
+        {
+            "cat_name":"2寸 X 2寸",
+            "goods_list":[
+                {
+                    "goodsId": 1,
+                    "goodsImg": "http://oz36epqiu.bkt.clouddn.com/p1.jpg",
+                    "goodsName": "光方 2 x 2 (12呎)",
+                    "price": 178
+                },
+                {
+                    "goodsId": 2,
+                    "goodsImg": "http://oz36epqiu.bkt.clouddn.com/p2.jpg",
+                    "goodsName": "光方 2 x 2 (8呎)",
+                    "price": 178
+                } 
+            ]
+        }]
+    }
+]

@@ -30,32 +30,32 @@ body {
    	if ($total_price=="" && $created_by=="" && $invoice_no!="" && $mem_id=="" && $goods_partno=="" && $customer_detail =="" && $invoice_status=="" && $invoice_date_start=="" && $invoice_date_end==""  && $sales=="" && $delivery=="" && $receiver==""&& $deposit_method==""){
 		
 	//search by invoiceno
-	  $sql="SELECT  a.customer_detail,a.deposit_method,a.created_by,a.last_update_by,a.call_count,a.total_price,total_price,invoice_no,invoice_date,delivery_date,customer_name,member_id,branchID,delivery, sales_name,settle  from invoice a where void!='I' and a.invoice_no = '".$invoice_no."'";
+	  $sql="SELECT  a.customer_detail,a.deposit_method,a.created_by,a.last_update_by,a.call_count,a.total_price,total_price,invoice_no,invoice_date,delivery_date,customer_name,member_id,branchID,delivery, sales_name,settle  from invoice a where void!='I'  and settle='S'  and a.invoice_no = '".$invoice_no."'";
 	}else if ($created_by=="" &&  $mem_id!="" && $invoice_no=="" && $goods_partno=="" && $customer_detail =="" && $invoice_status=="" && $invoice_date_start=="" && $invoice_date_end==""  && $sales=="" && $delivery=="" && $receiver=="" && $deposit_method==""){
 		//searc by mem id
-	   $sql="SELECT  a.customer_detail,a.deposit_method,a.created_by,a.last_update_by,a.call_count,a.total_price,total_price,invoice_no,invoice_date,delivery_date,customer_name,member_id,branchID,delivery, sales_name,settle  from invoice a where void!='I' and a.member_id='".$mem_id."'";
-	    $sqlCount= " Select count(*) as total  from invoice a where a.member_id='".$mem_id."'";
+	   $sql="SELECT  a.customer_detail,a.deposit_method,a.created_by,a.last_update_by,a.call_count,a.total_price,total_price,invoice_no,invoice_date,delivery_date,customer_name,member_id,branchID,delivery, sales_name,settle  from invoice a where void!='I'  and settle='S'  and a.member_id='".$mem_id."'";
+	    
 		}else if ($created_by=="" &&  $mem_id=="" && $invoice_no=="" && $goods_partno=="" && $customer_detail =="" && $invoice_status=="" && $invoice_date_start=="" && $invoice_date_end==""  && $sales=="" && $delivery=="" && $receiver!=""){
 		//searc by receiver
-	   $sql="SELECT  a.customer_detail,a.deposit_method,a.created_by,a.last_update_by,a.call_count,a.total_price,total_price,invoice_no,invoice_date,delivery_date,customer_name,member_id,branchID,delivery, sales_name,settle  from invoice a where void!='I' and a.receiver='".$receiver."'";
-	    $sqlCount= " Select count(*) as total  from invoice a where a.receiver='".$receiver."'";
+	   $sql="SELECT  a.customer_detail,a.deposit_method,a.created_by,a.last_update_by,a.call_count,a.total_price,total_price,invoice_no,invoice_date,delivery_date,customer_name,member_id,branchID,delivery, sales_name,settle  from invoice a where void!='I'  and settle='S' and a.receiver='".$receiver."'";
+	    
     }else if ($created_by=="" &&  $goods_partno!="" && $mem_id=="" && $invoice_no=="" && $customer_detail =="" && $invoice_status=="" && $invoice_date_start=="" && $invoice_date_end==""  && $sales=="" && $delivery==""){
 			//sear by goodNo
-	   $sql ="SELECT  a.customer_detail,a.deposit_method,a.created_by,a.last_update_by,a.call_count,a.total_price, a.total_price,a.invoice_no,a.invoice_date, a.delivery_date,a.customer_name,a.member_id,a.branchID,a.delivery, a.sales_name,a.settle  from invoice a ,goods_invoice b where a.void!='I' and a.invoice_no=b.invoice_no and b.goods_partno='".$goods_partno."'";
-	    $sqlCount= " Select count(*) as total   from invoice a ,goods_invoice b where a.invoice_no=b.invoice_no and b.goods_partno='".$goods_partno."'";
+	   $sql ="SELECT  a.customer_detail,a.deposit_method,a.created_by,a.last_update_by,a.call_count,a.total_price, a.total_price,a.invoice_no,a.invoice_date, a.delivery_date,a.customer_name,a.member_id,a.branchID,a.delivery, a.sales_name,a.settle  from invoice a ,goods_invoice b where a.void!='I'  and settle='S'  and a.invoice_no=b.invoice_no and b.goods_partno='".$goods_partno."'";
+	    
 	   } else if ($created_by=="" &&  $customer_detail!="" && $mem_id=="" && $invoice_no=="" && $goods_partno=="" &&  $invoice_status=="" && $invoice_date_start=="" && $invoice_date_end==""  && $sales=="" && $delivery==""){
 		   
 	   //by custom detail
 	   $sql="SELECT  a.customer_detail,a.deposit_method,a.created_by,a.last_update_by,a.call_count,a.total_price,total_price,invoice_no,invoice_date,delivery_date,customer_name,member_id,branchID,delivery, sales_name,settle  from invoice a where a.customer_detail like '%".$customer_detail."%'";
 	   }  else if ($created_by=="" && $invoice_status!="" && $mem_id=="" && $invoice_no=="" && $goods_partno=="" && $customer_detail ==""  && $invoice_date_start=="" && $invoice_date_end==""  && $sales=="" && $delivery=="")
-	   $sql="SELECT a.customer_detail,a.deposit_method,a.created_by,a.last_update_by,a.call_count,a.total_price,total_price,invoice_no,invoice_date,delivery_date,customer_name,member_id,branchID,delivery, sales_name,settle  from invoice a where a.settle like 'S' ";
+	   $sql="SELECT a.customer_detail,a.deposit_method,a.created_by,a.last_update_by,a.call_count,a.total_price,total_price,invoice_no,invoice_date,delivery_date,customer_name,member_id,branchID,delivery, sales_name,settle  from invoice a where a.settle = 'S' ";
 	   else if ($created_by==""  && $invoice_date_start!="" && $invoice_date_end!="" && $mem_id=="" && $invoice_no=="" && $goods_partno=="" && $customer_detail =="" && $invoice_status==""  && $sales=="" && $delivery=="")
-	   $sql="SELECT a.customer_detail,a.deposit_method,a.created_by,a.last_update_by,a.call_count,a.total_price,total_price,invoice_no,invoice_date,delivery_date,customer_name,member_id,branchID,delivery, sales_name,settle  from invoice a where a.void!='I' and a.invoice_date >= '".$invoice_date_start." 00:00:00' and a.invoice_date <='".$invoice_date_end." 23:59:00' ";
+	   $sql="SELECT a.customer_detail,a.deposit_method,a.created_by,a.last_update_by,a.call_count,a.total_price,total_price,invoice_no,invoice_date,delivery_date,customer_name,member_id,branchID,delivery, sales_name,settle  from invoice a where a.void!='I'  and settle='S' and a.invoice_date >= '".$invoice_date_start." 00:00:00' and a.invoice_date <='".$invoice_date_end." 23:59:00' ";
 		else if ($created_by==""  && $delivery_date_start!="" && $delivery_date_end!="" && $mem_id=="" && $invoice_no=="" && $goods_partno=="" && $customer_detail =="" && $invoice_status==""  && $sales=="" && $delivery=="" )
-	   $sql="SELECT a.customer_detail,a.deposit_method,a.created_by,a.last_update_by,a.call_count,a.total_price,total_price,invoice_no,invoice_date,delivery_date,customer_name,member_id,branchID,delivery, sales_name,settle  from invoice a where a.void!='I' and a.delivery_date >= '".$delivery_date_start." 00:00:00' and a.delivery_date <='".$delivery_date_end." 23:59:00' ";
+	   $sql="SELECT a.customer_detail,a.deposit_method,a.created_by,a.last_update_by,a.call_count,a.total_price,total_price,invoice_no,invoice_date,delivery_date,customer_name,member_id,branchID,delivery, sales_name,settle  from invoice a where a.void!='I' and settle='S'and a.delivery_date >= '".$delivery_date_start." 00:00:00' and a.delivery_date <='".$delivery_date_end." 23:59:00' ";
 	   else if ($total_price==""  && $created_by=="" && $invoice_no=="" && $mem_id=="" && $goods_partno=="" && $customer_detail =="" && $invoice_status=="" && $invoice_date_start=="" && $invoice_date_end=="" && $sales=="" && $delivery=="" && $deposit_method=="")	{
-	  		$sql="SELECT a.customer_detail,a.deposit_method,a.created_by,a.last_update_by,call_count,total_price,invoice_no,invoice_date,delivery_date,customer_name,member_id,branchID,delivery, sales_name,settle,status FROM invoice a where a.void!='I' ";
-	  	    $sqlCount= " Select count(*) as total FROM invoice a ";
+	  		$sql="SELECT a.customer_detail,a.deposit_method,a.created_by,a.last_update_by,call_count,total_price,invoice_no,invoice_date,delivery_date,customer_name,member_id,branchID,delivery, sales_name,settle,status FROM invoice a where a.void!='I' and settle='S' ";
+	  	    
 	// $sql="SELECT * FROM invoice order by invoice_no desc";
 		} else{
 			
@@ -162,14 +162,14 @@ body {
 			
 			if ($checking>=1){
 					$sql.=" and ";
-					$sql.= " a.void!='I' ";
+					$sql.= " a.void!='I'  and settle='S' ";
 					$checking++;			
 				//member deposit checking 20161217
 			}
 	
 	   }
 		$sql.=" order by a.invoice_no desc ";   
-  
+
    
 	//cal total count first;
 	if ($sqlCount!=""){
@@ -178,12 +178,11 @@ body {
 				$countTotal=$row["total"];
 		 }
 	}
+	 
+	$result = $db->query($sql);
 	//echo $countTotal;
 	 
-   require_once("./include/Pager.class.php");
-
-   include_once('./invoice/Pager_header.php');
- 
+  
 		 
  // While there are still rows in the result set, fetch the current
    // row into the array $row
@@ -248,7 +247,6 @@ body {
 <input type="button" name="button" value="改為入賑並把入賬日轉為今天A" onclick="submitForm('A')"/>
 <input type="button" name="button" value="改為掛單S" onclick="submitForm('S')"/>
 <input type="button" name="button" value="取消單" onclick="submitForm('cancel')"/>
-
 </form>
 
 
@@ -295,8 +293,8 @@ if (($AREA=="Y" && $PC=="99") || ($AREA=="Y" && $PC=="1") ){
 
     <?php 
 	
-	for ($i=0;$i<count($result);$i++)
-	{ $row=$result[$i];
+	 while ($row=$result->fetchRow(DB_FETCHMODE_ASSOC))
+	{ 
 	
    ?><tr valign="middle" align="center"  <? 
 if($row['settle']=="S" || $row['settle']=="") {echo "class='b'\"";echo " onMouseOut=\"this.className='b'\"";echo " onMouseOver=\"this.className='normal'\"";}
@@ -324,7 +322,7 @@ else if ($row['settle']=="A") { echo " onMouseOut=\"this.className='normal'\"";e
 	} 
 	?>
     <td><a  href="/?page=invoice&subpage=invoice_view.php&id=<?=$row['invoice_no']?>">View</a></td>
-   <td>[<a  href="/?page=invoice&subpage=invoice_edit.php&id=<?=$row['invoice_no']?>">Edit</a>]
+   <td>[<a  href="/?page=invoice&subpage=invoice_edit.php&id=<?=$row['invoice_no']?>&returnpage=invoicelist_s">Edit</a>]
    [<a  href="/?page=posv2&subpage=index_edit.php&pos=pos1_edit&id=<?=$row['invoice_no']?>&action=edit"  target="_blank">POS</a>]
    [<a target="_blank" href="/?page=ipadpos&subpage=index_edit.php&id=<?=$row['invoice_no']?>&pos=pos1_edit&action=edit">IpadPOS</a>]</td>
    <td><a  href="/invoice/pdf/<?=$row['invoice_no']?>.pdf">Print</a></td></tr>
@@ -387,7 +385,7 @@ function submitForm(action) {
 
         $.ajax({
             type: "POST",
-            url: "/?page=invoice&subpage=invoicelist_action.php",
+              url: "/?page=invoice&subpage=invoicelist_action.php",
             dataType: 'html',
             data: { 
                     myCheckboxes:myCheckboxes,action:action },

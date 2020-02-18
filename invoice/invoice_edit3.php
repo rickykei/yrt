@@ -158,11 +158,26 @@ include_once("./include/functions.php");
 	  }else{
 			include_once("./pdf3/pdf.php");
 	  }
-?>
-<SCRIPT LANGUAGE="JavaScript">
-popUp("/invoice/pdf/<?=$invoice_no?>.pdf");
- window.location="/?page=invoice&subpage=invoicelist.php";
-</script><?
+
+	
+	if($returnpage==""){
+	?>
+	<SCRIPT LANGUAGE="JavaScript">
+	popUp("/invoice/pdf/<?=$invoice_no?>.pdf");
+	 window.location="/?page=invoice&subpage=invoicelist.php";
+	</script>
+	<?
+	}else{
+	?>
+	<SCRIPT LANGUAGE="JavaScript">
+	popUp("/invoice/pdf/<?=$invoice_no?>.pdf");
+	 window.location="/?page=invoice&subpage=<?php echo $returnpage;?>.php";
+	</script>
+	<?
+	}	
+		
+
+
 }
   /*
 	for ($i=0;$i<$totalcounter;$i++)

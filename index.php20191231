@@ -1,6 +1,4 @@
 <?php
-
-if($page!="api"){
  //or, if you DO want a file to cache, use:
 session_cache_limiter('private_no_expire:');
 session_start();
@@ -22,18 +20,11 @@ session_start();
  include_once('./include/function.php');
  include_once('./include/config2.php');
  include_once('./include/user.class.php');
- 
- 
-  if (substr($subpage,-10)!='action.php'){
-	  
-  
-		?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-		<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-		<head>
-		<title>
-		<?php 
-
-
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+<title>
+<?php 
 if ($page=='invoice' && substr($subpage,0,4)=='inde')
 echo '出貨單';
 if ($page=='invoice' && substr($subpage,0,10)=='invoice_ed')
@@ -62,21 +53,18 @@ if ($page=='member' )
 echo '會員登記表';
 if ($page=='invoice_door' &&  substr($subpage,0,4)=='inde')
 echo '方邊門出貨單';
-  }
+
 
 
 if ($pos!='')
 	echo "[".$pos."]";
-
-
- if (substr($subpage,-10)!='action.php'){
-	  
-?>[<?echo $UNAME;?>,<?echo $AREA;?>,<?echo $PC;?>]
+?>
+[<?echo $UNAME;?>,<?echo $AREA;?>,<?echo $PC;?>]
 </title>
  
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
- <? }  
-
+ 
+<?php
  $User2 = new User($db);
  if ($_SESSION['username']==''){
  $uname=$_REQUEST['username'];
@@ -109,7 +97,6 @@ if ($_SESSION['username']=="" && $uname!="" && $User2->checkPassword($uname,$pas
 	$USER=$_SESSION['name'];
 	$UNAME=$_SESSION['username'];
 	$UROLE=$_SESSION['userrole'];
-	$BROWSERYRT = "YRT_".$AREA."_".$PC;
 	?><body style="margin-top:  0px;margin-left:  0px;"><?php 	  
 }else if ($_SESSION['username']=="" && $uname!="" && $User2->checkPassword($UNAME,$pass)==false){
 	 ?> <script>
@@ -158,13 +145,17 @@ $(document).ready(function(){
 
 
  if($UNAME!='' & $UROLE!='') {
-	  
-	  
-	 if (substr($subpage,-10)!='action.php')
+	 
+	 //check login time 20180501
+	//if normal user 7.45 > < 18.15
+	 
 		include_once("header.php");	
 		 	
 		if (checkLoginDateTime()){
-	 
+	?>
+	<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onkeydown="detectKeyBoard(event)">
+ 
+	<?php
 	//print_r($_SESSION);
 	   if($_REQUEST['page']!='' && $_REQUEST['subpage']!='')
 		  include_once('./'.$_REQUEST['page'].'/'.$_REQUEST['subpage']);
@@ -175,17 +166,11 @@ $(document).ready(function(){
  } 
  }  
  
- 
-  if (substr($subpage,-10)!='action.php'){
 ?>
+ 
 </body>
 </html> 
- <? }
-
-
-}else{
-	
-	  include_once('./'.$_REQUEST['page'].'/'.$_REQUEST['subpage']);
-}
-
- ?>
+ 
+ 
+ 
+ 

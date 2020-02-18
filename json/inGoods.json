@@ -1,0 +1,65 @@
+[
+    [
+        {
+            "goodsId": 1,
+            "goodsImg": "http://oz36epqiu.bkt.clouddn.com/p1.jpg",
+            "goodsName": "紅櫸門 28寸X81寸",
+            "price": 178
+        },
+        {
+            "goodsId": 2,
+            "goodsImg": "http://oz36epqiu.bkt.clouddn.com/p2.jpg",
+            "goodsName": "紅櫸門 30寸X81寸",
+            "price": 178
+        } 
+            
+    ],
+    [
+        {
+            "goodsId": 11,
+            "goodsImg": "http://oz36epqiu.bkt.clouddn.com/p11.jpg",
+            "goodsName": "松木圍身板",
+            "price": 66
+        },
+        {
+            "goodsId": 12,
+            "goodsImg": "http://oz36epqiu.bkt.clouddn.com/p12.jpg",
+            "goodsName": "松木圍身板",
+            "price": 38
+        } 
+    ],
+    [
+        {
+            "goodsId": 15,
+            "goodsImg": "http://oz36epqiu.bkt.clouddn.com/p15.jpg",
+            "goodsName": "騎士牌袋裝白膠漿",
+            "price": 17
+        },
+        {
+            "goodsId": 16,
+            "goodsImg": "http://oz36epqiu.bkt.clouddn.com/p16.jpg",
+            "goodsName": "騎士牌袋裝白膠漿",
+            "price": 13
+        },
+        {
+            "goodsId": 17,
+            "goodsImg": "http://oz36epqiu.bkt.clouddn.com/p17.jpg",
+            "goodsName": "騎士牌袋裝白膠漿",
+            "price": 16
+        }
+    ],
+    [
+        {
+            "goodsId": 18,
+            "goodsImg": "http://oz36epqiu.bkt.clouddn.com/p18.jpg",
+            "goodsName": "松木圍身板",
+            "price": 49
+        },
+        {
+            "goodsId": 19,
+            "goodsImg": "http://oz36epqiu.bkt.clouddn.com/p19.jpg",
+            "goodsName": "松木圍身板",
+            "price": 69
+        }
+    ]
+]

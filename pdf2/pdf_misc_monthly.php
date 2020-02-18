@@ -114,6 +114,7 @@ function Body($month,$year,$shop)
   $this->Cell(310,8,iconv("UTF-8", "BIG5-HKSCS",$year."年".$month."月".$shop."鋪"),$border,1,'C',0);
   $this->SetFont('Big5','',12);
   
+    $this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS"," "),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS","日期"),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS","現金收入"),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS","現金支出"),$border,0,'R',0);
@@ -121,7 +122,7 @@ function Body($month,$year,$shop)
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS","信用卡"),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS","EPS"),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS","銀聯"),$border,0,'R',0);
-	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS","收入總額"),$border,1,'R',0);
+	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS","收入總額"),$border,1,'R',0);
 	
 	//$this->Cell(50,8,iconv("UTF-8", "BIG5-HKSCS","備註"),$border,1,'R',0);
 	 
@@ -131,6 +132,7 @@ function Body($month,$year,$shop)
 	for ($i=0;$i<$counter;$i++)
 	{
   
+    $this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS"," "),$border,0,'R',0);
 	$this->Cell(30,7,iconv("UTF-8", "BIG5-HKSCS",$invoice_date[$i]),$border,0,'R',0);
 	
 	$this->Cell(30,7,iconv("UTF-8", "BIG5-HKSCS",$daily_income[$i]),$border,0,'R',0);
@@ -152,7 +154,7 @@ function Body($month,$year,$shop)
 	//$this->Cell(50,8,iconv("UTF-8", "BIG5-HKSCS"," "),$border,1,'R',0);
 	 	 
 	}
-	
+	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS"," "),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",'Total:'),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",$a),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",$b),$border,0,'R',0);

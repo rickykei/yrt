@@ -1,0 +1,33 @@
+[
+    {
+        "goodsId": 1,
+        "goodsName": "門。門框" 
+       
+    },
+    {
+        "goodsId": 2,
+        "goodsName": "木板" 
+     
+    },
+    {
+        "goodsId": 3,
+        "goodsName": "五金" 
+    },
+    {
+        "goodsId": 4,
+        "goodsName": "木枋" 
+         
+    },
+    {
+        "goodsId": 5,
+        "goodsName": "腳線" 
+    },
+    {
+        "goodsId": 6,
+        "goodsName": "膠水" 
+    },
+    {
+        "goodsId": 17,
+        "goodsName": "什項" 
+    } 
+]

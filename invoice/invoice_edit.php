@@ -409,8 +409,10 @@ $</strong></span></td>
     <td width="0">&nbsp;</td>
   </tr>
 </table>
- <input type="hidden" name="AREA" value="<?echo $AREA;?>" /><input type="hidden" name="PC" value="<?echo $PC;?>" />
-<input type="hidden" name="invoice_no" id="invoice_no" value="<?php echo $id;?>" /><?
+ <input type="hidden" name="returnpage" value="<?echo $_REQUEST['returnpage'];?>" />
+ <input type="hidden" name="AREA" value="<?echo $AREA;?>" />
+ <input type="hidden" name="PC" value="<?echo $PC;?>" />
+ <input type="hidden" name="invoice_no" id="invoice_no" value="<?php echo $id;?>" /><?
 
 ?>
 </form>

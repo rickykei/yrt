@@ -103,7 +103,7 @@ function Body($invoice_no)
 	$this->Cell(40,8,$rightLabel1,"TRL",1,'C',0);
 	 
    $this->Cell(5,8,"",$border,0,'C',0);
-	 $this->Cell(35,8,$receiver." ".$lastname,$border,0,'L',0);
+	 $this->Cell(35,8,$receiver,$border,0,'L',0);
   	$this->SetFont($fontname,'',16);	 
     $this->Cell(125,8,$printShopDetail,$border,0,'C',0);
     $this->Cell(40,8,$rightLabel2,"BRL",1,'C',0);
@@ -122,7 +122,7 @@ function Body($invoice_no)
 
 	//$this->SetFont($fontname,'',16);
    $this->Cell(5,8,"",$border,0,'C',0);
-  $this->Cell(35,8,$receiver." ".$lastname,$border,0,'L',0);
+	$this->Cell(35,8,$receiver,$border,0,'L',0);
 	$this->SetFont($fontname,'',16);
     $this->Cell(125,8,$printShopDetail,$border,0,'C',0);
     $this->Cell(40,8,"",$border,1,'C',0);
@@ -133,11 +133,11 @@ function Body($invoice_no)
 
 
 	$this->SetFont($fontname,'',16);
-	$this->Cell(5,8,"",$border,0,'R',0);
-	$this->Cell(105,8,"",$border,0,'L',0);
+	$this->Cell(25,8,"",$border,0,'R',0);
+	$this->Cell(105,8,"".$lastname,$border,0,'L',0);
 	$this->SetFont($fontname,'',14);
 	
-	$this->Cell(35,8,"",$border,0,'R',0);
+	$this->Cell(20,8,"",$border,0,'R',0);
 	$this->Cell(50,8,$delLabel,$border,1,'C',0);
 	 
 	 
@@ -272,16 +272,17 @@ $this->Cell(9,6,$row2['unit_name_chi'],$border,0,'R',0);
 
 	$this->Cell(5,7,"",$border,0,'R',0);	
 	$this->Cell(140,7,"",$border,0,'L',0);
-	$this->Cell(30,7,"",$border,0,'R',0);
-	$this->Cell(5,7,"",$border,1,'R',0);
+	$this->SetFont($fontname,'',17);
+	$this->Cell(35,7,number_format($subtotal+$creditcardtotal, 2, '.', ','),$border,1,'R',0);
+	//$this->Cell(5,7,"",$border,1,'R',0);
 	
 	$this->Cell(5,7,"",$border,0,'R',0);	
 	$this->SetFont($fontname,'',10);
 	//$this->Cell(140,7,iconv("UTF-8", "BIG5-HKSCS","訂造貨品，必須貨到後一個月內取，否則視作客戶自動"),$border,0,'L',0);
 	$this->Cell(140,7,"",$border,0,'L',0);
 	$this->SetFont($fontname,'',17);
-	$this->Cell(30,7,number_format($subtotal+$creditcardtotal, 2, '.', ','),$border,0,'R',0);
-	$this->Cell(5,7,"",$border,1,'R',0);
+	$this->Cell(35,7, "",$border,1,'R',0);
+//	$this->Cell(5,7,"",$border,1,'R',0);
 
 	//$this->Cell(5,7,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);	
 	//$this->SetFont('Big5','',14);

@@ -85,10 +85,11 @@ include("./include/config.php");
    {
   	  if($_REQUEST['print']=='3col'){
 		  include_once("./pdf3/pdf_v2.php");
+	  }else if($_REQUEST['print']=='boss'){
+		  include_once("./pdf3/pdf_vboss.php");
 	  }else{
-  	include_once("./pdf2/pdf.php");
+		  include_once("./pdf3/pdf.php");
 	  }
- 
 ?><SCRIPT LANGUAGE="JavaScript">
 popUp("/invoice/pdf/<?=$invoice_no?>.pdf");
 window.location="/?page=posv2&subpage=index.php&pos=<?=$pos?>"; 

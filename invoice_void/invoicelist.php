@@ -173,7 +173,8 @@ body {
 
  
    ?>
-   
+  <hr/><div id="response">    <pre></pre></div>
+ 
 <form name="search" action="/?page=invoice_void&subpage=invoicelist.php" method="POST">
 <div><label>發票編號：</label>
 <input name="invoice_no" type="text" class="buttonstyle"  id="invoice_no" size="10" maxlength="10" /></div>
@@ -221,6 +222,9 @@ body {
 </div>
 <input type="submit" name="button" value="查貨單"/>
 </form>
+
+<input type="button" name="button" value="重新回覆單" onclick="submitForm('resume')"/>
+
 <hr/>
 <a href="../">回主頁</a>
 <?php if ($deposit_method!=""){ ?>
@@ -235,7 +239,10 @@ body {
    <hr/>
 <?=$turnover?>
 <table  width="100%" bgcolor="#2E2E2E" border="0" cellpadding="1" cellspacing="1">
-<TR bgcolor="#5E5E5E" align="center" style="font-weight:bold" ><TD width="50" height="23" bgcolor="#006633"> 發票編號</TD>
+
+<TR bgcolor="#5E5E5E" align="center" style="font-weight:bold" >
+<TD width="20" height="23" bgcolor="#006633"> ID <input name="invoice_action_all" type="checkbox" id="invoice_action_all" value="B" /></TD>
+<TD width="50" height="23" bgcolor="#006633"> 發票編號</TD>
 <TD width="107" bgcolor="#006633"> 發票日期</TD>
 <TD width="107" bgcolor="#006633">送貨日期 </TD>
 <td width="78" bgcolor="#006633">客戶名稱</td>
@@ -268,6 +275,7 @@ if (($AREA=="Y" && $PC=="99") || ($AREA=="Y" && $PC=="1") ){
 if($row['settle']=="S" || $row['settle']=="") {echo "class='b'\"";echo " onMouseOut=\"this.className='b'\"";echo " onMouseOver=\"this.className='normal'\"";}
 else if ($row['settle']=="A") { echo " onMouseOut=\"this.className='normal'\"";echo " onMouseOver=\"this.className='highlight'\"";} else if ($row['settle']=="D") { echo "class='deposit'\""; echo " onMouseOut=\"this.className='deposit'\"";echo " onMouseOver=\"this.className='highlight'\"";}
 ?>   />
+<TD width="20"   > <input name="invoice_action[]" type="checkbox" id="invoice_action[]" value="<?=$row['invoice_no']?>" /></TD>
    <td><? if ($row['call_count']>0) echo "*" ; ?><?=$row['invoice_no']?></td>
    <td><?=$row['invoice_date']?></td>
    <td><?=$row['delivery_date']?></td>
@@ -331,5 +339,38 @@ else if ($row['settle']=="A") { echo " onMouseOut=\"this.className='normal'\"";e
       
     }
   );
+  
+  
+  $('#invoice_action_all').click(function(e){
+    var table= $(e.target).closest('table');
+    $('td input:checkbox',table).prop('checked',this.checked);
+});
+
+function submitForm(action) {
+	 
+        var myCheckboxes = new Array();
+		var checked_box = $('input[name="invoice_action[]"]:checked');
+		
+		if (checked_box.length>0){
+        $('input[name="invoice_action[]"]:checked').each(function() {
+           myCheckboxes.push($(this).val());
+        });
+
+        $.ajax({
+            type: "POST",
+            url: "/?page=invoice_void&subpage=invoicelist_action.php",
+            dataType: 'html',
+            data: { 
+                    myCheckboxes:myCheckboxes,action:action },
+            success: function( data){
+                    $('#response pre').html( data );
+                } 
+		});
+		
+		}
+		console.log(myCheckboxes);
+		 
+		return false;
+} 
 </script>
  

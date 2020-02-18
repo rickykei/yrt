@@ -36,6 +36,15 @@ body {
           <div align="center"><a href="/?page=supplier&subpage=insuppliernameedit.php" target="_blank">更改供應商資料</a></div></td>
         <td><div align="center"><a href="/?page=invoice&subpage=invoicelist.php" target="invoicelist">所有出貨單</a></div></td>
       </tr>
+	  
+	  <tr bgcolor="#CCCCCC">
+        <td>
+          <div align="center"><a href="/?page=ingood&subpage=ingoodnameedit.php" target="_blank"></a></div></td>
+        <td>
+          <div align="center"><a href="/?page=supplier&subpage=insuppliernameedit.php" target="_blank"></a></div></td>
+        <td><div align="center"><a href="/?page=invoice&subpage=invoicelist_s.php" target="invoicelist">所有出貨單(掛單S)</a></div></td>
+      </tr>
+	  
 	  <tr bgcolor="#CCCCCC">
         <td>
              <div align="center"><a href="/?page=ingood&subpage=index.php" target="_blank">所有入貨名</a></div></td>
@@ -66,7 +75,7 @@ body {
 	  
 	  <tr bgcolor="#CCCCCC">
          <td align="center"></td>
-        <td><div align="center"><a href="/?page=ipadposv2&subpage=index.php&pos=pos1" target="_blank">IPAD POS1</a> <a href="/?page=ipadpos&subpage=index.php&pos=pos2" target="_blank">POS2</a> <a href="/?page=pos&subpage=index.php&pos=pos3" target="_blank">POS3</a>  </div></td>
+        <td><div align="center"><a href="/?page=ipadposv2&subpage=index.html&pos=pos1" target="_blank">IPAD POS1</a> <a href="/?page=ipadpos&subpage=index.php&pos=pos2" target="_blank">POS2</a> <a href="/?page=pos&subpage=index.php&pos=pos3" target="_blank">POS3</a>  </div></td>
         <td><div align="center"><a href="/invoice/invoicecsv.php" target="_blank">出貨單Excel</a></div></td>
       </tr>
       <tr bgcolor="#CCCCCC">

@@ -106,96 +106,88 @@ function Body($invoice_no)
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'R',0);
 	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,1,'C',0);
 	$border=1; 
-	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS","收支日報表"),$border,0,'R',0);
 	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS","發票日期"),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",$invoice_date),$border,0,'R',0);
 	$this->Cell(40,8,iconv("UTF-8", "BIG5-HKSCS",$area),$border,1,'C',0);
 	 
 	$this->SetFont('Big5','',12);
-	$this->Ln(5);
+		$this->Ln(5);
 	
-	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS"," "),$border,0,'R',0);
+	
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'R',0);
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS",'什項支出'),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",'金額'),$border,0,'R',0);
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'C',0);
     $this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS",'支票'),$border,0,'R',0);
-	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS",'金額'),$border,1,'R',0);
+	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",'金額'),$border,1,'R',0);
 	
-	for ($i=0;$i<17;$i++){
-	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS"," "),$border,0,'R',0);
+	for ($i=0;$i<5;$i++){
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",$i+1),$border,0,'R',0);
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS",$misc_misc[$i]),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($misc_miscAmt[$i],2,'.',',')),$border,0,'R',0);
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",$i+1),$border,0,'R',0);
     $this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS",$cheque[$i]),$border,0,'R',0);
-	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS",number_format($cheque_amt[$i],2,'.',',')),$border,1,'R',0);
+	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($cheque_amt[$i],2,'.',',')),$border,1,'R',0);
 	}
 	  $this->SetFont('Big5','',12);
-	  $this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS"," "),$border,0,'R',0);
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","生意總額"),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($daily_revenue,2,'.',',')),$border,0,'R',0);
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'C',0);
     $this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS",'是日存柜'),$border,0,'R',0);
-	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS",number_format($daily_drawer,2,'.',',')),$border,1,'R',0);
+	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($daily_drawer,2,'.',',')),$border,1,'R',0);
 	
-	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS"," "),$border,0,'R',0);
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","總支出"),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($daily_expend,2,'.',',')),$border,0,'R',0);
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'C',0);
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS",'昨日存柜'),$border,0,'R',0);
-	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS",number_format($past_daily_drawer,2,'.',',')),$border,1,'R',0);
+	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($past_daily_drawer,2,'.',',')),$border,1,'R',0);
 	
-	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS"," "),$border,0,'R',0);
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","支票"),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($daily_cheque,2,'.',',')),$border,0,'R',0);
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'C',0);
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS",'差額'),$border,0,'R',0);
-	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS",number_format($drawer_diff,2,'.',',')),$border,1,'R',0);
+	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($drawer_diff,2,'.',',')),$border,1,'R',0);
  
-	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS"," "),$border,0,'R',0);
+	
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","信用卡"),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($daily_creditcard,2,'.',',')),$border,0,'R',0);
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'C',0);
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'R',0);
-	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,1,'R',0);
+	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,1,'R',0);
  
-    $this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS"," "),$border,0,'R',0);
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","銀聯卡"),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($daily_unionpay,2,'.',',')),$border,0,'R',0);
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'C',0);
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'R',0);
-	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,1,'R',0);
+	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,1,'R',0);
 	
-	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS"," "),$border,0,'R',0);
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","EPS"),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($daily_eps,2,'.',',')),$border,0,'R',0);
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'C',0);
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'R',0);
-	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,1,'R',0);
+	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,1,'R',0);
 	
-	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS"," "),$border,0,'R',0);
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","QRCODE"),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($daily_fps,2,'.',',')),$border,0,'R',0);
  	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'C',0);
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'R',0);
-	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,1,'R',0);
+	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,1,'R',0);
 	
-    $this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS"," "),$border,0,'R',0);
+  
     $this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","入數"),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($daily_income,2,'.',',')),$border,0,'R',0);
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'C',0);
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'R',0);
-	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,1,'R',0);
+	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,1,'R',0);
  
  
  
@@ -243,7 +235,7 @@ function Footer()
 
 
 //$pdf=new pdf('P','mm',array(216,217));
-$pdf=new pdf('P','mm',array(210,297));
+$pdf=new pdf('L','mm',array(148,210));
 $pdf->SetAutoPageBreak(true,2);
 $pdf->SetTopMargin(0);
 $pdf->SetLeftMargin(0);
