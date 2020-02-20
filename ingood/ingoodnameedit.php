@@ -13,10 +13,11 @@ if ($update==1)
    $goods_detail=addslashes($goods_detail);
    
       if ($partno_sub==""){
-   $query="update sumgoods set status='$status', pos_label='$pos_label',model='$model',model2='$model2',model3='$model3',model3_x='$model3_x',model3_y='$model3_y',goods_detail='$goods_detail',market_price=$market_price ,remark='$remark' , unitid='$unitid', inshop_quota='$inshop_quota' ,inshop_box = '$inshop_box' , sell_out_unit='$sell_out_unit',sell_out_qty='$sell_out_qty',buy_in_unit='$buy_in_unit', thereafter_price='$thereafter_price', thereafter_qty='$thereafter_qty' ,market_price_door='$market_price_door' where goods_partno='$goods_partno'";
+   $query="update sumgoods set pos_display='$pos_display', pos_seq='$pos_seq', status='$status', pos_label='$pos_label',model='$model',model2='$model2',model3='$model3',model3_x='$model3_x',model3_y='$model3_y',goods_detail='$goods_detail',market_price=$market_price ,remark='$remark' , unitid='$unitid', inshop_quota='$inshop_quota' ,inshop_box = '$inshop_box' , sell_out_unit='$sell_out_unit',sell_out_qty='$sell_out_qty',buy_in_unit='$buy_in_unit', thereafter_price='$thereafter_price', thereafter_qty='$thereafter_qty' ,market_price_door='$market_price_door' where goods_partno='$goods_partno'";
 	  }else{
-	$query="update sumgoods set status='$status',pos_label='$pos_label',model='$model',model2='$model2',model3='$model3',model3_x='$model3_x',model3_y='$model3_y',goods_detail='$goods_detail',market_price=$market_price ,remark='$remark' , unitid='$unitid', inshop_quota='$inshop_quota' ,inshop_box = '$inshop_box', mix='Y' ,sell_out_unit='$sell_out_unit', sell_out_qty='$sell_out_qty', buy_in_unit='$buy_in_unit',thereafter_price='$thereafter_price' , thereafter_qty='$thereafter_qty' ,market_price_door='$market_price_door' where goods_partno='$goods_partno'";	  
+	$query="update sumgoods set  pos_display='$pos_display', pos_seq='$pos_seq',status='$status',pos_label='$pos_label',model='$model',model2='$model2',model3='$model3',model3_x='$model3_x',model3_y='$model3_y',goods_detail='$goods_detail',market_price=$market_price ,remark='$remark' , unitid='$unitid', inshop_quota='$inshop_quota' ,inshop_box = '$inshop_box', mix='Y' ,sell_out_unit='$sell_out_unit', sell_out_qty='$sell_out_qty', buy_in_unit='$buy_in_unit',thereafter_price='$thereafter_price' , thereafter_qty='$thereafter_qty' ,market_price_door='$market_price_door' where goods_partno='$goods_partno'";	  
 	  }
+	  
 	  
 	 
    if (mysql_query($query))
@@ -440,7 +441,26 @@ else
         <td width="142">&nbsp;</td>
         <td width="346">&nbsp;</td>
       </tr>
-	  
+	    <tr bgcolor="#999999"> 
+        <td width="113"><font color="#FFFFFF" size="2"  class="style6">POS 顯示些產品?</font></td>
+        <td width="275"> 
+         <select name="pos_display" id="pos_display">
+		 <option value="Y" <?php if($row["pos_display"]=="Y") echo "Selected";?>>Y</option>
+	 	 <option value="N"  <?php if($row["pos_display"]=="N") echo "Selected";?>>N</option>
+ 
+        </select>
+              </td>
+        <td width="142">&nbsp;</td>
+        <td width="346">&nbsp;</td>
+      </tr>
+	    <tr bgcolor="#999999"> 
+        <td width="113"><font color="#FFFFFF" size="2"  class="style6">POS 順序 (0至999) 小的排先</font></td>
+        <td width="275"> 
+         <input type="text" name="pos_seq" id="pos_seq" value="<?php echo $row["pos_seq"];?>" >
+              </td>
+        <td width="142">&nbsp;</td>
+        <td width="346">&nbsp;</td>
+      </tr>
 	  <tr> 
         <td width="113">&nbsp;</td>
         <td width="275" height="20" align="left" valign="middle"> 

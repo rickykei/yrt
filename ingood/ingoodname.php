@@ -45,9 +45,9 @@ if ($add==1) //after submit
    */
 
 	if ($partno_sub==""){
-    $query="insert into sumgoods (goods_partno,goods_detail,market_price,allstock,status,admin_view,remark,model,model2,model3,model3_x,model3_y,unitid,inshop_quota,inshop_box,sell_out_qty,sell_out_unit,thereafter_price,thereafter_qty,market_price_door,buy_in_unit) values ('$goods_partno','$goods_detail',$market_price,0,'Y','N','$remark','$model','$model2','$model3','$model3_x','$model3_y','$unitid','$inshop_quota','$inshop_box','$sell_out_qty','$sell_out_unit','$thereafter_price','$thereafter_qty','$market_price_door','$buy_in_unit')";
+    $query="insert into sumgoods (goods_partno,goods_detail,market_price,allstock,status,admin_view,remark,model,model2,model3,model3_x,model3_y,unitid,inshop_quota,inshop_box,sell_out_qty,sell_out_unit,thereafter_price,thereafter_qty,market_price_door,buy_in_unit,pos_display,pos_seq) values ('$goods_partno','$goods_detail',$market_price,0,'Y','N','$remark','$model','$model2','$model3','$model3_x','$model3_y','$unitid','$inshop_quota','$inshop_box','$sell_out_qty','$sell_out_unit','$thereafter_price','$thereafter_qty','$market_price_door','$buy_in_unit','$pos_display','$pos_seq')";
 	}else{
-	$query="insert into sumgoods (goods_partno,goods_detail,market_price,allstock,status,admin_view,remark,model,model2,model3,model3_x,model3_y,unitid,inshop_quota,inshop_box,mix,sell_out_qty,sell_out_unit,thereafter_price,thereafter_qty,market_price_door,buy_in_unit) values ('$goods_partno','$goods_detail',$market_price,0,'Y','N','$remark','$model','$model2','$model3','$model3_x','$model3_y','$unitid','$inshop_quota','$inshop_box','Y','$sell_out_qty','$sell_out_unit','$thereafter_price','$thereafter_qty','$market_price_door','$buy_in_unit')";			
+	$query="insert into sumgoods (goods_partno,goods_detail,market_price,allstock,status,admin_view,remark,model,model2,model3,model3_x,model3_y,unitid,inshop_quota,inshop_box,mix,sell_out_qty,sell_out_unit,thereafter_price,thereafter_qty,market_price_door,buy_in_unit,pos_display,pos_seq) values ('$goods_partno','$goods_detail',$market_price,0,'Y','N','$remark','$model','$model2','$model3','$model3_x','$model3_y','$unitid','$inshop_quota','$inshop_box','Y','$sell_out_qty','$sell_out_unit','$thereafter_price','$thereafter_qty','$market_price_door','$buy_in_unit','$pos_display','$pos_seq')";			
 	}
  
       if (mysql_query($query)){
@@ -170,37 +170,37 @@ body {
     <td width="4" height="">&nbsp;</td>
     <td align="center" valign="top"><table width="100%"  border="0" cellpadding="2" cellspacing="0">
       <tr>
-        <td width="14%" height="21" bgcolor="#006633"><span class="style6">入貨名</span></td>
-        <td width="34%"><span class="style7"><? echo "< ".$AREA."鋪,第".$PC."機 >";?></span></td>
-        <td width="15%"><span class="style2"><? echo "$message"?></span></td>
-        <td width="37%">&nbsp;</td>
+        <td  height="21" bgcolor="#006633"><span class="style6">入貨名</span></td>
+        <td ><span class="style7"><? echo "< ".$AREA."鋪,第".$PC."機 >";?></span></td>
+        <td  ><span class="style2"><? echo "$message"?></span></td>
+        <td  >&nbsp;</td>
       </tr>
-      <tr bgcolor="">
-        <td height="24" colspan="4">
+      <tr  >
+        <td   colspan="4">
 <form name="ingoodnameform" method="post" action="/?page=ingood&subpage=ingoodname.php">
 
   <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
     <tr bgcolor=""> 
       <input type="hidden" name="add" value=1 class="login">
-      <td width="15%" bgcolor="#669933"><font size="3" face="新細明體" class="style8">貨品編號：</font></td>
+      <td width="15%" bgcolor="#669933"><font   face="新細明體" class="style8">貨品編號：</font></td>
       <td width="85%" bgcolor="#669933" withd="86%"> 
         <input name="goods_partno" type="text">
         </td>
     </tr>
     <tr bgcolor=""> 
-      <td width="15%" bgcolor="#669933"><font size="3" face="新細明體" class="style8">貨品描述：</font></td>
+      <td width="15%" bgcolor="#669933"><font  face="新細明體" class="style8">貨品描述：</font></td>
       <td width="85%" bgcolor="#669933"> 
         <textarea name="goods_detail" cols="50" rows="4" ></textarea>
       </td>
     </tr>
     <tr bgcolor="#666666"> 
-      <td width="15%" bgcolor="#669933"><font size="3" face="新細明體" class="style8">備註：</font></td>
+      <td width="15%" bgcolor="#669933"><font  face="新細明體" class="style8">備註：</font></td>
       <td width="85%" bgcolor="#669933"> 
         <textarea name="remark" cols="50" rows="4" ></textarea>
       </td>
     </tr>
     <tr bgcolor="#666666"> 
-      <td width="15%" bgcolor="#669933" ><font face="新細明體" size="3"  class="style8">種類1：</font></span></td>
+      <td width="15%" bgcolor="#669933" ><font face="新細明體"   class="style8">種類1：</font></span></td>
       <td width="85%" bgcolor="#669933"> 
         <select name="model" id="model">
 		<option> </option>
@@ -213,7 +213,7 @@ body {
       </td>
     </tr>
         <tr bgcolor="#666666"> 
-      <td width="15%" bgcolor="#669933" ><font face="新細明體" size="3"  class="style8">種類2：</font></span></td>
+      <td width="15%" bgcolor="#669933" ><font face="新細明體"   class="style8">種類2：</font></span></td>
       <td width="85%" bgcolor="#669933"> 
         <select name="model2" id="model2">
 		<option> </option>
@@ -226,7 +226,7 @@ body {
       </td>
     </tr>
 	  <tr bgcolor="#666666"> 
-      <td width="15%" bgcolor="#669933" ><font face="新細明體" size="3"  class="style8">種類3：</font></span></td>
+      <td width="15%" bgcolor="#669933" ><font face="新細明體"   class="style8">種類3：</font></span></td>
       <td width="85%" bgcolor="#669933"> 
         <select name="model3" id="model3">
 		<? while ($typerow2 = $type2Result->fetchRow(DB_FETCHMODE_ASSOC))
@@ -238,26 +238,26 @@ body {
       </td>
     </tr>
 	 <tr bgcolor="#666666"> 
-      <td width="15%" bgcolor="#669933" ><font face="新細明體" size="3"  class="style8">種類3 x：</font></span></td>
+      <td width="15%" bgcolor="#669933" ><font face="新細明體"   class="style8">種類3 x：</font></span></td>
       <td width="85%" bgcolor="#669933"> 
          <input type="text" name="model3_x">
       </td>
     </tr>
 	 <tr bgcolor="#666666"> 
-      <td width="15%" bgcolor="#669933" ><font face="新細明體" size="3"  class="style8">種類3 y：</font></span></td>
+      <td width="15%" bgcolor="#669933" ><font face="新細明體"   class="style8">種類3 y：</font></span></td>
       <td width="85%" bgcolor="#669933"> 
         <input type="text" name="model3_y">
       </td>
     </tr>
 	
 	 <tr bgcolor="#666666"> 
-      <td width="15%" bgcolor="#669933" ><font face="新細明體" size="3"  class="style8">POS 貨名：</font></span></td>
+      <td width="15%" bgcolor="#669933" ><font face="新細明體"   class="style8">POS 貨名：</font></span></td>
       <td width="85%" bgcolor="#669933"> 
         <input type="text" name="pos_label">
       </td>
     </tr>
 	  <tr  bgcolor="#669933"> 
-      <td  ><font size="3" face="新細明體" class="style6">單位：</font></td>
+      <td  ><font  face="新細明體" class="style6">單位：</font></td>
       <td  > 
         <select name="unitid" id="unitid">
 		<? for ($i=0;$i<count($unit_arr);$i++)
@@ -380,8 +380,26 @@ body {
         <td width="142">&nbsp;</td>
         <td width="346">&nbsp;</td>
       </tr>
-	  
-	  
+	   <tr bgcolor="#999999"> 
+        <td width="113"><font color="#FFFFFF" size="2"  class="style6">POS 顯示些產品?</font></td>
+        <td width="275"> 
+         <select name="pos_display" id="pos_display">
+		 <option value="Y">Y</option>
+	 	 <option value="N">N</option>
+ 
+        </select>
+              </td>
+        <td width="142">&nbsp;</td>
+        <td width="346">&nbsp;</td>
+      </tr>
+	    <tr bgcolor="#999999"> 
+        <td width="113"><font color="#FFFFFF" size="2"  class="style6">POS 順序 (0至999) 小的排先</font></td>
+        <td width="275"> 
+         <input type="text" name="pos_seq" id="pos_seq" value="0" >
+              </td>
+        <td width="142">&nbsp;</td>
+        <td width="346">&nbsp;</td>
+      </tr>
     <tr bgcolor="#006666"> 
       <td width="15%" bgcolor="#006633">&nbsp;</td>
       <td width="85%" bgcolor="#006633"><span class="style6"><input type="submit" name="submit" onclick="JavaScript:checkform();"/> 
