@@ -29,7 +29,7 @@ $invoice_date=$year.'-'.$month.'-'.$day;
 	} 
 	
 if (security_check($AREA,$PC)){
-	$shop_array = array ( "Y","B","H","F","A");
+	$shop_array = array ( "Y","A");
 }else{
 	$shop_array = array ( $AREA);
 	}
@@ -176,17 +176,17 @@ body,td,th ,tr{
 		
 		//today spending memeber cash on invoice
 		$member_total_spend_on_deposit[$i]="select sum(total_price) as total from invoice where month(invoice.settledate)=$month && year(invoice.settledate)=$year && DAYOFMONTH(invoice.settledate)=$day and branchID='$shop_array[$i]'  and void='A' and settle='A' and deposit_method='D' ";
-		
+	 
 		//today spending memeber bank on invoice
 		$member_total_spend_on_bank_deposit[$i]="select sum(total_price) as total from invoice where month(invoice.settledate)=$month && year(invoice.settledate)=$year && DAYOFMONTH(invoice.settledate)=$day and branchID='$shop_array[$i]'  and void='A' and settle='A' and deposit_method='B' ";
-		
+	 
 		//today spending memeber cash on invoice door
+	 
 		$member_total_spend_on_deposit_door[$i]="select sum(total_price) as total from invoice_door where month(settledate)=$month && year(settledate)=$year && DAYOFMONTH(settledate)=$day and branchID='$shop_array[$i]'   and settle='A' and deposit_method='D' ";
-		
+	 
 		//today spending memeber bank on invoice door
 		$member_total_spend_on_bank_deposit_door[$i]="select sum(total_price) as total from invoice_door where month(settledate)=$month && year(settledate)=$year && DAYOFMONTH(settledate)=$day and branchID='$shop_array[$i]'   and settle='A' and deposit_method='B' ";
-		
-		
+	 
 		//all member spending by bank acc on invoice 
 		$member_total_spend_on_all_bank_deposit[$i]="select sum(total_price) as total from invoice where branchID='$shop_array[$i]'  and void='A' and settle='A' and deposit_method='B' and invoice.settledate <= '$year-$month-$dayday'";
 		//echo $member_total_spend_on_all_bank_deposit[$i];

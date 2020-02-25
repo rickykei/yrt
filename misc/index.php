@@ -26,14 +26,14 @@
 	$day=date("d");
 	$shop_array = $AREA;
 	  
-	 $subtotal="select sum(total_price) as total from invoice where month(invoice.invoice_date)=$month && year(invoice.invoice_date)=$year && DAYOFMONTH(invoice.invoice_date)=$day ";
+	 $subtotal="select sum(total_price) as total from invoice where month(invoice.invoice_date)=$month && year(invoice.invoice_date)=$year && DAYOFMONTH(invoice.invoice_date)=$day and void='A'   ";
 	$rows = $connection->query($subtotal);
    $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
    $day_counter=$row['total'];
    
 
 	for ($i=0;$i<count($shop_array);$i++){
-		$shop_subtotal[$i]="select sum(total_price) as total from invoice where month(invoice.invoice_date)=$month && year(invoice.invoice_date)=$year && DAYOFMONTH(invoice.invoice_date)=$day and branchID='$shop_array[$i]'";
+		$shop_subtotal[$i]="select sum(total_price) as total from invoice where month(invoice.invoice_date)=$month && year(invoice.invoice_date)=$year && DAYOFMONTH(invoice.invoice_date)=$day and branchID='$shop_array[$i]'  and void='A' ";
 		
 		$shop_invoice_scrap_subtotal[$i]="select sum(total_price) as total from invoice_scrap where month(invoice_scrap.invoice_date)=$month && year(invoice_scrap.invoice_date)=$year && DAYOFMONTH(invoice_scrap.invoice_date)=$day and branchID='$shop_array[$i]'";
 		$settle_shop_invoice_scrap_subtotal[$i]="select sum(total_price) as total from invoice_scrap  where month(invoice_scrap.settledate)=$month && year(invoice_scrap.settledate)=$year && DAYOFMONTH(invoice_scrap.settledate)=$day and branchID='$shop_array[$i]' and settle='A'";
@@ -45,17 +45,17 @@
 		$unsettle_shop_invoice_door_subtotal[$i]="select sum(total_price) as total from invoice_door where month(invoice_door.invoice_date)=$month && year(invoice_door.invoice_date)=$year && DAYOFMONTH(invoice_door.invoice_date)=$day and branchID='$shop_array[$i]' and settle='S'";
 
 		
-		$settle_shop_subtotal[$i]="select sum(total_price) as total from invoice where month(invoice.settledate)=$month && year(invoice.settledate)=$year && DAYOFMONTH(invoice.settledate)=$day and branchID='$shop_array[$i]' and settle='A'";
-		$unsettle_shop_subtotal[$i]="select sum(total_price) as total from invoice where month(invoice.invoice_date)=$month && year(invoice.invoice_date)=$year && DAYOFMONTH(invoice.invoice_date)=$day and branchID='$shop_array[$i]' and settle='S'";
+		$settle_shop_subtotal[$i]="select sum(total_price) as total from invoice where month(invoice.settledate)=$month && year(invoice.settledate)=$year && DAYOFMONTH(invoice.settledate)=$day and branchID='$shop_array[$i]' and settle='A'  and void='A'";
+		$unsettle_shop_subtotal[$i]="select sum(total_price) as total from invoice where month(invoice.invoice_date)=$month && year(invoice.invoice_date)=$year && DAYOFMONTH(invoice.invoice_date)=$day and branchID='$shop_array[$i]' and settle='S'  and void='A'";
 		
 		
 		$dayday=$day+1;
-		$unsettle_shop_subtotal_from_day_one[$i]="select sum(total_price) as total from invoice where invoice.invoice_date <= '$year-$month-$dayday' and branchID='$shop_array[$i]' and settle='S'";
-		$unsettle_shop_deposit[$i]="select sum(deposit) as total from invoice where month(invoice.settledate)=$month && year(invoice.settledate)=$year && DAYOFMONTH(invoice.settledate)=$day and branchID='$shop_array[$i]' and settle='S'";
+		$unsettle_shop_subtotal_from_day_one[$i]="select sum(total_price) as total from invoice where invoice.invoice_date <= '$year-$month-$dayday' and branchID='$shop_array[$i]' and settle='S'  and void='A'";
+		$unsettle_shop_deposit[$i]="select sum(deposit) as total from invoice where month(invoice.settledate)=$month && year(invoice.settledate)=$year && DAYOFMONTH(invoice.settledate)=$day and branchID='$shop_array[$i]' and settle='S'  and void='A'";
 		$shop_return_total[$i]="select sum(total_price) as total from returngood where month(returngood.return_date)=$month && year(returngood.return_date)=$year && DAYOFMONTH(returngood.return_date)=$day and branchID='$shop_array[$i]'";
 		$delivery_total[$i]="select sum(fee) as total from delivery_fee where month(delivery_date)=$month && year(delivery_date)=$year && DAYOFMONTH(delivery_date)=$day and shop='$shop_array[$i]'";
 		$member_total_deposit[$i]="select sum(deposit_amt) as total from member_deposit where month(deposit_date)=$month && year(deposit_date)=$year && DAYOFMONTH(deposit_date)=$day and branchID='$shop_array[$i]' ";
-		$member_total_spend_on_deposit[$i]="select sum(total_price) as total from invoice where month(invoice.settledate)=$month && year(invoice.settledate)=$year && DAYOFMONTH(invoice.settledate)=$day and branchID='$shop_array[$i]' and settle='A' and deposit_method='D' ";
+		$member_total_spend_on_deposit[$i]="select sum(total_price) as total from invoice where month(invoice.settledate)=$month && year(invoice.settledate)=$year && DAYOFMONTH(invoice.settledate)=$day and branchID='$shop_array[$i]' and settle='A' and deposit_method='D'  and void='A' ";
 		$member_total_all_deposit[$i]="select sum(deposit_amt) as total from member_deposit where deposit_date  <= '$year-$month-$dayday' and  	branchID='$shop_array[$i]' ";
 		
 		if ($AREA==$shop_array[$i]  ){
@@ -125,13 +125,16 @@
 		   $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
 		   $member_total_all_deposit_counter[$i]=$row['total'];
 		   
-   }
+		}
 		
 	}
 	  
 	    
   	for ($i=0;$i<count($shop_array);$i++){
+		
 		$fixAmt=$settle_shop_subtotal_counter[$i]-$return_shop_total_counter[$i]+$settle_shop_invoice_scrap_subtotal_counter[$i]+$settle_shop_invoice_door_subtotal_counter[$i];
+		
+		//echo "shop=".$AREA.", settle_shop_subtotal_counter=".$settle_shop_subtotal_counter[$i].", return_shop_total_counter=".$return_shop_total_counter[$i]." settle_shop_invoice_scrap_subtotal_counter=".$settle_shop_invoice_scrap_subtotal_counter[$i]." settle_shop_invoice_door_subtotal_counter=".$settle_shop_invoice_door_subtotal_counter[$i];
 	 
 
 		 } 
