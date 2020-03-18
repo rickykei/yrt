@@ -165,6 +165,7 @@ function checkform()
 function check_del(aa)
 {
  alert('刪除 '+ aa);
+ document.ingood_del_form.submit();
 }
 
 </script>
@@ -478,7 +479,7 @@ else
       <tr> 
         <td width="113"></td>
         <td valign="bottom" width="275">&nbsp;        </td>
-        <td width="142"><form name="ingood_del_form"  action="/?page=ingood&subpage=ingoodname_del.php">
+        <td width="142"><form name="ingood_del_form" method="POST" action="/?page=ingood&subpage=ingoodname_del.php">
 		<input type="hidden" name="goods_partno" value="<?echo $row["goods_partno"];?>" >
         <input type="submit" name="Submit" value="刪除此項貨品名" onClick="javascript:check_del('<?echo $goods_partno;?>')">
         </form></td>

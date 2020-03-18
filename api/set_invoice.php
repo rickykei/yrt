@@ -66,9 +66,22 @@ for ($i=0;$i<count($cart_arr);$i++)
 	//$manpower[$i]=$cart_arr[$i]["manpower"];
 	$manpower[$i]=0;
 	$goods_detail[$i]=$cart_arr[$i]["goodsName"];
-	$deductStock[$i]=$cart_arr[$i]["deductStock"];
-	$cutting[$i]=$cart_arr[$i]["cutting"];
-	$delivered[$i]=$cart_arr[$i]["delivered"];
+	
+	if ($cart_arr[$i]["deductStock"]==true)
+		$deductStock[$i]='N';
+	else
+		$deductStock[$i]='Y';
+	
+	if ($cart_arr[$i]["cutting"]==true)
+		$cutting[$i]='Y';
+	else
+		$cutting[$i]='N';
+	
+	if ($cart_arr[$i]["delivered"]==true)
+		$delivered[$i]='Y';
+	else
+		$delivered[$i]='N';
+	 
 }
 
  
@@ -146,7 +159,7 @@ include("./include/config3.php");
 	   include_once("./pdf3/pdf.php");
 		$user_arr=array(
         "order_id" => $invoice_no,
-		"pdf_url" => "http://yrtdemo.rickykei.com/invoice/pdf/".$invoice_no.".pdf"
+		"pdf_url" => "http://yrt8.rickykei.com/invoice/pdf/".$invoice_no.".pdf"
 		);
 		$result = "{\"success\":\"true\", \"data\":". json_encode($user_arr)."}";  
 		echo $result;
