@@ -14,8 +14,8 @@
    // (Run the query on the winestore through the connection
    $result = $connection->query("SET NAMES 'UTF8'");
    if (DB::isError($result)) die ($result->getMessage());
-	  $sql="SELECT * FROM staff";
-	 $staffResult = $connection->query($sql);
+	 // $sql="SELECT * FROM staff";
+	// $staffResult = $connection->query($sql);
        
 ?> 
 <? // = $ajax->loadJsCore(true) ?>
@@ -76,18 +76,9 @@ a:active {
                 <span class="style6">發票日期：</span></td>
             <td width="150"><input name="invoice_date" type="text" id="invoice_date" value="<? echo Date("Y-m-d H:i"); ?>" size="15" maxlength="20" readonly="readonly"></td>
              <td width="79"><span class="style6">營業員 ： </span></td>
-            <td width="110">
-              <select name="sales" id="sales">
-              <option value="" > </option>
-			  <?php while ($row = $staffResult->fetchRow(DB_FETCHMODE_ASSOC))
-			  {
-                echo "<option value=\"".$row['name'];
-                echo "\"";
-                if ($USER==$row['name'])
-           			echo " selected";
-                echo ">".$row['name']."</option>";
-				}?>
-                </select>			</td>
+            <td width="110"><span class="style6"><?php echo $USER;?></span>
+              <input type="hidden" name="sales" id="sales" value="<?php echo $USER;?>">
+             </td>
             
 			<td colspan="3"><input id="status1" name="status" type="radio" value="A" checked>
 			  <span class="style6">入賑</span>

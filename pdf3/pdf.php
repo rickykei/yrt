@@ -87,7 +87,7 @@ function Body($invoice_no)
 
  $this->SetY(-1);
    //$this->Ln(95);
-   //$this->Ln(8);
+   $this->Ln(7);
    
    $this->SetFont($fontname,'',16);
   // $this->SetDrawColor(255,255,255);
@@ -170,9 +170,9 @@ function Body($invoice_no)
 	$this->Cell(85,8,$customer_detail,$border,0,'L',0);
 	$this->Cell(35,8,"",$border,0,'R',0);
 if ($customer_tel=="888")
-	$this->Cell(60,8,"自取".$delivery_date,$border,1,'R',0);
+	$this->Cell(60,8,"自取".substr($delivery_date,0,-8),$border,1,'R',0);
 	else
-	$this->Cell(60,8,"送貨".$delivery_date,$border,1,'R',0);
+	$this->Cell(60,8,"送貨".substr($delivery_date,0,-8),$border,1,'R',0);
 //	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS","地址："),0,0,'R',0);
 //	$this->Cell(170,8,$customer_detail,0,1,'L',0);
 
@@ -180,7 +180,7 @@ if ($customer_tel=="888")
 	$this->Cell(15,8,"",$border,0,'R',0);
 	$this->Cell(80,8,"",$border,0,'L',0);
 	
-		$this->Ln(12);
+		$this->Ln(20);
 		/*
 	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS","行數"),0,0,'C',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS","貨品編號"),0,0,'C',0);
@@ -276,12 +276,12 @@ $this->Cell(9,6,$row2['unit_name_chi'],$border,0,'R',0);
 	$this->Cell(35,7,number_format($subtotal+$creditcardtotal, 2, '.', ','),$border,1,'R',0);
 	//$this->Cell(5,7,"",$border,1,'R',0);
 	
-	$this->Cell(5,7,"",$border,0,'R',0);	
-	$this->SetFont($fontname,'',10);
+//	$this->Cell(5,7,"",$border,0,'R',0);	
+//	$this->SetFont($fontname,'',10);
 	//$this->Cell(140,7,iconv("UTF-8", "BIG5-HKSCS","訂造貨品，必須貨到後一個月內取，否則視作客戶自動"),$border,0,'L',0);
-	$this->Cell(140,7,"",$border,0,'L',0);
-	$this->SetFont($fontname,'',17);
-	$this->Cell(35,7, "",$border,1,'R',0);
+//	$this->Cell(140,7,"",$border,0,'L',0);
+//	$this->SetFont($fontname,'',17);
+//	$this->Cell(35,7, "",$border,1,'R',0);
 //	$this->Cell(5,7,"",$border,1,'R',0);
 
 	//$this->Cell(5,7,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);	
@@ -293,7 +293,7 @@ $this->Cell(9,6,$row2['unit_name_chi'],$border,0,'R',0);
 	//$this->Cell(30,7,'',$border,0,'R',0);
  	//$this->Cell(5,7,iconv("UTF-8", "BIG5-HKSCS",""),$border,1,'R',0);
  
-	$this->Ln(3);
+//	$this->Ln(3);
 
  	
 }

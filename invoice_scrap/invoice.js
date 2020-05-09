@@ -203,9 +203,9 @@ function stateChanged() {
 		
 		
 		if (cal_unit=='mm'){
-			total_amt=(Math.round(width/25.416)*Math.round(height/25.416))/144*marketPrice/16;
+			total_amt=(Math.round(width/25.416)*Math.round(height/25.416))/144*marketPrice/32*1.8;
 		}else{
-			total_amt=(width*height)/144*marketPrice/16;
+			total_amt=(width*height)/144*marketPrice/32*1.8;
 		}
 		
 		 	//add stock bal 20151204
