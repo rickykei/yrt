@@ -27,7 +27,7 @@
 <script type="text/javascript" src="./include/jquery-1.4.1.min.js"></script>
 <link href="./include/invoice.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="./include/functions.js"></script>
-<script type="text/javascript" src="./invoice_scrap/invoice.js?date=20200509"></script>
+<script type="text/javascript" src="./invoice_scrap/invoice.js?date=20200516"></script>
 <style type="text/css">
 <!--
 .style11 {

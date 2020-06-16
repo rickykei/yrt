@@ -213,8 +213,8 @@ function stateChanged() {
 		if (node != null) 
 			$("#stockbal_" + index).html(node.nodeValue)	
 		 
-	if(total_amt<15)
-		total_amt=15;
+	if(total_amt<30)
+		total_amt=30;
 	
 	total_amt=Math.round(total_amt);
 	
