@@ -71,16 +71,28 @@ function Body($invoice_no)
 	$branchid=$row['branchID'];
   
 	if ($row['delivery']=="Y")
-	$delLabel='送貨';
+	{
+		$delLabel='送貨';
+		$rightLabel1='收尾數';
+		$rightLabel2='黃河付車費';
+		$borderLabel1='';
+		$borderLabel2='';
+	}
 	else if ($row['delivery']=="C")
 	{
 		$delLabel='街車即走';
 		$rightLabel1='收尾數';
 		$rightLabel2='車費客付';
+		$borderLabel1='';
+		$borderLabel2='';
 	}
-	else if ($row['delivery']=="S")
-	$delLabel='自取';
-	
+	else if ($row['delivery']=="S"){
+		$delLabel='自取';
+		$rightLabel1='有客';
+		$rightLabel2='有車';
+		$borderLabel1='TRL';
+		$borderLabel2='BRL';
+	}
 	//if ($customer_tel=="888")
 	//$delLabel='自取';
    }
@@ -93,20 +105,20 @@ function Body($invoice_no)
   // $this->SetDrawColor(255,255,255);
    
 	
-	if ($delivery=="C")
+	if ($delivery=="C" || $delivery=="S"|| $delivery=="Y")
 	{
 	 
 	$this->Cell(40,8,"",$border,1,'C',0);
 	 
 	$this->Cell(40,8,"",$border,0,'R',0);
 	$this->Cell(125,8,$printShopName,$border,0,'C',0);
-	$this->Cell(40,8,$rightLabel1,"TRL",1,'C',0);
+	$this->Cell(40,8,$rightLabel1,$borderLabel1,1,'C',0);
 	 
    $this->Cell(5,8,"",$border,0,'C',0);
 	 $this->Cell(35,8,$receiver,$border,0,'L',0);
   	$this->SetFont($fontname,'',16);	 
     $this->Cell(125,8,$printShopDetail,$border,0,'C',0);
-    $this->Cell(40,8,$rightLabel2,"BRL",1,'C',0);
+    $this->Cell(40,8,$rightLabel2,$borderLabel2,1,'C',0);
   
 	}else{	
 //   $this->Cell(216,8,iconv("UTF-8", "BIG5-HKSCS",$printShopName),$border,1,'C',0);
@@ -145,7 +157,7 @@ function Body($invoice_no)
 	$this->Cell(5,8,"",$border,0,'R',0);
 	$this->Cell(20,8,"",$border,0,'R',0);
 	$this->Cell(65,8,$customer_name,$border,0,'L',0);
-	$this->Cell(55,8,$sales_name,$border,0,'L',0);
+	$this->Cell(55,8,"",$border,0,'L',0);
 	$this->Cell(50,8,$branchid.$invoice_no,$border,1,'C',0);
 
 
@@ -160,7 +172,7 @@ function Body($invoice_no)
 	}else{
 	$this->Cell(55,8,$customer_tel,$border,0,'L',0);
 	}
-	$this->Cell(65,8,$staffTel,$border,0,'C',0);
+	$this->Cell(65,8,$sales_name.":".$staffTel,$border,0,'C',0);
 	$this->Cell(60,8,"落單".$invoice_date,$border,1,'R',0);
 	
 	
@@ -368,12 +380,7 @@ $pdf->SetLeftMargin(0);
 $title='出貨單';
 $header_title=array();
 $pdf->Body($invoice_no);
-$title='出貨單';
-$header_title=array();
-$pdf->Body($invoice_no);
-$title='出貨單';
-$header_title=array();
-$pdf->Body($invoice_no);
+
 $pdf->SetAuthor('YRT Company Limited');
 
 $filepath='./invoice/pdf/'.$invoice_no.'.pdf';

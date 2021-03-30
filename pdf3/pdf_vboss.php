@@ -406,9 +406,9 @@ $pdf->SetAutoPageBreak(true,2);
 $pdf->SetTopMargin(1);
 $pdf->SetLeftMargin(0);
 //$fontname = TCPDF_FONTS::addTTFfont('d:/github/yrt/pdf3/fonts/DroidSansFallback.ttf', 'TrueTypeUnicode', '', 96);
- $fontname="msungstdlight";
+$fontname="msungstdlight";
  
- $pdf->SetFont($fontname, '', 10);
+$pdf->SetFont($fontname, '', 10);
  
  
 $pdf->SetTextColor(0,0,0);
