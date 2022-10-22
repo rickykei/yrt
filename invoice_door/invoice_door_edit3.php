@@ -122,7 +122,7 @@ include("./include/functions.php");
   	 if($_REQUEST['print']=='3col'){
 		include_once("./pdf3/pdf_invoice_door_v2.php");
 	  }else{
-  	 include_once("./pdf3/pdf_invoice_door.php");
+  	 include_once("./pdf2/pdf_invoice_door.php");
 	  }
 ?>
 <SCRIPT LANGUAGE="JavaScript">

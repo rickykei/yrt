@@ -110,7 +110,7 @@
 			echo "<td>y".($y)."</td>";
 		for ($i=0;$i<5;$i++){
 			
-		?><td> <a  href="#" class="ui-button ui-widget ui-corner-all" partno="<?php echo stripslashes($inputname[$i][$y]['partno']);?>" desc="<?php echo stripslashes($inputname[$i][$y]['goods_detail']);?>" price="<?php echo stripslashes($inputname[$i][$y]['market_price']);?>"><?php if($inputname[$i][$y]['pos_label']!=""){echo $inputname[$i][$y]['pos_label'];}else{echo stripslashes($inputname[$i][$y]['goods_detail']);}?></a></td>
+		?><td> <a  title="<?php echo $inputname[$i][$y]['market_price']?>" href="#" class="ui-button ui-widget ui-corner-all" partno="<?php echo stripslashes($inputname[$i][$y]['partno']);?>" desc="<?php echo stripslashes($inputname[$i][$y]['goods_detail']);?>" price="<?php echo stripslashes($inputname[$i][$y]['market_price']);?>"><?php if($inputname[$i][$y]['pos_label']!=""){echo $inputname[$i][$y]['pos_label'];}else{echo stripslashes($inputname[$i][$y]['goods_detail']);}?></a></td>
 		 <?php
 		}
 		?></tr><?php

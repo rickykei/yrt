@@ -12,7 +12,7 @@ body {
 	font-weight: bold;
 }</style>
 <style type="text/css">
-@import url(./include/cal/calendar-win2k-1.css);
+@import url(../include/cal/calendar-win2k-1.css);
 </style>
 <script type="text/javascript" src="./include/cal/calendar.js"></script>
 <script type="text/javascript" src="./include/cal/lang/calendar-en.js"></script>

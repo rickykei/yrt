@@ -84,7 +84,7 @@
     <td width="4" height="360">&nbsp;</td>
     <td  align="center" valign="top"><table width="100%" height="100%" border="0" cellpadding="2" cellspacing="0">
       <tr>
-        <td width="13%" height="21" bgcolor="#666666"><span class="style6"><a href="/?page=scrap&subpage=scraplist.php">更改碎料出貨</a></span></td>
+        <td width="13%" height="21" bgcolor="#666666"><span class="style6"><a href="invoicelist.php">更改碎料出貨</a></span></td>
         <td width="35%"><? echo "< ".$AREA."鋪,第".$PC."機 >";?>[<?php echo $id;?>]</td>
         <td width="15%">&nbsp;</td>
         <td width="37%">&nbsp;</td>

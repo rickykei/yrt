@@ -26,9 +26,9 @@ $invoice_no=$_POST['invoice_no'];
  
 
   //insert invoice Door
-  $query="update misc set daily_revenue='$daily_revenue', daily_expend='$daily_expend',daily_cheque=$daily_cheque,daily_creditcard='$daily_creditcard',daily_unionpay='$daily_unionpay',daily_eps='$daily_eps',daily_fps='$daily_fps',daily_cash='$daily_cash',daily_income='$daily_income',daily_drawer='$daily_drawer',past_daily_drawer='$past_daily_drawer',drawer_diff='$drawer_diff',area='$area',invoice_date='$invoice_date',pc='$pc',modified_by='$browseryrt',modified_date=SYSDATE(),sts='A' where id='$invoice_no'";
+  $query="update misc set daily_revenue='$daily_revenue', daily_expend='$daily_expend',daily_cheque='$daily_cheque',daily_creditcard='$daily_creditcard',daily_unionpay='$daily_unionpay',daily_eps='$daily_eps',daily_fps='$daily_fps',daily_cash='$daily_cash',daily_income='$daily_income',daily_drawer='$daily_drawer',past_daily_drawer='$past_daily_drawer',drawer_diff='$drawer_diff',area='$area',invoice_date='$invoice_date',pc='$pc',modified_by='$browseryrt',modified_date=SYSDATE(),sts='A' where id='$invoice_no'";
   
- // echo $query;
+ 
   $result=$connection->query($query);
   if (DB::isError($result)) die ($result->getMessage());
   
@@ -136,7 +136,7 @@ $invoice_no=$_POST['invoice_no'];
  	include_once("./pdf2/pdf_misc.php");
  ?><SCRIPT LANGUAGE="JavaScript">
  popUp("/misc/pdf/<?=$invoice_no?>.pdf");
-  window.location="/?page=misc&subpage=misc_list.php"; 
+ window.location="/?page=misc&subpage=misc_list.php"; 
 </script><?
  
 }

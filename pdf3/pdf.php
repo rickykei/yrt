@@ -57,6 +57,7 @@ function Body($invoice_no)
 	$lastname=$row['lastname'];
 	$receiver=$row['receiver'];
 	$delivery=$row['delivery'];
+	$settle=$row['settle'];
 	//20100805
 	$creditLevel= $rowCust['creditLevel'];
 	
@@ -70,9 +71,14 @@ function Body($invoice_no)
 	
 	$branchid=$row['branchID'];
   
+  
+    if ($settle=='A')
+		$logo1="黃河收訖";
+	
 	if ($row['delivery']=="Y")
 	{
 		$delLabel='送貨';
+		 if ($settle!='A')
 		$rightLabel1='收尾數';
 		$rightLabel2='黃河付車費';
 		$borderLabel1='';
@@ -81,10 +87,11 @@ function Body($invoice_no)
 	else if ($row['delivery']=="C")
 	{
 		$delLabel='街車即走';
+		if ($settle!='A')
 		$rightLabel1='收尾數';
 		$rightLabel2='車費客付';
-		$borderLabel1='';
-		$borderLabel2='';
+		$borderLabel1='TRL';
+		$borderLabel2='BRL';
 	}
 	else if ($row['delivery']=="S"){
 		$delLabel='自取';
@@ -99,7 +106,7 @@ function Body($invoice_no)
 
  $this->SetY(-1);
    //$this->Ln(95);
-   $this->Ln(7);
+   $this->Ln(6);
    
    $this->SetFont($fontname,'',16);
   // $this->SetDrawColor(255,255,255);
@@ -108,6 +115,8 @@ function Body($invoice_no)
 	if ($delivery=="C" || $delivery=="S"|| $delivery=="Y")
 	{
 	 
+	$this->Cell(40,8,"",$border,0,'C',0);
+	$this->Cell(125,8,"",$border,0,'C',0);
 	$this->Cell(40,8,"",$border,1,'C',0);
 	 
 	$this->Cell(40,8,"",$border,0,'R',0);
@@ -125,8 +134,10 @@ function Body($invoice_no)
 //   $this->Cell(216,8,iconv("UTF-8", "BIG5-HKSCS",$printShopDetail),$border,1,'C',0);
 
 	
+	$this->Cell(40,8,"",$border,0,'C',0);
+	$this->Cell(125,8,"",$border,0,'C',0);
 	$this->Cell(40,8,"",$border,1,'C',0);
-
+	 
 	$this->Cell(40,8,'',$border,0,'R',0);
 	$this->Cell(125,8,$printShopName,$border,0,'C',0);
 	$this->Cell(40,8,"",$border,1,'C',0);
@@ -264,10 +275,10 @@ $this->Cell(9,6,$row2['unit_name_chi'],$border,0,'R',0);
 	$subtotal=$man_power_price+$total;
 	$subtotal=$subtotal-($subtotal*$discount_percent/100);
 	$subtotal=$subtotal-$discount_deduct;
-	$this->SetFont($fontname,'',13);
-	$this->Cell(5,7,"",$border,0,'R',0);	
-	$this->Cell(100,7,"",$border,0,'L',0);
-	$this->Cell(101,7,"",$border,1,'R',0);
+	//$this->SetFont($fontname,'',13);
+	//$this->Cell(5,7,"",$border,0,'R',0);	
+	//$this->Cell(100,7,"",$border,0,'L',0);
+	//$this->Cell(101,7,"",$border,1,'R',0);
  	$this->SetFont($fontname,'',14);
 	if ($creditcardrate!=0){
 		$creditcardtotal=round($subtotal*$creditcardrate/100);
@@ -278,8 +289,20 @@ $this->Cell(9,6,$row2['unit_name_chi'],$border,0,'R',0);
 	}
 	else
 	{ 
+	$this->Cell(5,7,"",$border,0,'R',0);	
+	$this->Cell(140,7,"",$border,0,'L',0);
+	$this->SetFont($fontname,'B',22);
+	if ($settle=='A'){
+	$this->SetTextColor(255,255,255);
+	$this->SetFillColor(0,0,0);
 	
-	$this->Cell(22,6,"",$border,1,'C',0);
+	$this->Cell(35,7,$logo1,$border,1,'C',1);
+	
+	$this->SetFillColor(233,233,233);
+	$this->SetTextColor(0,0,0);
+	}else{
+		$this->Cell(35,7,"",$border,1,'C',0);
+	}
 	}
 
 	$this->Cell(5,7,"",$border,0,'R',0);	

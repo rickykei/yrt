@@ -568,7 +568,7 @@ function predictSpecifyDate($day,$month,$year,$modelSelectR,$pre3Days=0,$tmps_ex
 				 
 				 
 				 //find today out_qty
-					$goodsPartnoSql="select sum(qty) as totalqty from goods_invoice i ,invoice where invoice.invoice_no=i.invoice_no and i.goods_partno ='".$invoiceItem[$j][$i]['goods_partno']."' and date(invoice_date)=CURDATE()";
+					$goodsPartnoSql="select sum(qty) as totalqty from goods_invoice i ,invoice where invoice.invoice_no=i.invoice_no and i.goods_partno ='".$invoiceItem[$j][$i]['goods_partno']."' and date(invoice_date)='".$year."-".$month."-".$day."'";
 					$todayOutresults = $db->query($goodsPartnoSql);
 					$todayOutRow = $todayOutresults->fetchRow(DB_FETCHMODE_ASSOC);
 					$invoiceItem[$j][$i]['todayPartNoOutTotal']=$todayOutRow['totalqty'];

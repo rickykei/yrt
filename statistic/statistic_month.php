@@ -27,7 +27,6 @@ echo $date_end;
 //$subtotal="select sum(total_price) as total from invoice where month(invoice.invoice_date)=$month && year(invoice.invoice_date)=$year  ";
 $subtotal="select sum(total_price) as total from invoice where invoice.invoice_date>='$date_start' && invoice.invoice_date<='$date_end'  and void='A' ";
 
- 
 	$rows = $connection->query($subtotal);
    $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
    $m_day_counter=$row['total'];
@@ -55,7 +54,6 @@ $subtotal="select sum(total_price) as total from invoice where invoice.invoice_d
 		$member_total_spend_on_bank_deposit[$i]="select sum(total_price) as total from invoice where invoice.settledate <= '$date_end' and branchID='$shop_array[$i]' and settle='A' and deposit_method='B'  and void='A' ";
 		 
 		if ($AREA==$shop_array[$i] || security_check($AREA,$PC) ){
-			 
 		   $rows = $connection->query($shop_subtotal[$i]);
 		   $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
 		   $m_shop_counter[$i]=$row['total'];
@@ -71,7 +69,7 @@ $subtotal="select sum(total_price) as total from invoice where invoice.invoice_d
 		   $rows = $connection->query($unsettle_shop_deposit[$i]);
 		   $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
 		   $m_unsettle_shop_deposit_counter[$i]=$row['total'];
-		   
+		  
 		   $rows = $connection->query($shop_return_total[$i]);
 		   $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
 		   $m_return_shop_total_counter[$i]=$row['total'];

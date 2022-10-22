@@ -28,7 +28,7 @@ function check888(){
 	   if (document.getElementById('mem_id').value=='888')
 	   {
 		   
-		  // document.getElementById('status1').checked=true;
+		  document.getElementById('status1').checked=true;
 		   document.getElementById('delivery2').checked=true;
 
 	   }

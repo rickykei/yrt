@@ -2,14 +2,9 @@
    include_once("./include/config.php");
 ?>
 <link rel="stylesheet" href="./include/invoice_style.css" type="text/css">
+<link href="./include/invoice.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
-<!--
-body {
-	background-color: #CCCCCC;
-}
-.style1 {color: #5E5E5E}
--->
-
+ 
 @import url(./include/cal/calendar-win2k-1.css);
 </style>
 <script type="text/javascript" src="./include/cal/calendar.js"></script>
@@ -240,30 +235,30 @@ body {
 <?=$turnover?>
 <table  width="100%" bgcolor="#2E2E2E" border="0" cellpadding="1" cellspacing="1">
 
-<TR bgcolor="#5E5E5E" align="center" style="font-weight:bold" >
-<TD width="20" height="23" bgcolor="#006633"> ID <input name="invoice_action_all" type="checkbox" id="invoice_action_all" value="B" /></TD>
-<TD width="50" height="23" bgcolor="#006633"> 發票編號</TD>
-<TD width="107" bgcolor="#006633"> 發票日期</TD>
-<TD width="107" bgcolor="#006633">送貨日期 </TD>
-<td width="78" bgcolor="#006633">客戶名稱</td>
-<TD width="94" bgcolor="#006633">會員編號</TD>
-<TD width="67" bgcolor="#006633">分店</TD>
-<TD width="88" bgcolor="#006633">送貨</td>
-<TD width="88" bgcolor="#006633">地址</td>
-<TD width="100" bgcolor="#006633">售貨員</TD>
-<TD width="100" bgcolor="#006633">單總</TD>
-<TD width="40" bgcolor="#006633">入賑方法</TD>
+<TR  class="pagetitle" align="center" style="font-weight:bold" >
+<TD width="20" height="23" > ID <input name="invoice_action_all" type="checkbox" id="invoice_action_all" value="B" /></TD>
+<TD width="50" height="23" > 發票編號</TD>
+<TD width="107" > 發票日期</TD>
+<TD width="107" >送貨日期 </TD>
+<td width="78" >客戶名稱</td>
+<TD width="94" >會員編號</TD>
+<TD width="67" >分店</TD>
+<TD width="88" >送貨</td>
+<TD width="88" >地址</td>
+<TD width="100" >售貨員</TD>
+<TD width="100" >單總</TD>
+<TD width="40" >入賑方法</TD>
 <?php 
 //20100525
 if (($AREA=="Y" && $PC=="99") || ($AREA=="Y" && $PC=="1") ){ 
 ?>
-<TD width="100" bgcolor="#006633">機號</TD>
+<TD width="100" >機號</TD>
 <?php 
 } 
 ?>
-<TD width="32" bgcolor="#006633">唯讀</td>
+<TD width="32" >唯讀</td>
  
-<TD width="32" bgcolor="#006633">列印</td>
+<TD width="32" >列印</td>
 </TR>
 
     <?php 

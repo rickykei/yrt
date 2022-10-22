@@ -1,4 +1,4 @@
-﻿<? 
+<? 
 if ($add==1) //after submit
   {
    $flag=0;

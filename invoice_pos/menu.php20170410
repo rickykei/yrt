@@ -1,0 +1,7 @@
+<div class="widget">
+		 <a class="ui-button ui-widget ui-corner-all" href="index.php" rel="external">主頁</a>
+		 
+		 <a class="ui-button ui-widget ui-corner-all" href="#" id="backlink">上一頁</a>
+		 <a class="ui-button ui-widget ui-corner-all" href="#" id="nextlink">下一頁</a>
+		 <a class="ui-button ui-widget ui-corner-all" href="../invoice/" rel="external">出貨單</a>
+		 </div>

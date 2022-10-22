@@ -363,14 +363,6 @@ $title='出貨單';
 $header=array('出貨單','出貨單','出貨單','出貨單','出貨單');
 $header_title=array();
 $pdf->Body($invoice_no);
-$title='出貨單';
-$header=array('出貨單','出貨單','出貨單','出貨單','出貨單');
-$header_title=array();
-$pdf->Body($invoice_no);
-$title='出貨單';
-$header=array('出貨單','出貨單','出貨單','出貨單','出貨單');
-$header_title=array();
-$pdf->Body($invoice_no);
 $pdf->SetAuthor('YRT Company Limited');
 
 $filepath='./invoice_door/pdf/'.$invoice_no.'.pdf';

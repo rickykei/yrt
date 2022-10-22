@@ -386,7 +386,7 @@ body {
         <input name="clear" type="reset" id="clear" value="上一步" onClick="history.back(1);;">
         <input name="submitb" type="submit" id="submitb" value="送出">
 			<input name="print" type="hidden" id="print" value="">
-		 
+			<input  type="button" value="出3色單" onclick="print3color();">
 			</td>
       </tr>
     </table></td>

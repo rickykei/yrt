@@ -299,6 +299,8 @@ body,td,th ,tr{
 		   $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
 		   $member_total_spend_on_all_bank_deposit_counter[$i]=$row['total'];
 		   
+		   
+		   //echo $member_total_spend_on_all_deposit[$i];
 		   $rows = $connection->query($member_total_spend_on_all_deposit[$i]);
 		   $row = $rows->fetchRow(DB_FETCHMODE_ASSOC);
 		   $member_total_spend_on_all_deposit_counter[$i]=$row['total'];
@@ -529,7 +531,9 @@ var day = document.getElementById("day");
   <tr>
     <?
   	for ($i=0;$i<count($shop_array);$i++){?>
-		<td class="yrtfont">會員現金總存款 <?=number_format($member_total_all_deposit_counter[$i]-$member_total_spend_on_all_deposit_counter[$i]-$member_total_spend_on_all_deposit_door_counter[$i],2,'.',',')?> </td>
+		<td class="yrtfont">會員現金總存款 <?=number_format($member_total_all_deposit_counter[$i]-$member_total_spend_on_all_deposit_counter[$i]-$member_total_spend_on_all_deposit_door_counter[$i],2,'.',',')?>
+	
+		</td>
 		<?}?>
   </tr>
    <tr>

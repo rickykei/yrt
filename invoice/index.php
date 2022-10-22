@@ -25,7 +25,7 @@
 <script type="text/javascript" src="./include/cal/calendar.js"></script>
 <script type="text/javascript" src="./include/cal/lang/calendar-en.js"></script>
 <script type="text/javascript" src="./include/cal/calendar-setup.js"></script>
-<script type="text/javascript" src="./include/functions.js"></script>
+<script type="text/javascript" src="./include/functions.js?20210427"></script>
 <script type="text/javascript" src="./include/invoice.js?20190218"></script>
 <link href="./include/invoice.css" rel="stylesheet" type="text/css" />
  <script type="text/javascript" src="./js/js.storage.min.js"></script> 
@@ -80,9 +80,9 @@ a:active {
               <input type="hidden" name="sales" id="sales" value="<?php echo $USER;?>">
              </td>
             
-			<td colspan="3"><input id="status1" name="status" type="radio" value="A" checked>
+			<td colspan="3"><input id="status1" name="status" type="radio" value="A" >
 			  <span class="style6">入賑</span>
-			  <input id="status2" name="status" type="radio" value="S">
+			  <input id="status2" name="status" type="radio" value="S" checked>
 			  <span class="style6">掛單</span><span class="style6">
 			  <input id="status1" name="status" type="radio" value="D" >
 			  <span class="style6">訂金</span>

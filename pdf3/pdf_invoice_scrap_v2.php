@@ -396,11 +396,11 @@ $pdf->Body($invoice_no);
 
 
 $title='提貨單';
-$pdf->Body($invoice_no);
+#$pdf->Body($invoice_no);
 
 
 $title='收據';
-$pdf->Body($invoice_no);
+#$pdf->Body($invoice_no);
 
 ///$pdf->SetTextColor(0,0,255);
 ///$pdf->SetFillColor(0,0,255);

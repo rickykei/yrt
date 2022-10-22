@@ -37,16 +37,26 @@ function checkLoginDateTime(){
  global $AREA;
 	//check login time 20180501
 	//if normal user 7.45 > < 18.15
-   	$ThatTime ="07:45:00";
-   	$EndTime = "18:15:00";
-	
-	if (time() >= strtotime($ThatTime)&&time() <= strtotime($EndTime)){
+	$hr = date('H', time()); // 13:50:29
+	$mi = date('i', time()); // 13:50:29
+        $hr=intval($hr);
+	$mi=intval($mi);	
+//	echo $hr.$mi;
+//	echo $PC.$AREA;
+	if ($hr>=7){
+			if ($hr<=18){
 					
+			}else{
+				if ($PC!='99'){
+				$UROLE="";		
+				$UNAME="";
+				}
+			}
 			
 	}else{
 		if ($PC!='99'){
-			$UROLE="";		
-			$UNAME="";
+			//$UROLE="";		
+			//$UNAME="";
 		}
 	}
 	

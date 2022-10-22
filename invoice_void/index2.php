@@ -7,24 +7,9 @@ for ($i=0;$i<$invoiceRecord;$i++)
 	if ($goods_partno[$i]!="")
 	$totalcounter++;
 }
-
-//* 20120709 +  buy 138-3 free 333
-
-/*for ($i=0;$i<$totalcounter;$i++)
-{
-	if ($goods_partno[$i]=="138-3"){
-		$goods_partno[$totalcounter]="3333";
-		$qty[$totalcounter]=$qty[$i];
-		$totalcounter++;
-	}
-}
-*/
-//* 20110911 +  buy 138-3 free 333 END
  
-
-//get name
-require_once("../include/config.php");
-require_once("../include/functions.php");
+require_once("./include/config.php");
+require_once("./include/functions.php");
 
 
 //20160825 remove del_timeslot when delivery="w"
@@ -111,34 +96,11 @@ if ($count_man_flag==1)
 }
 */
 }
-?><html>
-<title>invoice_form <?echo $total_man_power_price;?></title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script language="JavaScript" type="text/JavaScript">
-<!--
-function MM_reloadPage(init) {  //reloads the window if Nav4 resized
-  if (init==true) with (navigator) {if ((appName=="Netscape")&&(parseInt(appVersion)==4)) {
-    document.MM_pgW=innerWidth; document.MM_pgH=innerHeight; onresize=MM_reloadPage; }}
-  else if (innerWidth!=document.MM_pgW || innerHeight!=document.MM_pgH) location.reload();
-}
-MM_reloadPage(true);
-function MM_findObj(n, d) { //v4.0
-  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
-    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
-  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
-  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
-  if(!x && document.getElementById) x=document.getElementById(n); return x;
-}
+?>  
 
-function MM_showHideLayers() { //v3.0
-  var i,p,v,obj,args=MM_showHideLayers.arguments;
-  for (i=0; i<(args.length-2); i+=3) if ((obj=MM_findObj(args[i]))!=null) { v=args[i+2];
-    if (obj.style) { obj=obj.style; v=(v=='show')?'visible':(v='hide')?'hidden':v; }
-    obj.visibility=v; }
-}
-//-->
-</script>
 <script language="javascript">
+
+
 function first_text_box_focus()
 {
 	document.form1.elements[0].focus();
@@ -164,30 +126,21 @@ function AddrWindow(toccbcc){
 }
  
 </script>
-<script type="text/javascript" src="../include/invoice.js"></script>
+<script type="text/javascript" src="../include/invoice.js?20190522"></script>
 <link href="../include/invoice.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-<!--
-body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
-}
--->
-</style>
-<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onkeydown="detectKeyBoard(event)">
-<form name="form1" action="index3.php" method="POST">
+ 
+
+<form id="form1" name="form1" action="/?page=invoice&subpage=index3.php" method="POST">
 <table width="900" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#99d6ff">
   
   <tr>
     <td width="4" height="360">&nbsp;</td>
     <td width="801" align="center" valign="top"><table width="101%" height="100%" border="0" cellpadding="2" cellspacing="0">
       <tr>
-        <td width="19%" height="21" bgcolor="#004d80"><span class="style6">出貨單</span></td>
-        <td width="29%"><? echo "< ".$AREA."鋪,第".$PC."機 >";?></td>
-        <td width="15%">&nbsp;</td>
-        <td width="37%">&nbsp;</td>
+        <td width="19%" height="21" class=" pagetitle"><span class="style6">出貨單</span></td>
+        <td width="29%" class="light-pagetitle"><? echo "< ".$AREA."鋪,第".$PC."機 >";?></td>
+        <td width="15%" class="light-pagetitle">&nbsp;</td>
+        <td width="37%" class="light-pagetitle">&nbsp;</td>
       </tr>
       <tr bgcolor="#FFFFFF">
         <td height="24" colspan="4">
@@ -239,7 +192,7 @@ body {
             <td height="24"><span class="style6">
               <?if ($status=="A"){echo "入賑";}else if ($status=="S"){echo "掛單";} else {echo "訂金";};?>
             </span></td>
-			 <td height="24" class="style6"> <?if ($deposit_method=="C"){echo "現金入賑";}else if ($deposit_method=="D"){echo "會員賑戶扣數";} ?></td>
+			 <td height="24" class="style6"> <?if ($deposit_method=="C"){echo "現金入賑";}else if ($deposit_method=="D"){echo "會員現金扣數";}else if ($deposit_method=="B"){echo "會員銀行扣數 ";} ?></td>
           </tr>
         </table></td>
       </tr>
@@ -331,7 +284,7 @@ body {
 		   $creditcardtotal=0;
 			$creditcardrate=0;
 		 if ($creditcard=="on"){
-		 			$creditcardrate=1.5;
+		 			$creditcardrate=3;
 		 			$creditcardtotal=round($subsubtotal*$creditcardrate/100);
 					$subsubtotal=$subsubtotal+$creditcardtotal;
 		 }
@@ -407,8 +360,14 @@ body {
 		<input type="hidden" name="subdiscount" value="<? echo $subdiscount;?>" />
 		<input type="hidden" name="subdeduct" value="<? echo $subdeduct;?>" />
 		<input type="hidden" name="man_power_price" value="<? echo $total_man_power_price;?>" />
-        <input name="clear" type="reset" id="clear" value="上一步" onClick="history.back(1);;">
-        <input name="submitb" type="submit" id="submitb" value="送出"></td>
+        <input name="clear" type="button" id="clear" value="上一步" onClick="history.back(1);;">
+		
+        <input name="submitb" type="submit" id="submitb" value="出單">
+		<input name="print" type="hidden" id="print" value="">
+		<input type="button" value="出3色單" onclick="print3color();">
+		<input type="button" value="出清洲單" onclick="printboss();">
+		</td>
+		
       </tr>
     </table></td>
     <td width="10">&nbsp;</td>
@@ -420,4 +379,4 @@ body {
   </tr>
 </table>
 </form>
-</body></html>
+ 

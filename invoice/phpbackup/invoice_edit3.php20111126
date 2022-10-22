@@ -1,0 +1,108 @@
+﻿<script language="javascript">
+function popUp(URL) {
+day = new Date();
+id = day.getTime();
+eval("page" + id + " = window.open(URL, '" + id + "', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=1,width=800,height=600');");
+}
+</script><?
+$ok=0;
+$totalcounter=0;
+//count input
+for ($i=0;$i<18;$i++)
+{
+	if ($goods_partno[$i]!="")
+	$totalcounter++;
+}
+
+//get name
+include("../include/config.php");
+include("../include/functions.php");
+   $query="SET NAMES 'UTF8'";
+    $connection = DB::connect($dsn);
+
+   if (DB::isError($connection))
+      die($connection->getMessage());
+
+   // (Run the query on the winestore through the connection
+   $result = $connection->query("SET NAMES 'UTF8'");
+   if (DB::isError($result))
+      die ($result->getMessage());
+
+
+
+  for ($i=0;$i<$totalcounter;$i++)
+  {
+  //echo $goods_id[$i]."@".$goods_name[$i]."@".$qty[$i]."@".$discount[$i];
+  }
+
+  //insert invoice
+  $query="update invoice set last_update_date=SYSDATE(),call_count=call_count+1,last_update_by='$browseryrt',invoice_date ='$invoice_date' , delivery_date = '$delivery_date' , sales_name= '$sales' ,customer_name = '$mem_name' ,customer_tel = '$mem_tel' ,customer_detail = '$mem_add' ,member_id ='$mem_id',settle='$status',branchID='$branchID', delivery = '$delivery' ,man_power_price= '$man_power_price' ,discount_percent = '$subdiscount', discount_deduct= '$subdeduct',  special_man_power_percent='$special_man_power_percent',total_price='$subsubtotal',deposit='$deposit',credit_card_rate='$creditcardrate' ,settledate = '$settledate' ,receiver = '$receiver' where invoice_no='".$invoice_no."'";
+  
+ // $query.=" values ('',now(),'$delivery_date','$sales','$mem_name','$mem_tel','$mem_add','$mem_id','A','$AREA','$delivery','$man_power_price','$discount_percent','$discount_deduct')";
+//  echo $query;
+
+//20100112
+	sqllog($query);
+//20100112
+
+  $result=$connection->query($query);
+  if (DB::isError($result))
+      die ($result->getMessage());
+     // echo $query;
+      
+	  
+	  
+	//delete all goods_invoice in old invoice first
+	$sql="delete from goods_invoice where invoice_no='".$invoice_no."'";
+//20100112
+	sqllog($sql);
+//20100112
+  $result = $connection->query($sql);
+   if (DB::isError($result))
+   die ($result->getMessage());
+   
+   
+  for ($i=0;$i<$totalcounter;$i++)
+  {
+   $query="insert into goods_invoice (invoice_no,goods_partno,qty,discountrate,marketprice,status,subtotal,manpower,goods_detail,deductstock,cutting) ";
+   $query.=" values    ('$invoice_no','$goods_partno[$i]','$qty[$i]','$discount[$i]','$market_price[$i]','A','$subtotal[$i]','$manpower[$i]','$goods_detail[$i]','$deductStock[$i]','$cutting[$i]')";
+   //20100112
+	sqllog($query);
+//20100112
+  $result=$connection->query($query);
+  	if (DB::isError($result))
+  	{
+      die ($result->getMessage());
+      
+      $status=0;
+      }
+      else
+      {
+      	$status=1;
+      }
+      
+   
+  }
+  
+  if ($status==1)
+  //echo "invoice insert Success=".$invoice_no;
+  {
+  	include_once("../pdf2/pdf.php");
+?>
+<SCRIPT LANGUAGE="JavaScript">
+popUp("./pdf/<?=$invoice_no?>.pdf");
+window.location="invoicelist.php";
+</script><?
+}
+  /*
+	for ($i=0;$i<$totalcounter;$i++)
+	{
+		$query="select * from sumgoods where goods_id='".$goods_id[$i]."'";
+		$result=$connection->query($query);
+		if (DB::isError($result)) 
+		      die ($result->getMessage());
+    $row = $result->fetchRow();
+    $goods_name[$i]=$row[3];
+    $market_price[$i]=$row[4];
+	}*/		      
+?>

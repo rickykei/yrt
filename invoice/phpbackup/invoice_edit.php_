@@ -1,0 +1,261 @@
+
+<?php
+    $callajax="/invoice/sampleAjaxServer.php";
+  $invoiceRecord=18;
+  require_once("../include/config.php");
+  include_once ('../include/ajax/phpAjaxTags.inc.php'); 
+	pat_Js(array('jsPath'=>'../include/ajax/js'));
+  include_once("../include/timestamp.php");
+  $ts = new TIMESTAMP;
+	//db connection
+	$connection = DB::connect($dsn);
+	   if (DB::isError($connection))
+      die($connection->getMessage());
+	   $result = $connection->query("SET NAMES 'UTF8'");
+	//get Staff name	  
+	  $sql="SELECT * FROM staff";
+	 $staffResult = $connection->query($sql);
+      
+	 //select invoice
+	 $sql="Select * from invoice where invoice_no = ".$id;
+	 $invoiceResult = $connection->query($sql);
+	$invoicerow = $invoiceResult->fetchRow(DB_FETCHMODE_ASSOC);
+	
+	for ($i=0;$i<$invoiceRecord;$i++)
+	{
+	$goods_invoice[$i]['discountrate']=0;
+	$goods_invoice[$i]['qty']=0;
+	}
+	
+	// get goods_invoice detail
+	$sql="select * from goods_invoice where invoice_no=".$id;
+	$goods_invoiceResult = $connection->query($sql);
+	$i=0;
+	while($goods_invoicerow = $goods_invoiceResult->fetchRow(DB_FETCHMODE_ASSOC))
+	{
+		$goods_invoice[$i]['goods_partno']=$goods_invoicerow['goods_partno'];
+		$goods_invoice[$i]['qty']=$goods_invoicerow['qty'];
+		$goods_invoice[$i]['discountrate']=$goods_invoicerow['discountrate'];
+		$sql="select * from sumgoods where goods_partno='".$goods_invoicerow['goods_partno']."'";
+
+		$goods_c= $connection->query($sql);
+		$goods_p =$goods_c->fetchRow(DB_FETCHMODE_ASSOC);
+		$goods_invoice[$i]['goods_detail']=$goods_p['goods_detail'];
+		$goods_invoice[$i]['marketprice']=$goods_invoicerow['marketprice'];
+		$goods_invoice[$i]['status']=$goods_invoicerow['status'];
+		$goods_invoice[$i]['subtotal']=$goods_invoicerow['subtotal'];
+		$goods_invoice[$i]['manpower']=$goods_invoicerow['manpower'];
+		$i++;
+	}
+
+?><html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Invoice</title>
+
+<style type="text/css">
+@import url(../include/cal/calendar-win2k-1.css);
+</style>
+<script type="text/javascript" src="../include/cal/calendar.js"></script>
+<script type="text/javascript" src="../include/cal/lang/calendar-en.js"></script>
+<script type="text/javascript" src="../include/cal/calendar-setup.js"></script>
+<script type="text/javascript" src="../include/invoice.js"></script>
+<link href="../include/invoice.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+<!--
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+-->
+</style></head>
+<body onkeydown="detectKeyBoard(event)">
+<form action="invoice_edit2.php" method="POST" enctype="application/x-www-form-urlencoded" name="form1">
+
+<table width="800" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#99CC99">
+  <tr>
+    <td width="4" height="360">&nbsp;</td>
+    <td width="801" align="center" valign="top"><table width="100%" height="100%" border="0" cellpadding="2" cellspacing="0">
+      <tr>
+        <td width="14%" height="21" bgcolor="#006633"><span class="style6">出貨單</span></td>
+        <td width="34%"><? echo "< ".$AREA."鋪,第".$PC."機 >";?></td>
+        <td width="15%">&nbsp;</td>
+        <td width="37%">&nbsp;</td>
+      </tr>
+      <tr bgcolor="#FFFFFF">
+        <td height="24" colspan="4"><table width="100%" border="0" cellpadding="2" cellspacing="0">
+          <tr bgcolor="#006633">
+            <td width="80" height="21">
+                <span class="style6"> 發票日期： </span>            </td>
+            <td width="113"><span class="style6"><?php $ts->getDate($invoicerow['invoice_date']);	
+			?><input type="hidden" name="invoice_date" value="<?php $ts->getDate($invoicerow['invoice_date']);?>"> </span></td>
+            <td width="75"><span class="style6">送貨日期：</span></td>
+            <td width="167"><div align="left">
+              <input name="delivery_date" type="text" id="delivery_date3" value="<?php $ts->getDate($invoicerow['delivery_date']);?>" size="15">
+              <input name="cal" id="calendar" value=".." type="button">
+            </div></td>
+            <td colspan="2"><span class="style5">
+              <input name="delivery" type="radio" id="delivery" value="Y" <?php if ($invoicerow['delivery']=="Y"){echo "checked";}?>/>
+            </span><span class="style6">送貨
+            <input name="delivery" type="radio" id="radio" value="S" <?php if ($invoicerow['delivery']=="S"){echo "checked";}?>/>
+自取
+<input name="delivery" type="radio" id="radio2" value="C" <?php if ($invoicerow['delivery']=="C"){echo "checked";}?>/>
+街車即走</span></td>
+            </tr>
+          <tr bgcolor="#006633">
+            <td><span class="style6">營業員 ： </span></td>
+            <td>
+              <select name="sales" id="sales">
+			  <?php while ($row = $staffResult->fetchRow(DB_FETCHMODE_ASSOC))
+			  {
+                echo "<option value=\"".$row['name']."\" ";
+				if ($invoicerow['sales_name']==$row['name'])
+				echo "selected";
+				echo ">".$row['name']."</option>";
+				}?>
+                </select>			</td>
+            <td><span class="style6">客戶編號：</span></td>
+            <td><input name="mem_id" type="text" id="mem_id" value="<?php echo $invoicerow['member_id'];?>" size="15">
+              <input name="check_mem_id" id="check_mem_id" type="button" value="?"></td>
+			  <script type="text/javascript">
+		<?
+			pat_updateField(array(
+			'baseUrl'=>''.$callajax.'',
+			'parameters'=>'action=check_mem_id&mem_id={mem_id}',
+			'action'=>"check_mem_id",
+			'target'=>'mem_name,mem_add,mem_credit_level',
+			'source'=>"mem_id",
+		));
+		?>
+		</script>
+            <td width="77"><span class="style6">客戶名稱：</span></td>
+            <td width="252"><input name="mem_name" type="text" id="mem_name" value="<?php echo $invoicerow['customer_name'];?>">
+              <span class="style6">會員級別</span>
+              <input name="mem_credit_level" id="mem_credit_level" type="text" disabled="disabled" class="blocktextbox" size="2" maxlength="2"></td>
+          </tr>
+          <tr bgcolor="#006633">
+            <td height="24"><span class="style6">送貨地址：</span></td>
+            <td height="24" colspan="5"><input name="mem_add" type="text" id="mem_add" size="50" value="<?php echo $invoicerow['customer_detail'];?>"></td>
+          </tr>
+        </table></td>
+      </tr>
+      <tr bgcolor="#FFFFFF">
+        <td colspan="4"><table width="100%" border="0" cellpadding="2" cellspacing="1" bgcolor="#FFFFFF">
+          <tr bgcolor="#006633">
+            <td width="5%"><span class="style6">行數</span></td>
+            <td width="29%"><span class="style6">貨品編號</span></td>
+            <td width="9%"><span class="style6">數量</span></td>
+            <td width="34%"><span class="style6">項目</span></td>
+            <td width="12%"><span class="style6"><span class="style5">單價</span></span></td>
+            <td width="6%"><span class="style6">折扣</span></td>
+            <td width="5%"><span class="style6"><strong>扶力</strong>
+              <input name="allmanpower" type="checkbox" id="allmanpower0" onChange="javascript:selectall();"/>
+            </span></td>
+          </tr>
+<? $elements_counter=13;
+
+$tab=0; 
+for ($i=0;$i<$invoiceRecord;$i++)          
+{
+	?>
+          <tr bgcolor="#CCCCCC">
+            <td><div align="center"><?echo $i+1;?></div></td>
+            <td><input name="goods_id[]" type="text" id="goods_id<?echo $i;?>" size="20" maxlength="25"  value="<?php echo $goods_invoice[$i]['goods_partno'];?>" onKeyPress="next_text_box(event,'qty<?=$i;?>')" />
+            <input type=button name="search" value="." onClick="javascript:AddrWindow(<?echo $elements_counter;$elements_counter=$elements_counter+8;?>)" >
+            <input type="button" name="action<?=$i?>" id="action<?=$i?>" value="?"></td>
+            <td><input name="qty[]" type="text" id="qty<?echo $i;?>" size="8" maxlength="10"  onKeyPress="next_text_box(event,'goods_id<?=$i+1;?>')" onClick="javascipt:count_total();" onKeyUp="javascipt:count_total();" onChange="javascipt:count_total(); " value="<?php echo $goods_invoice[$i]['qty'];?>"></td>
+                       <td><div align="center">
+              <input name="goods_detail[]" type="text" disabled="disabled" class="blocktextbox" id="goods_detail<?echo $i;?>" value="<?php echo $goods_invoice[$i]['goods_detail'];?>" size="35" maxlength="40">
+            </div></td>
+			 <td><div align="center">
+              <input name="market_price[]" type="text" disabled="disabled" class="blocktextbox" id="market_price<?echo $i;?>" onChange="javascipt:count_total();" onClick="javascipt:count_total();" value="<?php echo $goods_invoice[$i]['marketprice'];?>"  size="10" maxlength="10">
+             </div></td>
+            <td><div align="center">
+              <input name="discount[]" type="text" id="discount<?echo $i;?>" size="3" maxlength="3" value="<?php echo $goods_invoice[$i]['discountrate'];?>">
+            </div></td>
+            <td>
+              <div align="center">
+			  <?php if ($goods_invoice[$i]['manpower']=='Y'){ ?>
+  			           <input name="manpowerX[]" type="checkbox"  id="manpowerX<?echo $i;?>" value="Y" onClick="javascript:clickCheckBox(<?echo $i;?>)" checked/>
+					   <?php } else{ ?>
+			           <input name="manpowerX[]" type="checkbox"  id="manpowerX<?echo $i;?>" value="N" onClick="javascript:clickCheckBox(<?echo $i;?>)" />
+					   <?php }?>
+              </div></td>
+          </tr><script type="text/javascript">
+		<?
+			pat_updateField(array(
+			'baseUrl'=>''.$callajax.'',
+			'parameters'=>'action=updatefield&mph={goods_id'.$i.'}&num='.$i.'',
+			'action'=>"action$i",
+			'target'=>'goods_detail'.$i.',market_price'.$i.'',
+			'source'=>"goods_id$i",
+		));
+		?>
+		</script>
+<?}?>
+          
+        
+            
+        </table>          </td>
+      </tr>
+      <tr bgcolor="#FFFFFF">
+        <td height="" colspan="4">
+          <table width="100%" border="0" cellpadding="2" cellspacing="0" bgcolor="#006633">
+            <tr>
+              <td width="15%"><span class="style6">特別扶力費：</span></td>
+              <td width="14%"><input name="special_man_power_percent" type="text" id="special_man_power_percent" size="3" maxlength="5" value="<?php echo $invoicerow['special_man_power_percent'];?>"/>
+                <span class="style6"><strong>%                </strong></span></td>
+              <td width="11%"><span class="style6">總折扣</span></td>
+            <td width="24%"><span class="style6">
+              <label>
+              <input name="subdiscount" type="text" id="subdiscount" value="<?=$invoicerow['discount_percent']?>" size="5" maxlength="3" >
+              </label>
+%<strong>
+<input name="subdeduct" type="text" id="subdeduct" value="<?=$invoicerow['discount_deduct']?>" size="7" maxlength="7">
+$</strong></span></td>
+              <td width="25%" class="style6"><input type="button" name="Submit" value="暫計" onClick="javascript:count_total()">
+                <input name="count" type="text" class="disabled" id="countid" size="10" /></td>
+              <td width="8%"><input name="clear" type="reset" id="clear" value="清除"></td>
+              <td width="3%"><input name="submitb" type="button" id="submitb" value="送出" onClick="checkform()"></td>
+            </tr>
+          </table>          </td>
+      </tr>
+      <tr>
+        <td height="">&nbsp;</td>
+        <td height="">&nbsp;</td>
+        <td height=""></td>
+        <td>&nbsp;</td>
+      </tr>
+    </table></td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+ <input type="hidden" name="AREA" value="<?echo $AREA;?>" /><input type="hidden" name="PC" value="<?echo $PC;?>" />
+<input type="hidden" name="invoice_no" id="invoice_no" value="<?php echo $id;?>" /><?
+for ($i=0;$i<$invoiceRecord;$i++)
+ {
+   if($goods_invoice[$i]['manpower']=='Y'){ 
+   ?><input type="hidden" name="manpower[]" id="manpower<?echo $i;?>" value="Y"/><?
+   }
+   else{
+   ?><input type="hidden" name="manpower[]" id="manpower<?echo $i;?>" value="N"/><?
+	}
+ }
+?>
+</form>
+<script type="text/javascript">
+first_text_box_focus();
+  Calendar.setup(
+    {
+      inputField  : "delivery_date3",         // ID of the input field
+      ifFormat    : "%Y-%m-%d %H:%M",    // the date format
+      showsTime      :    true,
+      button      : "calendar"       // ID of the button
+      
+    }
+  );
+</script>
+
+
