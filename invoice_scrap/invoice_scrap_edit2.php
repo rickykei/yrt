@@ -217,9 +217,9 @@ function checkform(i)
 			     <div align="left"><span class="style7">
 			       $<?
 		   $creditcardtotal=0;
-			$creditcardrate=0;
+			 $creditcardrate=0;
 		 if ($creditcard=="on"){
-		 			$creditcardrate=1.5;
+		 			 $creditcardrate=$creditcardrate_default;
 		 			$creditcardtotal=round($subsubtotal*$creditcardrate/100);
 					$subsubtotal=$subsubtotal+$creditcardtotal;
 		 }

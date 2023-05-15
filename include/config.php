@@ -33,5 +33,5 @@ $shopAddress[1]="九龍大角咀通州街2-16號長豐大廈A-M舖地下";
 $shopDetail[0]="TEL : 2393-9335, 2787-7678 FAX : 2393-8707";
 $shopDetail[1]="TEL : 2412-2335, 2412-2241 FAX : 2413-3373";
 
- 
+ $creditcardrate=2;
 ?>

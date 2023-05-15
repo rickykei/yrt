@@ -291,9 +291,9 @@ body {
 			     <div align="left"><span class="style7">
 			       $<?
 		   $creditcardtotal=0;
-			$creditcardrate=0;
+			 $creditcardrate=0;
 		 if ($creditcard=="on"){
-		 			$creditcardrate=3;
+		 			 $creditcardrate=$creditcardrate_default;
 		 			$creditcardtotal=round($subsubtotal*$creditcardrate/100);
 					$subsubtotal=$subsubtotal+$creditcardtotal;
 		 }

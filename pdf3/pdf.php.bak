@@ -21,7 +21,7 @@ function Body($invoice_no)
 {
 	
    $this->SetFont($fontname,'',26,false);
-   $border=0;
+   $border=1;
    
    include("./include/config.php");
 

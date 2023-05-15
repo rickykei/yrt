@@ -357,8 +357,9 @@ $</strong></span></td>
 		<input type="hidden" name="deposit" value="<?=$deposit?>"/>
 <? }
 $subsubtotal=($total_man_power_price+$total_price)*(100-$subdiscount)/100-$subdeduct;
+$creditcardrate=0;
  if ($creditcard=="on"){
-		 			$creditcardrate=3;
+		 			$creditcardrate=$creditcardrate_default;
 		 			$creditcardtotal=round($subsubtotal*$creditcardrate/100);
 					$subsubtotal=$subsubtotal+$creditcardtotal;
 		 }
