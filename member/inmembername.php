@@ -98,6 +98,20 @@ function checkform()
             </select></td>
             <td bgcolor="#CCCC00">&nbsp;</td>
           </tr>
+		   <tr bgcolor="#006633">
+		   <td height="21" bgcolor="#CCCC00">&nbsp;</td>
+		     <td align="right" bgcolor="#CCCC00"><span class="style6">聯絡人卡片 : </span></td>
+       
+        <td bgcolor="#999999" class="style6"> 
+          <select name="vcf" style="border-width: 1px; background-color: #CCCCCC;" #invalid_attr_id="solid">
+            <option value="Y" selected>Yes</option>
+              <option value="N">No</option>
+            
+          </select>
+        </td> 
+         <td bgcolor="#CCCC00">&nbsp;</td>
+    
+      </tr>
           <tr bgcolor="#006633">
             <td height="21" bgcolor="#CCCC00">&nbsp;</td>
             <td align="right" bgcolor="#CCCC00"><span class="style6">備註: </span></td>

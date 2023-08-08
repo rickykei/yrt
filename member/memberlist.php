@@ -61,7 +61,10 @@ body {
 
   <input type="submit" name="button" value="查客戶"/></div>
 
-</form><?=$turnover?>
+</form>
+<input type="button" onclick="location.href='/member/genvcf.php';" value="下載聯絡人" />
+  <hr>
+<?=$turnover?>
 <table  width="100%" bgcolor="#2E2E2E" border="0" cellpadding="1" cellspacing="1">
 <TR bgcolor="#5E5E5E" align="center" style="font-weight:bold" >
 <TD width="89" height="23" bgcolor="#006633">客戶ID</TD>
@@ -71,6 +74,7 @@ body {
 <TD width="99" bgcolor="#006633">傳真號碼 </TD>
 <TD width="66" bgcolor="#006633">貨品種類</TD>
 <TD width="60" bgcolor="#006633">級別 </td>
+<TD width="60" bgcolor="#006633">聯絡人名片 </td>
 <TD width="241" bgcolor="#006633">備註</TD>
   <TD width="67" bgcolor="#006633">編輯</td>
 
@@ -89,6 +93,7 @@ body {
    <td><?=$row['member_fax']?></td>
    <td><?=$row['member_good_type']?></td>
    <td><?=$row['creditLevel']?></td>
+    <td><?=$row['vcf']?></td>
    <td><?=$row['remark']?></td>
    <td><a  href="/?page=member&subpage=inmembernameedit.php&member_id=<?=$row['member_id']?>" target="_blank">Edit</a></td>
 		 <? }

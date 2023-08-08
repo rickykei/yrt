@@ -66,7 +66,7 @@ function count_total()
 	
 	//20181320 CreditCard Charge
 	if (document.getElementById('creditcard').checked==true){
-		subsubtotal=subsubtotal+Math.round(subsubtotal*3/100);
+		subsubtotal=subsubtotal+Math.round(subsubtotal*2/100);
 	}
 	
  

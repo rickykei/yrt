@@ -26,7 +26,7 @@
 
   
        
-    $query="insert into member (member_id,member_name,member_add,member_tel,member_fax,member_good_type,creditLevel,transportLevel,remark) values ('$member_id','$member_name','$member_add','$member_tel','$member_fax','$member_good_type','$creditLevel','$transportLevel','$remark')";
+    $query="insert into member (member_id,member_name,member_add,member_tel,member_fax,member_good_type,creditLevel,transportLevel,remark,vcf) values ('$member_id','$member_name','$member_add','$member_tel','$member_fax','$member_good_type','$creditLevel','$transportLevel','$remark','$vcf')";
   
       
       if (mysql_query($query))

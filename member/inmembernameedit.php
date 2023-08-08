@@ -6,7 +6,7 @@ include("./include/config.php");
  $result = $db->query("SET NAMES 'UTF8'");
 if	($update==1)
 {
-	$query="update member set member_name='$member_name', member_add='$member_add', member_tel='$member_tel',member_fax='$member_fax',member_good_type='$member_good_type',transportLevel='$transportLevel',creditLevel='$creditLevel',remark='$remark' where member_id='$member_id'";
+	$query="update member set member_name='$member_name', member_add='$member_add', member_tel='$member_tel',member_fax='$member_fax',member_good_type='$member_good_type',transportLevel='$transportLevel',creditLevel='$creditLevel',remark='$remark',vcf='$vcf' where member_id='$member_id'";
 
 	
 
@@ -147,6 +147,18 @@ function check_del(member)
             <option value="C" <? if($row['creditLevel']=="C") echo "selected"?>>C</option>
             <option value="D" <? if($row['creditLevel']=="D") echo "selected"?>>D</option>
             <option value="E" <? if($row['creditLevel']=="E") echo "selected"?>>E</option>
+          </select>
+        </label></td> 
+        <td width="20%" bgcolor="#999999">&nbsp;</td>
+        <td width="20%" bgcolor="#999999">&nbsp;</td>
+      </tr>
+	  <tr bgcolor="#999999">
+        <td class="style6">聯絡人卡片 : </td>
+        <td bgcolor="#999999" class="style6"><label>
+          <select name="vcf">
+            <option value="Y" <? if($row['vcf']=="Y") echo "selected"?>>Y</option>
+            <option value="N" <? if($row['vcf']=="N") echo "selected"?>>N</option>
+            
           </select>
         </label></td> 
         <td width="20%" bgcolor="#999999">&nbsp;</td>
