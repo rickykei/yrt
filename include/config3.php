@@ -1,6 +1,6 @@
 <?php
   
-$dsn = 'mysql://wood2018:98014380@localhost/wood2018';
+$dsn = 'mysql://root@localhost/wood2018';
 
 require_once 'DB.php';
  

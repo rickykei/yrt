@@ -11,6 +11,13 @@ function AddrWindow(toccbcc){
 	//window.open('page_search_partno.php?recid=' + toccbcc,"Searh GoodsID","left=400,screenY=300,width=530,height=360,scrollbars=yes");
 	popUp("/?page=invoice&subpage=page_search_partno.php&recid=" + toccbcc,700,500);
 }
+function BonusWindow(toccbcc){
+	///var abc;
+	//abc=document.form1.partno[0].value;
+	//alert(abc);
+	//window.open('page_search_partno.php?recid=' + toccbcc,"Searh GoodsID","left=400,screenY=300,width=530,height=360,scrollbars=yes");
+	popUp("/?page=bonus_by_item&subpage=page_search_partno.php&recid=" + toccbcc,700,500);
+}
 function detectKeyBoard(evt){
 	
         if(document.all)evt = event;

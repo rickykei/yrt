@@ -1,7 +1,7 @@
 <?php
  
 require_once('DB.php'); 
-$dsn = 'mysql://wood2014:98014380@localhost/wood2018';
+$dsn = 'mysql://root:@localhost/wood2018';
 $db = DB::connect($dsn);
 $connection = DB::connect($dsn);
 if (DB::isError($connection))

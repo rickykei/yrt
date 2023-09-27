@@ -120,6 +120,16 @@ body {
         <td><div align="center"><a href="member/inmembercsv.php" target="_blank">客戶名Excel</a></div></td>
         <td align="center"><a href="bonus/index.php" target="_blank">花紅計算表</a></td>
       </tr>
+	   <tr bgcolor="#CCCCCC">
+       <td align="center"></td>
+        <td><div align="center"></div></td>
+        <td align="center"><a href="bonus_percentage/index.php" target="_blank">花紅百份比計算表</a></td>
+      </tr>
+	   <tr bgcolor="#CCCCCC">
+       <td align="center"></td>
+        <td><div align="center"></div></td>
+        <td align="center"><a href="/?page=bonus_by_item&subpage=index.php" target="_blank">貨品花紅計算</a></td>
+      </tr>
         <tr bgcolor="#CCCCCC">
         <td align="center">  </td>
         <td></td>
