@@ -45,9 +45,9 @@ if ($add==1) //after submit
    */
 
 	if ($partno_sub==""){
-    $query="insert into sumgoods (goods_partno,goods_detail,market_price,allstock,status,admin_view,remark,model,model2,model3,model3_x,model3_y,unitid,inshop_quota,inshop_box,sell_out_qty,sell_out_unit,thereafter_price,thereafter_qty,market_price_door,buy_in_unit,pos_display,pos_seq) values ('$goods_partno','$goods_detail',$market_price,0,'Y','N','$remark','$model','$model2','$model3','$model3_x','$model3_y','$unitid','$inshop_quota','$inshop_box','$sell_out_qty','$sell_out_unit','$thereafter_price','$thereafter_qty','$market_price_door','$buy_in_unit','$pos_display','$pos_seq')";
+    $query="insert into sumgoods (goods_partno,goods_detail,market_price,allstock,status,admin_view,remark,model,model2,model3,model3_x,model3_y,unitid,inshop_quota,inshop_box,sell_out_qty,sell_out_unit,thereafter_price,thereafter_qty,market_price_door,buy_in_unit,pos_display,pos_seq,commission) values ('$goods_partno','$goods_detail',$market_price,0,'Y','N','$remark','$model','$model2','$model3','$model3_x','$model3_y','$unitid','$inshop_quota','$inshop_box','$sell_out_qty','$sell_out_unit','$thereafter_price','$thereafter_qty','$market_price_door','$buy_in_unit','$pos_display','$pos_seq','$commission')";
 	}else{
-	$query="insert into sumgoods (goods_partno,goods_detail,market_price,allstock,status,admin_view,remark,model,model2,model3,model3_x,model3_y,unitid,inshop_quota,inshop_box,mix,sell_out_qty,sell_out_unit,thereafter_price,thereafter_qty,market_price_door,buy_in_unit,pos_display,pos_seq) values ('$goods_partno','$goods_detail',$market_price,0,'Y','N','$remark','$model','$model2','$model3','$model3_x','$model3_y','$unitid','$inshop_quota','$inshop_box','Y','$sell_out_qty','$sell_out_unit','$thereafter_price','$thereafter_qty','$market_price_door','$buy_in_unit','$pos_display','$pos_seq')";			
+	$query="insert into sumgoods (goods_partno,goods_detail,market_price,allstock,status,admin_view,remark,model,model2,model3,model3_x,model3_y,unitid,inshop_quota,inshop_box,mix,sell_out_qty,sell_out_unit,thereafter_price,thereafter_qty,market_price_door,buy_in_unit,pos_display,pos_seq,commission) values ('$goods_partno','$goods_detail',$market_price,0,'Y','N','$remark','$model','$model2','$model3','$model3_x','$model3_y','$unitid','$inshop_quota','$inshop_box','Y','$sell_out_qty','$sell_out_unit','$thereafter_price','$thereafter_qty','$market_price_door','$buy_in_unit','$pos_display','$pos_seq','$commission')";			
 	}
  
       if (mysql_query($query)){
@@ -396,6 +396,14 @@ body {
         <td width="113"><font color="#FFFFFF" size="2"  class="style6">POS 順序 (0至999) 小的排先</font></td>
         <td width="275"> 
          <input type="text" name="pos_seq" id="pos_seq" value="0" >
+              </td>
+        <td width="142">&nbsp;</td>
+        <td width="346">&nbsp;</td>
+      </tr>
+	      <tr bgcolor="#999999"> 
+        <td width="113"><font color="#FFFFFF" size="2"  class="style6">佣金</font></td>
+        <td width="275"> 
+         <input type="text" name="commission" id="commission" value="<?php echo $row["commission"];?>" >
               </td>
         <td width="142">&nbsp;</td>
         <td width="346">&nbsp;</td>

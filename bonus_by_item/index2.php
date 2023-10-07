@@ -1,22 +1,13 @@
 <?
-$invoiceRecord=16;
+ 
 $totalcounter=0;
 //count input
-for ($i=0;$i<$invoiceRecord;$i++)
-{
-	if ($goods_partno[$i]!="")
-	$totalcounter++;
-}
+ 
  
 require_once("./include/config.php");
 require_once("./include/functions.php");
 
-
-//20160825 remove del_timeslot when delivery="w"
-if ($delivery=='W')
-{$delivery_timeslot=0;
-$delivery_date='';}
-
+ 
 //correct time slot to del date 20151211
 
 $delivery_date=correct_delTimeSlot_to_delDate($delivery_date,$delivery_timeslot);
@@ -31,44 +22,57 @@ $delivery_date=correct_delTimeSlot_to_delDate($delivery_date,$delivery_timeslot)
    // (Run the query on the winestore through the connection
    $result = $connection->query("SET NAMES 'UTF8'");
    if (DB::isError($result)) die ($result->getMessage());
-
-	$total_man_power_price=0;
-
-	for ($i=0;$i<$totalcounter;$i++)
-	{
-		$query="select * from sumgoods where goods_partno='".$goods_partno[$i]."'";
-		$result=$connection->query($query);
+ 
+ 
+ // for admin view
+if ($sales=='ALL'){
+		$query2="select IFNULL(sum( goods_invoice.qty * sumgoods.commission),0) as commission ,invoice.sales_name as sales_name from goods_invoice, invoice,sumgoods 
+		where invoice.invoice_no= goods_invoice.invoice_no  
+		AND sumgoods.goods_partno = goods_invoice.goods_partno 
+		and  invoice.settledate >='".$delivery_date." 00:01' 
+		and invoice.settledate <='".$settledate." 23:59' 
+		group by invoice.sales_name ";
+		$result=$connection->query($query2);
 		if (DB::isError($result)) die ($result->getMessage());
-	    $row = $result->fetchRow(DB_FETCHMODE_ASSOC);
-
-		//20060409 trim special char from input
-		$goods_detail[$i]=htmlspecialchars(stripslashes($goods_detail[$i]));
-		if ($goods_detail[$i]=="")
-		$goods_detail[$i]=$row["goods_detail"];
-		if ($market_price[$i]=="")
-		$market_price[$i]=$row["market_price"]; 
-	
-	
-		 
-		$query2="select IFNULL(sum(qty),0) as qty from goods_invoice, invoice where invoice.invoice_no= goods_invoice.invoice_no and goods_partno='".$goods_partno[$i]."'
-		and sales_name='".$sales."' and invoice.settledate >='".$delivery_date." 00:01' and invoice.settledate <='".$settledate." 23:59'";
+ 
+		$i=0;
+		while( $row2 = $result->fetchRow(DB_FETCHMODE_ASSOC)){
+			$commission[$i]=$row2["commission"]; 
+			$sales_name[$i]=$row2["sales_name"];
+			$i++;
+		}
+ 
+}else{
+	 //staff view
+		$query2="select IFNULL(sum(qty),0) as qty ,goods_invoice.goods_partno from goods_invoice, invoice where invoice.invoice_no= goods_invoice.invoice_no  
+		and sales_name='".$sales."' and invoice.settledate >='".$delivery_date." 00:01' and invoice.settledate <='".$settledate." 23:59' group by goods_invoice.goods_partno ";
  
 		$result=$connection->query($query2);
 		if (DB::isError($result)) die ($result->getMessage());
-	    $row2 = $result->fetchRow(DB_FETCHMODE_ASSOC);
-		$qty[$i]=$row2["qty"]; 
+	    
+		$i=0;
+		while( $row2 = $result->fetchRow(DB_FETCHMODE_ASSOC)){
+			$qty[$i]=$row2["qty"]; 
+			$goods_partno[$i]=$row2["goods_partno"];
+			$i++;
+		}
 		 
-		
-	} 
-	
+		for ($j=0;$j<$i;$j++) {
+		$query="select commission,goods_detail from sumgoods where goods_partno='".$goods_partno[$j]."'";
+		$result=$connection->query($query);
+		if (DB::isError($result)) die ($result->getMessage());
+			
+			while ($row = $result->fetchRow(DB_FETCHMODE_ASSOC)){
+				$goods_detail[$j]=htmlspecialchars(stripslashes($row['goods_detail']));
+				$commission[$j]=$qty[$j]*$row['commission'];
+			}
+		}
+	 
+ }
 	 
 ?>  
 
-<script language="javascript">
-
-
- 
-  
+<script language="javascript"> 
 </script>
 <script type="text/javascript" src="../include/bonus.js?20230927"></script>
 <link href="../include/invoice.css" rel="stylesheet" type="text/css" />
@@ -90,7 +94,7 @@ body {
     <td width="4" height="">&nbsp;</td>
     <td width="801" align="center" valign="top"><table width="101%" height="100%" border="0" cellpadding="2" cellspacing="0">
       <tr>
-        <td width="19%" height="21" bgcolor="#004d80"><span class="style6">出貨單</span></td>
+        <td width="19%" height="21" bgcolor="#004d80"><span class="style6">貨品花紅計算</span></td>
         <td width="29%"><? echo "< ".$AREA."鋪,第".$PC."機 >";?></td>
         <td width="15%">&nbsp;</td>
         <td width="37%">&nbsp;</td>
@@ -117,6 +121,8 @@ body {
           
         </table></td>
       </tr>
+	  
+	  <?php if ($sales!='ALL'){ ?>
       <tr bgcolor="#FFFFFF">
         <td colspan="4"><table width="100%" border="0" cellpadding="2" cellspacing="1" bgcolor="#FFFFFF">
           <tr bgcolor="#004d80">
@@ -131,19 +137,21 @@ body {
           </tr>
 		  <? 
 		  $total_price=0;
-		  for($i=0;$i<$totalcounter;$i++)
-		  {?>
+		  for($i=0;$i<$j;$i++)
+		  {
+			  if ($commission[$i]!=0){?>
           <tr bgcolor="#CCCCCC">
             <td><span class="style7"><?echo $i+1;?></span></td>
             <td><span class="style7"><?echo $goods_partno[$i];?></span></td>
             <td><span class="style7"><?echo $goods_detail[$i];?></span></td>
             <td><span class="style7"><?echo number_format($qty[$i]);?></span></td>
-            <td><span class="style7">$<?echo $market_price[$i];?></span></td>
+            <td><span class="style7">$<?echo $commission[$i];?></span></td>
            
-          <td><span class="style7"><?$subtotal[$i]=$market_price[$i]*$qty[$i];echo "$".number_format($subtotal[$i], 2, '.', ', ');?></span></td>
+          <td><span class="style7"><?$subtotal[$i]=$commission[$i]*$qty[$i];echo "$".number_format($subtotal[$i], 2, '.', ', ');?></span></td>
           </tr>
 		  <?
 		  $total_price=$total_price+$subtotal[$i];
+			  }
 		  }
 	
 		  ?>
@@ -175,56 +183,44 @@ body {
 			   </tr>
           </table>          </td>
       </tr>
-      <tr>
-        <td height="">&nbsp;</td>
-        <td height="">&nbsp;</td>
-        <td height="">&nbsp;</td>
-        <td>
-        
-        <input type="hidden" name="invoice_date" value="<? echo $invoice_date;?>">
-        <input type="hidden" name="delivery_date" value="<? echo $delivery_date;?>">
+      <?php }else{ 
+	  //admin view
+	  ?>
+	   <tr bgcolor="#FFFFFF">
+        <td colspan="4"><table width="100%" border="0" cellpadding="2" cellspacing="1" bgcolor="#FFFFFF">
+          <tr bgcolor="#004d80">
+            <td width="5%"><span class="style6">行數</span></td>
+            <td align="right" class="style6">Sales</td>
+            <td class="style6">佣金</td> 
+          </tr>
+		  <? 
+		  $total_price=0;
+		  for($j=0;$j<$i;$j++)
+		  {?>
+          <tr bgcolor="#CCCCCC">
+            <td><span class="style7"><?echo $j+1;?></span></td>
+            <td align="right"><span class="style7"><?echo $sales_name[$j];?></span></td>
  
-        <input type="hidden" name="settledate" value="<? echo $settledate;?>">
-		<input type="hidden" name="sales" value="<? echo $sales;?>" />
-       
-		<input type="hidden" name="AREA" value="<?echo $AREA;?>" />
-		<input type="hidden" name="PC" value="<?echo $PC;?>" />
-		 
-		
-        <?php
-        for($i=0;$i<$totalcounter;$i++)
-        {
-        ?>
-        <input type="hidden" name="goods_partno[]" value="<? echo $goods_partno[$i];?>">
-        <input type="hidden" name="goods_detail[]" value="<? echo $goods_detail[$i];?>">
-        <input type="hidden" name="qty[]" value="<? echo $qty[$i];?>">
-        <input type="hidden" name="market_price[]" value="<? echo $market_price[$i];?>">
- 
-        <input type="hidden" name="subtotal[]" value="<? echo $subtotal[$i];?>">
-		< 
-        <?php }?>
-		
-		<input type="hidden" name="status" value="<?=$status?>"/>
-<?
-//20060426
-		if ($status=="A")
-{
-	?>	<input type="hidden" name="deposit" value="<?=$subsubtotal?>"/>
-		<? }else{?>
-		<input type="hidden" name="deposit" value="<?=$deposit?>"/>
-<? }?>
-		<input type="hidden" name="deposit_method" value="<?=$deposit_method?>"/>
- 
-		<input type="hidden" name="subsubtotal" value="<?=$subsubtotal?>"/>
- 
-		<input type="hidden" name="subdeduct" value="<? echo $subdeduct;?>" />
- 
-        <input name="clear" type="button" id="clear" value="上一步" onClick="history.back(1);;">
-		
-   
-		</td>
-		
+            <td><span class="style7">$<?echo $commission[$j];?></span></td>
+           
+          
+          </tr>
+		  <?
+		  $total_price=$total_price+$commission[$j];
+	  }}
+	
+		  ?><tr bgcolor="#CCCCCC">
+			   <td height="23" ></td>
+			   <td align="right"><span class="style7">總合計</span><span class="style7">：</span></td>
+			   <td ><span class="style7">$<?php
+					
+				 echo $total_price;
+				  ?>
+			   </span></td>
+			   </tr>
+        </table>          </td>
       </tr>
+  
     </table></td>
     <td width="10">&nbsp;</td>
   </tr>

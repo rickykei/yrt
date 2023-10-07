@@ -17,6 +17,9 @@
 	  $sql="SELECT * FROM staff";
 	 $staffResult = $connection->query($sql);
        
+	   
+	  
+
 ?> 
 <? // = $ajax->loadJsCore(true) ?>
 <style type="text/css">
@@ -60,10 +63,10 @@ a:active {
 <form action="/?page=bonus_by_item&subpage=index2.php" method="POST" enctype="application/x-www-form-urlencoded" name="form1">
 <table width="1000"  border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#99d6ff">
   <tr>
-    <td width="4" height="360">&nbsp;</td>
+    <td width="4" >&nbsp;</td>
     <td align="center" valign="top"><table width="100%"  border="0" cellpadding="2" cellspacing="0">
       <tr>
-        <td width="14%" height="21" bgcolor="#004d80"><span class="style6"><a href="../">出貨單</a>  </span></td>
+        <td width="14%" height="21" bgcolor="#004d80"><span class="style6"><a href="../">貨品花紅計算</a>  </span></td>
         <td width="34%"><span class="style7"><? echo "< ".$AREA."鋪,第".$PC."機 >".$USER;?></span></td>
         <td width="15%">&nbsp;</td>
         <td width="37%">&nbsp;</td>
@@ -82,70 +85,32 @@ a:active {
          <tr bgcolor="#004d80">
 		    <td width="73" ><span class="style6">營業員 ：</span></td>
             <td width="94"  colspan=3> <select name="sales" id="sales">
-			  <?php
-			  
-			  if (!($AREA=="Y" && $PC=="99") && !($AREA=="Y" && $PC=="1") ){
-					echo "<option value=\"".$invoicerow['sales_name']."\" ";	
-					echo "selected";
-					echo ">".$invoicerow['sales_name']."</option>";
-			  }
-			  else
+			  <?php 
+			  if (($AREA=="Y" && $PC=="99") || ($AREA=="Y" && $PC=="1") )
 			  {
-				  while ($row = $staffResult->fetchRow(DB_FETCHMODE_ASSOC))
+				  
+					echo "<option value='ALL'>ALL</option>";
+					
+			  }
+			  while ($row = $staffResult->fetchRow(DB_FETCHMODE_ASSOC))
 				  {
-					echo "<option value=\"".$row['name']."\" ";
-					if ($invoicerow['sales_name']==$row['name'])
+			 
+				
+					echo "<option value=\"".$row['name']."\" ";	
+					  if ($USER==$row['name'])
 					echo "selected";
 					echo ">".$row['name']."</option>";
-					}
+				   
 			  }
+				 
 			?>
                     
                 </select><span class="style6"><?=$invoicerow['sales_name']?></span></td>
 		 </tr>
         </table></td>
       </tr>
-      <tr bgcolor="#FFFFFF">
-        <td colspan="4"><table width="100%" border="0" cellpadding="2" cellspacing="1" bgcolor="#FFFFFF">
-          <tr bgcolor="#004d80">
-            <td width="4%"><span class="style6">行數</span></td>
-            <td width="20%"><span class="style6">貨品編號</span></td>
-               <td width="30%"><span class="style6">項目</span></td>
-         
-            <td width="9%"><span class="style6"><span class="style6">佣</span></span></td>
-     
-         
-			 
-          </tr>
-<?
-
-
-$tab=0;        
-for ($i=0;$i<$invoiceRecord;$i++)          
-{
-	?>
-          <tr bgcolor="#CCCCCC">
-            <td><div align="center"><span class="style7"><?echo $i+1;?></span></div></td>
-            <td><input name="goods_partno[]" type="text" id="goods_partno<?echo $i;?>" size="15" maxlength="20"    onChange="findPartNoAjax('<?=$i?>')"/>
-			<input type=button name="search" value="." onClick="javascript:BonusWindow(<?echo $i;?>);" >
-			 
-            </td>
-<td>
-              <input name="goods_detail[]" type="text" id="goods_detail<?echo $i;?>"  size="35" maxlength="40">            </td>
-       
-			 <td><div align="center">
-              $<input name="market_price[]" type="text" id="market_price<?echo $i;?>"     size="10" maxlength="10"  />
-             </div></td> 
-           
-           
-			 
-          </tr>
-	 
-<?}?>
- 
-        </table> 
-		</td>
-      </tr>
+      
+  
       <tr bgcolor="#FFFFFF">
         <td height="" colspan="4">
           <table width="100%" border="0" cellpadding="2" cellspacing="0" bgcolor="#004d80">
@@ -167,7 +132,7 @@ for ($i=0;$i<$invoiceRecord;$i++)
 </form>
  
 <script type="text/javascript">
-first_text_box_focus();
+ 
   Calendar.setup(
     {
       inputField  : "delivery_date",         // ID of the input field
