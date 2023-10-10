@@ -30,7 +30,7 @@ if ($sales=='ALL'){
 		where invoice.invoice_no= goods_invoice.invoice_no  
 		AND sumgoods.goods_partno = goods_invoice.goods_partno 
 		and  invoice.settledate >='".$delivery_date." 00:01' 
-		and invoice.settledate <='".$settledate." 23:59' 
+		and invoice.settledate <='".$settledate." 23:59'  and invoice.settle ='A' 
 		group by invoice.sales_name ";
 		$result=$connection->query($query2);
 		if (DB::isError($result)) die ($result->getMessage());
@@ -45,7 +45,7 @@ if ($sales=='ALL'){
 }else{
 	 //staff view
 		$query2="select IFNULL(sum(qty),0) as qty ,goods_invoice.goods_partno from goods_invoice, invoice where invoice.invoice_no= goods_invoice.invoice_no  
-		and sales_name='".$sales."' and invoice.settledate >='".$delivery_date." 00:01' and invoice.settledate <='".$settledate." 23:59' group by goods_invoice.goods_partno ";
+		and sales_name='".$sales."' and invoice.settledate >='".$delivery_date." 00:01' and invoice.settledate <='".$settledate." 23:59' and invoice.settle='A' group by goods_invoice.goods_partno ";
  
 		$result=$connection->query($query2);
 		if (DB::isError($result)) die ($result->getMessage());
@@ -64,7 +64,7 @@ if ($sales=='ALL'){
 			
 			while ($row = $result->fetchRow(DB_FETCHMODE_ASSOC)){
 				$goods_detail[$j]=htmlspecialchars(stripslashes($row['goods_detail']));
-				$commission[$j]=$qty[$j]*$row['commission'];
+				$commission[$j]=$row['commission'];
 			}
 		}
 	 
@@ -130,7 +130,7 @@ body {
             <td width="24%" class="style6">貨品編號</td>
             <td width="32%" class="style6">項目</td>
             <td width="5%" class="style6">賣出數量</td>
-            <td width="13%" class="style6">佣</td>
+            <td width="13%" class="style6">佣(一件）</td>
             <td width="4%" class="style6">總計</td>
             
          
