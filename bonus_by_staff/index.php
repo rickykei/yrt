@@ -60,7 +60,7 @@ a:active {
 -->
 </style>
  
-<form action="/?page=bonus_by_item&subpage=index2.php" method="POST" enctype="application/x-www-form-urlencoded" name="form1">
+<form action="/?page=bonus_by_staff&subpage=index2.php" method="POST" enctype="application/x-www-form-urlencoded" name="form1">
 <table width="1000"  border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#99d6ff">
   <tr>
     <td width="4" >&nbsp;</td>
@@ -82,7 +82,31 @@ a:active {
                     <td><input name="settledate" type="text" id="settledate" value="<? echo Date("Y-m-d"); ?>" size="15" maxlength="20"><input name="cal2" id="calendar2" value=".." type="button"></td>
              
           </tr> 
-        
+         <tr bgcolor="#004d80">
+		    <td width="73" ><span class="style6">營業員 ：</span></td>
+            <td width="94"  colspan=3> <select name="sales" id="sales">
+			  <?php 
+			  if (($AREA=="Y" && $PC=="99") || ($AREA=="Y" && $PC=="1") )
+			  {
+				  
+					echo "<option value='ALL'>ALL</option>";
+					
+			  }
+			  while ($row = $staffResult->fetchRow(DB_FETCHMODE_ASSOC))
+				  {
+			 
+				
+					echo "<option value=\"".$row['name']."\" ";	
+					  if ($USER==$row['name'])
+					echo "selected";
+					echo ">".$row['name']."</option>";
+				   
+			  }
+				 
+			?>
+                    
+                </select><span class="style6"><?=$invoicerow['sales_name']?></span></td>
+		 </tr>
         </table></td>
       </tr>
       

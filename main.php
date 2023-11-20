@@ -128,7 +128,12 @@ body {
 	   <tr bgcolor="#CCCCCC">
        <td align="center"></td>
         <td><div align="center"></div></td>
-        <td align="center"><a href="/?page=bonus_by_item&subpage=index.php" target="_blank">貨品花紅計算</a></td>
+        <td align="center"><a href="/?page=bonus_by_staff&subpage=index.php" target="_blank">花紅計算 由員工</a></td>
+      </tr>
+	  <tr bgcolor="#CCCCCC">
+       <td align="center"></td>
+        <td><div align="center"><a href="" target="_blank"></a></div></td>
+        <td align="center"><a href="/?page=bonus_by_item&subpage=index.php" target="_blank">花紅計算 由貨品</a></td>
       </tr>
         <tr bgcolor="#CCCCCC">
         <td align="center">  </td>
