@@ -37,19 +37,7 @@
 		$i++;
 	}
 	
-	 // get misc_misc
-	 	 
-	$sql="select * from misc_misc where misc_id=".$id;
-	$goods_invoiceResult = $connection->query($sql);
-	$i=0;
-	while($goods_invoicerow = $goods_invoiceResult->fetchRow(DB_FETCHMODE_ASSOC))
-	{
-		
-		$misc[$i]['misc']=$goods_invoicerow['misc'];
-		$misc[$i]['misc_amt']=$goods_invoicerow['misc_amt'];
-		
-		$i++;
-	}
+	 
 	 // get misc_chq
 	 	 
 	$sql="select * from misc_chq where misc_id=".$id;
@@ -286,8 +274,17 @@
 		    <tr bgcolor="#CCCCCC">
           
             <td >銀聯卡:</td>
-            <td ><input type="text" name="daily_unionpay" id="daily_unionpay" value="<?php echo $miscrow['daily_unionpay']; ?>" onChange="calDailyIncome()"></td>  <td ></td>
+            <td ><span class="style6"><input type="text" name="daily_unionpay" id="daily_unionpay" value="<?php echo $miscrow['daily_unionpay']; ?>" onChange="calDailyIncome()"></span></td>  <td ></td>
+          </tr><tr bgcolor="#CCCCCC">
+		   <td >AE卡:</td>
+            <td ><span class="style6"><input type="text" name="daily_ae_card" id="daily_ae_card" value="<?php echo $miscrow['daily_ae_card']; ?>" onChange="calDailyIncome()"></span></td>  <td ></td>
           </tr>
+		      <tr bgcolor="#CCCCCC">
+          
+            <td >支付宝/微信/八逹卡:</td>
+            <td ><span class="style6"><input type="text" name="daily_octopus" id="daily_octopus" value="<?php echo $miscrow['daily_octopus']; ?>" onChange="calDailyIncome()"></span></td>  <td ></td>
+          </tr>
+		  
 		  <tr bgcolor="#CCCCCC">
          
             <td >EPS:</td>

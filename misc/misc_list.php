@@ -24,7 +24,7 @@ setlocale(LC_MONETARY, 'en_US');
   
 	$checking=0;
 	if ($created_by=="" && $invoice_no=="" && $mem_id=="" && $goods_partno=="" && $customer_detail =="" && $invoice_status=="" && $invoice_date_start=="" && $invoice_date_end=="" && $sales=="")	{
-	  		$sql="SELECT id,daily_revenue,daily_expend,daily_cheque,daily_creditcard,daily_unionpay,daily_eps,daily_fps,daily_cash,daily_income,daily_drawer,past_daily_drawer,drawer_diff,area,invoice_date,created_by,created_date,pc,modified_by,modified_date,sts FROM misc a";
+	  		$sql="SELECT id,daily_revenue,daily_expend,daily_cheque,daily_creditcard,daily_unionpay,daily_ae_card,daily_octopus,daily_eps,daily_fps,daily_cash,daily_income,daily_drawer,past_daily_drawer,drawer_diff,area,invoice_date,created_by,created_date,pc,modified_by,modified_date,sts FROM misc a";
 	  	    $sqlCount= " Select count(*) as total FROM misc a ";
 	// $sql="SELECT * FROM invoice order by invoice_no desc";
 		} else{
@@ -80,6 +80,8 @@ setlocale(LC_MONETARY, 'en_US');
 <TD width="67" bgcolor="#006633">支票</TD>
 <TD width="67" bgcolor="#006633">信用卡</TD>
 <TD width="67" bgcolor="#006633">銀聯卡</TD>
+<TD width="67" bgcolor="#006633">AE卡</TD>
+<TD width="67" bgcolor="#006633">支付宝/微信/八逹卡</TD>
 <TD width="67" bgcolor="#006633">EPS</TD>
 <TD width="67" bgcolor="#006633">QRCODE</TD>
 <TD width="67" bgcolor="#006633">現金入數</TD>
@@ -108,7 +110,9 @@ setlocale(LC_MONETARY, 'en_US');
    <td><?=number_format($row['daily_expend'],2)?></td>
    <td><?=number_format($row['daily_cheque'],2)?></td>
    <td><?=number_format($row['daily_creditcard'],2)?></td>
-   <td><?=number_format($row['daily_daily_unionpay'],2)?></td>
+   <td><?=number_format($row['daily_unionpay'],2)?></td>
+   <td><?=number_format($row['daily_ae_card'],2)?></td>
+   <td><?=number_format($row['daily_octopus'],2)?></td>
    <td><?=number_format($row['daily_eps'],2)?></td>
    <td><?=number_format($row['daily_fps'],2)?></td>
    <td><?=number_format($row['daily_cash'],2)?></td>

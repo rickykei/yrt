@@ -26,7 +26,7 @@ $invoice_no=$_POST['invoice_no'];
  
 
   //insert invoice Door
-  $query="update misc set daily_revenue='$daily_revenue', daily_expend='$daily_expend',daily_cheque='$daily_cheque',daily_creditcard='$daily_creditcard',daily_unionpay='$daily_unionpay',daily_eps='$daily_eps',daily_fps='$daily_fps',daily_cash='$daily_cash',daily_income='$daily_income',daily_drawer='$daily_drawer',past_daily_drawer='$past_daily_drawer',drawer_diff='$drawer_diff',area='$area',invoice_date='$invoice_date',pc='$pc',modified_by='$browseryrt',modified_date=SYSDATE(),sts='A' where id='$invoice_no'";
+  $query="update misc set daily_revenue='$daily_revenue', daily_expend='$daily_expend',daily_cheque='$daily_cheque',daily_creditcard='$daily_creditcard',daily_unionpay='$daily_unionpay',daily_ae_card='$daily_ae_card',daily_octopus='$daily_octopus',daily_eps='$daily_eps',daily_fps='$daily_fps',daily_cash='$daily_cash',daily_income='$daily_income',daily_drawer='$daily_drawer',past_daily_drawer='$past_daily_drawer',drawer_diff='$drawer_diff',area='$area',invoice_date='$invoice_date',pc='$pc',modified_by='$browseryrt',modified_date=SYSDATE(),sts='A' where id='$invoice_no'";
   
  
   $result=$connection->query($query);

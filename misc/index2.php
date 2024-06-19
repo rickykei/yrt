@@ -133,8 +133,15 @@ a:active {
             <td >銀聯卡:</td>
             <td ><?php echo number_format($daily_unionpay,2);?></td>  <td ></td>
           </tr>
-		  <tr bgcolor="#CCCCCC">
-           
+		  <tr bgcolor="#CCCCCC"> 
+            <td >AE卡:</td>
+            <td ><span class=""><?php echo number_format($daily_ae_card,2);?></span></td>  <td ></td>
+          </tr>
+		   <tr bgcolor="#CCCCCC"> 
+            <td >支付宝/微信/八逹卡:</td>
+            <td ><span class=""><?php echo number_format($daily_octopus,2);?></span></td>  <td ></td>
+          </tr>
+		  <tr bgcolor="#CCCCCC"> 
             <td >EPS:</td>
             <td ><?php echo number_format($daily_eps,2);?></td> <td ></td>
           </tr>
@@ -232,6 +239,8 @@ for ($i=0;$i<4;$i++)
 <input type="hidden" name="daily_cheque" id="daily_cheque" value="<?php echo $daily_cheque;?>"/>
 <input type="hidden" name="daily_creditcard" id="daily_creditcard" value="<?php echo $daily_creditcard;?>"/>
 <input type="hidden" name="daily_unionpay" id="daily_unionpay" value="<?php echo $daily_unionpay;?>"/>
+<input type="hidden" name="daily_ae_card" id="daily_ae_card" value="<?php echo $daily_ae_card;?>"/>
+<input type="hidden" name="daily_octopus" id="daily_octopus" value="<?php echo $daily_octopus;?>"/>
 <input type="hidden" name="daily_eps" id="daily_eps" value="<?php echo $daily_eps;?>"/>
 <input type="hidden" name="daily_fps" id="daily_fps" value="<?php echo $daily_fps;?>"/>
 <input type="hidden" name="daily_cash" id="daily_cash" value="<?php echo $daily_cash;?>"/>

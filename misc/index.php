@@ -232,7 +232,7 @@ a:active {
 			 
 		 ?>
 		  <tr bgcolor="#CCCCCC">
-            <td >支票<?php echo $i+1;?>:</td>
+            <td  >支票<?php echo $i+1;?>:</td>
             <td ><input type="text" name="cheque[<?php echo $i;?>]" size="28"></td>
             <td ><input type="text" name="cheque_amt[<?php echo $i;?>]" id="cheque_amt[<?php echo $i;?>]" onChange="calTotalChqAmt()" size="10"></td>
           </tr>
@@ -264,6 +264,16 @@ a:active {
           
             <td >銀聯卡:</td>
             <td ><input type="text" name="daily_unionpay" id="daily_unionpay" onChange="calDailyIncome()"></td>  <td ></td>
+          </tr>
+		      <tr bgcolor="#CCCCCC">
+          
+            <td >AE卡:</td>
+            <td ><input type="text" name="daily_ae_card" id="daily_ae_card" onChange="calDailyIncome()"></td>  <td ></td>
+          </tr>
+		      <tr bgcolor="#CCCCCC">
+          
+            <td >支付宝/微信/八逹卡:</td>
+            <td ><input type="text" name="daily_octopus" id="daily_octopus" onChange="calDailyIncome()"></td>  <td ></td>
           </tr>
 		  <tr bgcolor="#CCCCCC">
             

@@ -44,6 +44,8 @@ function Body($invoice_no)
 	$daily_cheque=$row['daily_cheque'];
 	$daily_creditcard=$row['daily_creditcard'];
 	$daily_unionpay=$row['daily_unionpay'];
+	$daily_ae_card=$row['daily_ae_card'];
+	$daily_octopus=$row['daily_octopus'];
 	$daily_eps=$row['daily_eps'];
 	$daily_fps=$row['daily_fps'];
 	$daily_cash=$row['daily_cash'];
@@ -172,6 +174,23 @@ function Body($invoice_no)
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'C',0);
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'R',0);
 	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,1,'R',0);
+
+   $this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS"," "),$border,0,'R',0);
+	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","AE卡"),$border,0,'R',0);
+	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($daily_ae_card,2,'.',',')),$border,0,'R',0);
+	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'C',0);
+	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'R',0);
+	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,1,'R',0);
+	
+   $this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS"," "),$border,0,'R',0);
+	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
+	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","支付寶/微信/八達通"),$border,0,'R',0);
+	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($daily_octopus,2,'.',',')),$border,0,'R',0);
+	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'C',0);
+	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'R',0);
+	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,1,'R',0);
+	
 	
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS"," "),$border,0,'R',0);
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
