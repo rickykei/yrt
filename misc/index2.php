@@ -128,28 +128,20 @@ a:active {
             <td >信用卡:</span></td>
             <td ><span class=""><?php echo number_format($daily_creditcard,2);?></span></td> <td ></td>
           </tr>
-		    <tr bgcolor="#CCCCCC">
-          
-            <td >銀聯卡:</td>
-            <td ><?php echo number_format($daily_unionpay,2);?></td>  <td ></td>
-          </tr>
+		  
 		  <tr bgcolor="#CCCCCC"> 
-            <td >AE卡:</td>
+            <td >AE咭:</td>
             <td ><span class=""><?php echo number_format($daily_ae_card,2);?></span></td>  <td ></td>
           </tr>
 		   <tr bgcolor="#CCCCCC"> 
-            <td >支付宝/微信/八逹卡:</td>
+            <td >支付寶/微信/八達通:</td>
             <td ><span class=""><?php echo number_format($daily_octopus,2);?></span></td>  <td ></td>
           </tr>
 		  <tr bgcolor="#CCCCCC"> 
             <td >EPS:</td>
             <td ><?php echo number_format($daily_eps,2);?></td> <td ></td>
           </tr>
-		    <tr bgcolor="#CCCCCC">
-           
-            <td >FPS:</td>
-            <td ><?php echo number_format($daily_fps,2);?></td> <td ></td>
-          </tr>
+		  
 		  <tr bgcolor="#CCCCCC">
             
             <td >現金入數:</td>

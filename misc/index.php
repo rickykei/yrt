@@ -260,11 +260,7 @@ a:active {
             <td >信用卡:</span></td>
             <td ><span class="style6"><input type="text" name="daily_creditcard"  id="daily_creditcard"   onChange="calDailyIncome()" ></span></td> <td ></td>
           </tr>
-		    <tr bgcolor="#CCCCCC">
-          
-            <td >銀聯卡:</td>
-            <td ><input type="text" name="daily_unionpay" id="daily_unionpay" onChange="calDailyIncome()"></td>  <td ></td>
-          </tr>
+		  
 		      <tr bgcolor="#CCCCCC">
           
             <td >AE卡:</td>
@@ -272,7 +268,7 @@ a:active {
           </tr>
 		      <tr bgcolor="#CCCCCC">
           
-            <td >支付宝/微信/八逹卡:</td>
+            <td >支付寶/微信/八逹通:</td>
             <td ><input type="text" name="daily_octopus" id="daily_octopus" onChange="calDailyIncome()"></td>  <td ></td>
           </tr>
 		  <tr bgcolor="#CCCCCC">
@@ -280,11 +276,7 @@ a:active {
             <td >EPS:</td>
             <td ><input type="text" name="daily_eps" id="daily_eps" onChange="calDailyIncome()"></td><td ></td>
           </tr>
-		 <tr bgcolor="#CCCCCC">
-            
-            <td >QRCODE:</td>
-            <td ><input type="text" name="daily_fps" id="daily_fps" onChange="calDailyIncome()"></td><td ></td>
-          </tr>
+		 
 		  <tr bgcolor="#CCCCCC">
            
             <td >入數:</td>

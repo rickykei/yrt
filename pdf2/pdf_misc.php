@@ -167,17 +167,11 @@ function Body($invoice_no)
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'R',0);
 	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,1,'R',0);
  
-    $this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS"," "),$border,0,'R',0);
-	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","銀聯卡"),$border,0,'R',0);
-	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($daily_unionpay,2,'.',',')),$border,0,'R',0);
-	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'C',0);
-	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'R',0);
-	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,1,'R',0);
+ 
 
    $this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS"," "),$border,0,'R',0);
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","AE卡"),$border,0,'R',0);
+	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","AE咭"),$border,0,'R',0);
 	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($daily_ae_card,2,'.',',')),$border,0,'R',0);
 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'C',0);
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'R',0);
@@ -200,13 +194,7 @@ function Body($invoice_no)
 	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'R',0);
 	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,1,'R',0);
 	
-	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS"," "),$border,0,'R',0);
-	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);
-	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS","QRCODE"),$border,0,'R',0);
-	$this->Cell(30,8,iconv("UTF-8", "BIG5-HKSCS",number_format($daily_fps,2,'.',',')),$border,0,'R',0);
- 	$this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'C',0);
-	$this->Cell(60,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,0,'R',0);
-	$this->Cell(20,8,iconv("UTF-8", "BIG5-HKSCS",''),$border,1,'R',0);
+ 
 	
     $this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS"," "),$border,0,'R',0);
     $this->Cell(10,8,iconv("UTF-8", "BIG5-HKSCS",""),$border,0,'R',0);

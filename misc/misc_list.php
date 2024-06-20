@@ -80,8 +80,8 @@ setlocale(LC_MONETARY, 'en_US');
 <TD width="67" bgcolor="#006633">支票</TD>
 <TD width="67" bgcolor="#006633">信用卡</TD>
 <TD width="67" bgcolor="#006633">銀聯卡</TD>
-<TD width="67" bgcolor="#006633">AE卡</TD>
-<TD width="67" bgcolor="#006633">支付宝/微信/八逹卡</TD>
+<TD width="67" bgcolor="#006633">AE咭</TD>
+<TD width="67" bgcolor="#006633">支付寶/微信/八達通</TD>
 <TD width="67" bgcolor="#006633">EPS</TD>
 <TD width="67" bgcolor="#006633">QRCODE</TD>
 <TD width="67" bgcolor="#006633">現金入數</TD>

@@ -245,7 +245,7 @@
 				?>
 		  <tr bgcolor="#CCCCCC">
             <td >支票<?php echo $i+1;?>:</td>
-            <td ><input type="text" name="cheque[<?php echo $i;?>]" size="28" value="<?php echo $misc[$i]['cheque'];?>"></td>
+            <td ><input type="text" name="cheque[<?php echo $i;?>]" size="20" value="<?php echo $misc[$i]['cheque'];?>"></td>
             <td ><input type="text" name="cheque_amt[<?php echo $i;?>]" id="cheque_amt[<?php echo $i;?>]" onChange="calTotalChqAmt()" size="10"  value="<?php echo $misc[$i]['cheque_amt'];?>"></td>
           </tr>
 		 	 
@@ -271,17 +271,13 @@
             <td >信用卡:</span></td>
             <td ><span class="style6"><input type="text" name="daily_creditcard"  id="daily_creditcard" value="<?php echo $miscrow['daily_creditcard']; ?>" onChange="calDailyIncome()"></span></td>  <td ></td>
           </tr>
-		    <tr bgcolor="#CCCCCC">
-          
-            <td >銀聯卡:</td>
-            <td ><span class="style6"><input type="text" name="daily_unionpay" id="daily_unionpay" value="<?php echo $miscrow['daily_unionpay']; ?>" onChange="calDailyIncome()"></span></td>  <td ></td>
-          </tr><tr bgcolor="#CCCCCC">
-		   <td >AE卡:</td>
+		     <tr bgcolor="#CCCCCC">
+		   <td >AE咭:</td>
             <td ><span class="style6"><input type="text" name="daily_ae_card" id="daily_ae_card" value="<?php echo $miscrow['daily_ae_card']; ?>" onChange="calDailyIncome()"></span></td>  <td ></td>
           </tr>
 		      <tr bgcolor="#CCCCCC">
           
-            <td >支付宝/微信/八逹卡:</td>
+            <td >支付寶/微信/八逹通:</td>
             <td ><span class="style6"><input type="text" name="daily_octopus" id="daily_octopus" value="<?php echo $miscrow['daily_octopus']; ?>" onChange="calDailyIncome()"></span></td>  <td ></td>
           </tr>
 		  
@@ -290,11 +286,7 @@
             <td >EPS:</td>
             <td ><input type="text" name="daily_eps" id="daily_eps" value="<?php echo $miscrow['daily_eps']; ?>" onChange="calDailyIncome()"></td>   <td ></td>
           </tr>
-		  <tr bgcolor="#CCCCCC">
-         
-            <td >QRCODE:</td>
-            <td ><input type="text" name="daily_fps" id="daily_fps" value="<?php echo $miscrow['daily_fps']; ?>" onChange="calDailyIncome()"></td>   <td ></td>
-          </tr>
+		  
 		  
 		  <tr bgcolor="#CCCCCC">
            
