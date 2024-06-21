@@ -102,9 +102,9 @@ function checkform()
 		 dailyExpendStr=$('#daily_expend').val();
 		 dailyChequeStr=$('#daily_cheque').val();
 		 dailyCCStr=$('#daily_creditcard').val();
-		 dailyUPStr=$('#daily_unionpay').val();
+		 dailyUPStr=$('#daily_octopus').val();
 		 dailyEPSStr=$('#daily_eps').val();
-		 dailyFPSStr=$('#daily_fps').val();
+		 dailyFPSStr=$('#daily_ae_card').val();
 		 
 		 
 		 
