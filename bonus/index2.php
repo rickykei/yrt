@@ -21,11 +21,11 @@
    if (DB::isError($result)) die ($result->getMessage());
    
 	  if ($AREA=='Y' && ($PC=='99' || $PC=='1')){   
-		$sql="SELECT sales_name,sum(total_price) as total_price, count(invoice_no) inv_cnt ,branchid FROM `invoice` WHERE `invoice_date` > '".$from_date." 00:00' and invoice_date < '".$to_date." 23:59' group by sales_name , branchID ";
-		$sql_return="SELECT sales_name,sum(total_price) as total_price, count(invoice_no) inv_cnt ,branchid FROM `invoice` WHERE `settledate` > '".$from_date." 00:00' and settledate < '".$to_date." 23:59' and settle = 'A' group by sales_name , branchID ";
+		$sql="SELECT sales_name,sum(total_price) as total_price, count(invoice_no) inv_cnt ,branchid FROM `invoice` WHERE `invoice_date` > '".$from_date." 00:00' and invoice_date < '".$to_date." 23:59' and void = 'A' group by sales_name , branchID ";
+		$sql_return="SELECT sales_name,sum(total_price) as total_price, count(invoice_no) inv_cnt ,branchid FROM `invoice` WHERE `settledate` > '".$from_date." 00:00' and settledate < '".$to_date." 23:59' and settle = 'A' and void = 'A' group by sales_name , branchID ";
 	  }else{
-		$sql="SELECT sales_name,sum(total_price) as total_price, count(invoice_no) inv_cnt ,branchid FROM `invoice` WHERE `invoice_date` > '".$from_date." 00:00' and invoice_date < '".$to_date." 23:59' and branchID ='".$AREA."' group by sales_name, branchID";
-		$sql_return="SELECT sales_name,sum(total_price) as total_price, count(invoice_no) inv_cnt ,branchid FROM `invoice` WHERE `settledate` > '".$from_date." 00:00' and settledate < '".$to_date." 23:59' and settle = 'A' group by sales_name , branchID ";
+		$sql="SELECT sales_name,sum(total_price) as total_price, count(invoice_no) inv_cnt ,branchid FROM `invoice` WHERE `invoice_date` > '".$from_date." 00:00' and invoice_date < '".$to_date." 23:59' and branchID ='".$AREA."' and void = 'A' group by sales_name, branchID";
+		$sql_return="SELECT sales_name,sum(total_price) as total_price, count(invoice_no) inv_cnt ,branchid FROM `invoice` WHERE `settledate` > '".$from_date." 00:00' and settledate < '".$to_date." 23:59' and settle = 'A' and void = 'A' group by sales_name , branchID ";
 	  }
 	  
 	 //echo $sql;

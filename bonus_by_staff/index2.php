@@ -28,7 +28,7 @@ $delivery_date=correct_delTimeSlot_to_delDate($delivery_date,$delivery_timeslot)
 if ($sales=='ALL'){
  
 		$query3="select  IFNULL(sum( goods_invoice.qty * sumgoods.commission),0) as commission , IFNULL(sum(qty),0) as qty , invoice.sales_name from goods_invoice, invoice ,sumgoods where invoice.invoice_no= goods_invoice.invoice_no  AND sumgoods.goods_partno = goods_invoice.goods_partno
-		and  invoice.settledate >='".$delivery_date." 00:01' and invoice.settledate <='".$settledate." 23:59' and invoice.settle='A' and sumgoods.commission <> 0  group by   invoice.sales_name ";
+		and  invoice.settledate >='".$delivery_date." 00:01' and invoice.settledate <='".$settledate." 23:59' and invoice.settle='A' and sumgoods.commission <> 0 and invoice.void='A' group by   invoice.sales_name ";
 		 
 		$result3=$connection->query($query3);
 		if (DB::isError($result3)) die ($result3->getMessage());
@@ -44,7 +44,7 @@ if ($sales=='ALL'){
 }else{
 	 //staff view
 		$query2="select IFNULL(sum(qty),0) as qty ,goods_invoice.goods_partno from goods_invoice, invoice where invoice.invoice_no= goods_invoice.invoice_no  
-		and sales_name='".$sales."' and invoice.settledate >='".$delivery_date." 00:01' and invoice.settledate <='".$settledate." 23:59' and invoice.settle='A' group by goods_invoice.goods_partno ";
+		and sales_name='".$sales."' and invoice.settledate >='".$delivery_date." 00:01' and invoice.settledate <='".$settledate." 23:59' and invoice.settle='A' and invoice.void='A' group by goods_invoice.goods_partno ";
  
 		$result=$connection->query($query2);
 		if (DB::isError($result)) die ($result->getMessage());

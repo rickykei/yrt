@@ -47,7 +47,7 @@ $subtotal="select sum(total_price) as total from invoice where invoice.invoice_d
 		if ($AREA==$shop_array[$i] || security_check($AREA,$PC) ){
 		$settle_shop_subtotal[$i]="select sum(total_price) as total from invoice where invoice.settledate>='$date_start' && invoice.settledate<='$date_end'  and branchID='$shop_array[$i]' and settle='A'  and void='A' ";
 	 
-		$shop_return_total[$i]="select sum(total_price) as total from returngood where returngood.return_date>='$date_start' && returngood.return_date<='$date_end' and branchID='$shop_array[$i]'";
+		$shop_return_total[$i]="select sum(total_price) as total from returngood where returngood.return_date>='$date_start' && returngood.return_date<='$date_end' and branchID='$shop_array[$i]' ";
 		
 		 
 		 
